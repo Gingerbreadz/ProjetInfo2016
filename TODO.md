@@ -14,7 +14,7 @@
 3-Générer la doc
 
 ##Tests
-1-Ecrire les tests (nécéssite au moins l'étape 2 de la section code).
+Ecrire les tests        (nécéssite au moins l'étape 2 de la section code).
 
 ##Setup
-1-Ecrire le script d'installation. (nécéssite au moins l'étape 2 de la section code).
+Ecrire le script d'installation.        (nécéssite au moins l'étape 2 de la section code).
