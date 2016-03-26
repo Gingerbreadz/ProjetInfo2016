@@ -26,10 +26,10 @@ class Fichier:
     @abstractmethod
     def lireligne(self, noligne):
         """Retourne la ligne n d'un fichier
-        :param noligne: numero de la ligne voulu
-        :type noligne: int
-        :return: ligne n du fichier instancié
-        :rtype: str"""
+            :param noligne: numero de la ligne voulu
+            :type noligne: int
+            :return: ligne n du fichier instancié
+            :rtype: str"""
         return self.contenu[noligne]
 
     @abstractmethod
@@ -56,6 +56,7 @@ class Fichier:
         :type noligne: int
         :return: Liste contenant les différents champs découpés.
         :rtype: xxx"""
+        return
 
 
 class FichierDeLog(Fichier):
@@ -70,20 +71,17 @@ class FichierDeLog(Fichier):
     c_reg=re.compile(r'^(.+)-(.*)\[(.+)[-|+](\d+)\] "([A-Z]+)?(.+) HTTP/\d.\d" (\d+)(\s[\d]+)?(\s"(.+)" )?(.*)$')
 
     def __init__(self, filepath):
-        super(FichierDeLog,self).__init__(filepath)
-        return
+        super().__init__(filepath)
 
     def lireligne(self, noligne):
-        super(FichierDeLog, self).lireligne(noligne)
-        return
+        return super().lireligne(noligne)
+
 
     def fermerfichier(self):
-        super(FichierDeLog, self).fermerfichier
-        return
+        super(FichierDeLog, self).fermerfichier()
 
     def decouperligne(self, noligne):
         super(FichierDeLog, self).decouperligne(noligne)
-        return
 
 
 class FichierRegExp(Fichier):
@@ -95,19 +93,15 @@ class FichierRegExp(Fichier):
 
     def __init__(self, filepath):
         super(FichierRegExp, self).__init__(filepath)
-        return
 
     def lireligne(self, noligne):
         super(FichierRegExp, self).lireligne(noligne)
-        return
 
     def fermerfichier(self):
         super(FichierRegExp, self).fermerfichier()
-        return
 
     def decouperligne(self, noligne):
         super(FichierRegExp, self).decouperligne(noligne)
-        return
 
 
 class FichierRapportTextuel(Fichier):
@@ -126,16 +120,12 @@ class FichierRapportTextuel(Fichier):
         self.contenu = []
         self.nbLigne = 0
         self.ro = False
-        return
 
     def lireligne(self):
         super(FichierRapportTextuel, self).lireligne()
-        return
 
     def fermerfichier(self):
         super(FichierRapportTextuel, self).fermerfichier()
-        return
 
     def ecriretexte(self, data):
         super(FichierRapportTextuel, self).ecriretexte(data)
-        return
