@@ -4,11 +4,11 @@ Analyseur de journal d'activité de serveur web Apache, réalisé dans le cadre 
 
 ## Installation
 
-	Installation Steps.
+	+Installation Steps.
 
 ## Usage
 
-	Usage Information.
+	+Usage Information.
 
 ## Contributing
 Access the projet page : https://github.com/Gingerbreadz/ProjetInfo2016/
@@ -21,10 +21,8 @@ Access the projet page : https://github.com/Gingerbreadz/ProjetInfo2016/
 
 ## License
 
-	License Details.
+	+License Details.
 	
 ## Credits
-Projet conduit par le groupe d'étudiant de Télécom SudParis suivant : 
-
-	Jeremy Venin | Clément Aubry | Antoine Tadros | Anatole Lefort
+Projet conduit par Jeremy Venin, Clément Aubry, Antoine Tadros, Anatole Lefort dans le cadre du programme d'enseignement de Telecom SudParis. 
 
