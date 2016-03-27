@@ -11,7 +11,7 @@ Analyseur de journal d'activité de serveur web Apache, réalisé dans le cadre 
 	Usage Information.
 
 ## Contributing
-
+Access the projet page : https://github.com/Gingerbreadz/ProjetInfo2016/
 1. Fork it!
 2. Create your feature branch: `git checkout -b my-new-feature`
 3. Commit your changes: `git commit -am 'Add some feature'`
@@ -21,3 +21,8 @@ Analyseur de journal d'activité de serveur web Apache, réalisé dans le cadre 
 ## License
 
 	License Details.
+	
+## Credits
+Projet conduit par le groupe d'étudiant de Télécom SudParis suivant : 
+Jeremy Venin | Clément Aubry | Antoine Tadros | Anatole Lefort
+
