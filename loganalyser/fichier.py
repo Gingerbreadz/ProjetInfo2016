@@ -56,7 +56,12 @@ class Fichier:
         :type noligne: int
         :return: Liste contenant les différents champs découpés.
         :rtype: xxx"""
-        return
+        log=self.contenu[noligne]
+        log.replace("\"", "")
+        log.replace("[", "")
+        log.replace("]", "")
+        log=log.split(' ')
+        return log
 
 
 class FichierDeLog(Fichier):
