@@ -13,9 +13,13 @@ class Fichier:
 
     @abstractmethod
     def __init__(self, filepath):
-        """Constructeur de classe. Un fichier est initialisé à partir de son chemin d'accès
-        :param filepath: chemin d'accès du fichier
-        :type filepath: str"""
+        """
+            Constructeur de classe. Un fichier est initialisé à partir de son chemin d'accès
+
+                :param filepath: chemin d'accès du fichier
+                :type filepath: str
+                
+        """
         self.file = open(filepath, 'r')
         self.chemin = filepath
         self.contenu = list(self.file)

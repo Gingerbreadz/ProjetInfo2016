@@ -1,20 +1,18 @@
-.. Apache Log Analyser documentation master file, created by
-   sphinx-quickstart on Sat Mar 26 12:46:34 2016.
+.. loganalyser documentation master file, created by
+   sphinx-quickstart on Mon Mar 28 22:56:35 2016.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Apache Log Analyser's documentation!
-===============================================
+Welcome to loganalyser's documentation!
+=======================================
 
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 4
 
-.. automodule:: fichier
+   loganalyser
 
-.. autoclass:: Fichier
-   :members:
 
 Indices and tables
 ==================
