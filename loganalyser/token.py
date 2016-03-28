@@ -1,19 +1,20 @@
 from abc import ABCMeta, abstractmethod
 
 #pas du tout fini, juste un début de travail à modifier et compléter
-class Token():
+class Token:
     """Classe abstraite interface pour token caractérisé par :
     - """
     __metaclass__ = ABCMeta
 
-	def getData():
+	def getData(self):
 		return
 
-	def getState():
+	def getState(self):
 		return
 	
-	def analyse():
-		return
+	def analyse(self):
+        return
+
 
 class IP(Token):
 	
