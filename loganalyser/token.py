@@ -2,15 +2,23 @@ from abc import ABCMeta, abstractmethod
 
 
 class Token:
-    """Classe abstraite interface pour token caractérisé par :
-    -sa donnée
+    """
+    Classe abstraite interface pour token caractérisé par :
+
+    - sa donnée
+    - sa sévérité
+
     """
     __metaclass__ = ABCMeta
 
     def __init__(self, value):
-        """Constructeur de classe. Un fichier est initialisé à partir de son chemin d'accès
+        """
+        Constructeur de classe. Un fichier est initialisé à partir de son chemin d'accès
+
         :param value: donnee du token e.g. "127.0.0.1", "404".
-        :type value: str"""
+        :type value: str
+
+        """
         if self.__verifier_type:
             self.donnee=value
             self.severite = self.__analyse()
@@ -20,16 +28,24 @@ class Token:
 
     @abstractmethod
     def __verifier_type(self):
-        """Vérifie si la donnee peut bien être instanciée sous cette classe de Token.
+        """
+        Vérifie si la donnee peut bien être instanciée sous cette classe de Token.
+
         :return: Retourne la réponse de la vérification
-        :rtype: bool"""
+        :rtype: bool
+
+        """
         return
 
     @abstractmethod
     def __analyse(self):
-        """Analyse la donnee contenue dans le token pour obtenir la sévérité de cette donnee.
+        """
+        Analyse la donnee contenue dans le token pour obtenir la sévérité de cette donnee.
+
         :return: Retourne la sévérité de la donnee de ce token
-        :rtype: int"""
+        :rtype: int
+
+        """
         return
 
 
