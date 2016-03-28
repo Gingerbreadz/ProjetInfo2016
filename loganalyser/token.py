@@ -1,38 +1,141 @@
 from abc import ABCMeta, abstractmethod
 
-#pas du tout fini, juste un début de travail à modifier et compléter
+
 class Token:
     """Classe abstraite interface pour token caractérisé par :
-    - """
+    -sa donnée
+    """
     __metaclass__ = ABCMeta
 
-	def getData(self):
-		return
+    def __init__(self, value):
+        """Constructeur de classe. Un fichier est initialisé à partir de son chemin d'accès
+        :param value: donnee du token e.g. "127.0.0.1", "404".
+        :type value: str"""
+        if self.__verifier_type:
+            self.donnee=value
+            self.severite = self.__analyse()
+        else:
+            raise ValueError("Mauvais type de donnee")
+        return
 
-	def getState(self):
-		return
-	
-	def analyse(self):
+    @abstractmethod
+    def __verifier_type(self):
+        """Vérifie si la donnee peut bien être instanciée sous cette classe de Token.
+        :return: Retourne la réponse de la vérification
+        :rtype: bool"""
+        return
+
+    @abstractmethod
+    def __analyse(self):
+        """Analyse la donnee contenue dans le token pour obtenir la sévérité de cette donnee.
+        :return: Retourne la sévérité de la donnee de ce token
+        :rtype: int"""
         return
 
 
 class IP(Token):
-	
+    """Classe concrète instanciant les token IP"""
 
-class Name(Token:
+    def __verifier_type(self):
+        s = True
+        return s
+
+    def __analyse(self):
+        severity_level = 0
+        return severity_level
+
+
+class Name(Token):
+    """Classe concrète instanciant les token Nom"""
+
+    def __verifier_type(self):
+        s = True
+        return s
+
+    def __analyse(self):
+        severity_level = 0
+        return severity_level
 
 
 class Date(Token):
+    """Classe concrète instanciant les token Date"""
+
+    def __verifier_type(self):
+        s = True
+        return s
+
+    def __analyse(self):
+        severity_level = 0
+        return severity_level
+
 
 class EXT(Token):
+    """Classe concrète instanciant les token Ext"""
+
+    def __verifier_type(self):
+        s = True
+        return s
+
+    def __analyse(self):
+        severity_level = 0
+        return severity_level
+
 
 class Methode(Token):
+    """Classe concrète instanciant les token Methode"""
+
+    def __verifier_type(self):
+        s = True
+        return s
+
+    def __analyse(self):
+        severity_level = 0
+        return severity_level
+
 
 class URL(Token):
+    """Classe concrète instanciant les token URL"""
+
+    def __verifier_type(self):
+        s = True
+        return s
+
+    def __analyse(self):
+        severity_level = 0
+        return severity_level
+
 
 class Response(Token):
+    """Classe concrète instanciant les token Réponse"""
+
+    def __verifier_type(self):
+        s = True
+        return s
+
+    def __analyse(self):
+        severity_level = 0
+        return severity_level
+
 
 class Byte(Token):
+    """Classe concrète instanciant les token Octet"""
+
+    def __verifier_type(self):
+        s = True
+        return s
+
+    def __analyse(self):
+        severity_level = 0
+        return severity_level
+
 
 class Referer(Token):
+    """Classe concrète instanciant les token Referer"""
 
+    def __verifier_type(self):
+        s = True
+        return s
+
+    def __analyse(self):
+        severity_level = 0
+        return severity_level
