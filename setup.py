@@ -1,4 +1,7 @@
-# -*- coding: utf-8 -*-
+"""
+Non-fonctionnel.
+La base est là, mais il faudra se pencher sur quoi rajouter/modifier pour avoir un script d'installation fonctionnel
+"""
 
 from setuptools import setup, find_packages
 

@@ -1,3 +1,9 @@
+"""
+Module token
+Il reste à écrire pour chacun des types de token les méthodes de vérification et de calcul de la sévérité.
+"""
+
+
 from abc import ABCMeta, abstractmethod
 
 

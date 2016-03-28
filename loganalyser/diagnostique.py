@@ -1,3 +1,8 @@
+"""
+Implementation du Diagnostique.
+Il reste à écrire les méthode d'analyse et de statistique.
+"""
+
 from loganalyser import token   #Gestion des tokens
 from loganalyser import outils  #Gestion des Dictionnaires
 

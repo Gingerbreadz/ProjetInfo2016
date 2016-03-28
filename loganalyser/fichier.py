@@ -1,3 +1,9 @@
+"""
+Sert à intéragir avec les fichiers.
+Il reste écrire les méthodes de découpage des fichier de log et de regexp.
+"""
+
+
 from abc import ABCMeta, abstractmethod
 import re
 
