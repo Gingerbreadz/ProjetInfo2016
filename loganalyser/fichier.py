@@ -17,10 +17,10 @@ class Fichier:
         :param filepath: chemin d'accès du fichier
         :type filepath: str"""
         self.file = open(filepath, 'r')
-        self.chemin=filepath
-        self.contenu=list(self.file)
-        self.nbLigne=len(self.contenu)
-        self.ro=True
+        self.chemin = filepath
+        self.contenu = list(self.file)
+        self.nbLigne = len(self.contenu)
+        self.ro = True
         return
 
     @abstractmethod
@@ -33,35 +33,10 @@ class Fichier:
         return self.contenu[noligne]
 
     @abstractmethod
-    def ecriretexte(self, data):
-        """Ecrit les lignes en entrée à la fin du fichier
-        :param data: numero de la ligne voulu
-        :type data: list"""
-        for ligne in data:
-            self.file.write(ligne + "\n")
-            self.nbLigne += 1
-            self.contenu.append(ligne)
-        return
-
-    @abstractmethod
     def fermerfichier(self):
         """Ferme le fichier pour libérer des ressources"""
         self.file.close()
         return
-
-    @abstractmethod
-    def decouperligne(self, noligne):
-        """Decoupage syntaxique de la n-ieme ligne
-        :param noligne: Numéro de ligne
-        :type noligne: int
-        :return: Liste contenant les différents champs découpés.
-        :rtype: xxx"""
-        log=self.contenu[noligne]
-        log.replace("\"", "")
-        log.replace("[", "")
-        log.replace("]", "")
-        log=log.split(' ')
-        return log
 
 
 class FichierDeLog(Fichier):
@@ -81,12 +56,21 @@ class FichierDeLog(Fichier):
     def lireligne(self, noligne):
         return super().lireligne(noligne)
 
-
     def fermerfichier(self):
         super(FichierDeLog, self).fermerfichier()
 
     def decouperligne(self, noligne):
-        super(FichierDeLog, self).decouperligne(noligne)
+        """Decoupage syntaxique de la n-ieme ligne pour séparer les différents token
+            :param noligne: Numéro de ligne
+            :type noligne: int
+            :return: Liste contenant les différents champs découpés.
+            :rtype: list"""
+        log = self.contenu[noligne]
+        log.replace("\"", "")
+        log.replace("[", "")
+        log.replace("]", "")
+        log = log.split(' ')
+        return log
 
 
 class FichierRegExp(Fichier):
@@ -106,7 +90,12 @@ class FichierRegExp(Fichier):
         super(FichierRegExp, self).fermerfichier()
 
     def decouperligne(self, noligne):
-        super(FichierRegExp, self).decouperligne(noligne)
+        """Decoupage syntaxique de la n-ieme ligne pour récupérer les regExp
+            :param noligne: Numéro de ligne
+            :type noligne: int
+            :return: Liste contenant les différents champs découpés.
+            :rtype: list"""
+        return []
 
 
 class FichierRapportTextuel(Fichier):
@@ -133,4 +122,11 @@ class FichierRapportTextuel(Fichier):
         super(FichierRapportTextuel, self).fermerfichier()
 
     def ecriretexte(self, data):
-        super(FichierRapportTextuel, self).ecriretexte(data)
+        """Ecrit les lignes en entrée à la fin du fichier
+            :param data: numero de la ligne voulu
+            :type data: list"""
+        for ligne in data:
+            self.file.write(ligne + "\n")
+            self.nbLigne += 1
+            self.contenu.append(ligne)
+        return
