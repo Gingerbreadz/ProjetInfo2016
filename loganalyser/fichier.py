@@ -68,7 +68,7 @@ class FichierDeLog(Fichier):
     """
 
     # RegExp utilisée pour le découpage du fichier
-    c_reg=re.compile(r'^(.+)-(.*)\[(.+)[-|+](\d+)\] "([A-Z]+)?(.+) HTTP/\d.\d" (\d+)(\s[\d]+)?(\s"(.+)" )?(.*)$')
+    c_reg=re.compile(([(\d\.)]+) - - \[(.*?)\] "(.*?)" (\d+) - "(.*?)" "(.*?)")
 
     def __init__(self, filepath):
         super().__init__(filepath)
