@@ -1,7 +1,7 @@
 """
 Implementation du Diagnostique.
 Il reste à écrire les méthode d'analyse et de statistique.
-TODO: Ecrire la méthode qui génère le rapport.
+TODO: Ecrire la méthode qui génère le rapport. | Reste plus tard.
 """
 
 from loganalyser import token   #Gestion des tokens
