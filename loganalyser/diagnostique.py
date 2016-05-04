@@ -6,7 +6,6 @@ Il reste à écrire les méthode d'analyse et de statistique.
 from loganalyser import token   #Gestion des tokens
 from loganalyser import outils  #Gestion des Dictionnaires
 
-
 class Diagnostique:
     """Classe instanciant le diagnostique, qui contient les résultats d'analyse et les fait.
     """
