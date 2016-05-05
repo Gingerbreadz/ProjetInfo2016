@@ -68,8 +68,7 @@ class FichierDeLog(Fichier):
     """
 
     # RegExp utilisée pour le découpage du fichier
-    regex = '([(\d\.)]+) - - \[(.*?)\] "(.*?)" (\d+) - "(.*?)" "(.*?)"'
-    c_reg=re.compile(regex)
+    c_reg=re.compile('([^ ]*) ([^ ]*) ([^ ]*) \[([^]]*)\] "([^"]*)" ([^ ]*) ([^ ]*)'' "([^"]*)" "([^"]*)"') #combined log format
 
     def __init__(self, filepath):
         super().__init__(filepath)
@@ -90,11 +89,21 @@ class FichierDeLog(Fichier):
         :rtype: list
 
         """
-        log = self.contenu[noligne]
-        log.replace("\"", "")
-        log.replace("[", "")
-        log.replace("]", "")
-        log = log.split(' ')
+        log = c_reg.match(self.contenu[noligne]).groups  
+
+        """
+        ip = log[0]
+        idclient = log[1]
+        auth = log[2]
+        date = log[3]
+        request = log[4]
+        status = log[5]
+        size = log[6]
+        referer = log[7]
+        agent = log[8]
+
+        """
+
         return log
 
 
