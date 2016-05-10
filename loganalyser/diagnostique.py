@@ -71,7 +71,15 @@ class Diagnostique:
         if fileformat:
             report = ["Ceci est la première ligne du Fichier Rapport", "Ceci est la deuxième"]
         else:
-            report = ["===Attack===", self.attack_dict.__str__(), "===Stats===", self.stat_dict.__str__()]
+            report=["                         ===Stats===                       "]
+            L=[]
+            Stat_keys=self.stat_dict.keys()
+            for skey in Stat_keys: #Stock les clé correspondant aux différents types de stats
+                stat=self.stat_dict[skey] #Stock le dictionnaire correspondant à un type de stat dans la varaible 
+                report=report.append(skey)  # on affichera le clé si celle-ci correspond au nom de la stat
+                for key in stat.keys():
+                    L.append(key, stat[key]) #on affiche chaque champ de la stat 
+                    report=report+L
         return report
 
 
