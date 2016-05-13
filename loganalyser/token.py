@@ -3,7 +3,8 @@ Module token
 Il reste à écrire pour chacun des types de token les méthodes de vérification et de calcul de la sévérité.
 TODO: Implementer tests type log; Calculs de sévérité | Reste rien.
 """
-
+import socket
+    
 
 from abc import ABCMeta, abstractmethod
 
@@ -58,11 +59,17 @@ class Token:
 
 class IP(Token):
     """Classe concrète instanciant les token IP"""
-
+  
     def __verifier_type(self):
-        s = True
-        return s
-
+        try:
+            socket.inet_pton(socket.AF_INET, self) #"verifie" que l'ip est une ip (ipv4)
+        except socket.error: 
+            try :
+                socket.inet_pton(socket.AF_INET6, self) #"verifie" que l'ip est une ip (ipv6)
+            except socket.error:
+                return False
+        return True
+                        
     def __analyse(self):
         severity_level = 0
         return severity_level
