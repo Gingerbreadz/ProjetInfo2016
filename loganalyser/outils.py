@@ -1,5 +1,100 @@
 """
-Vide pour l'instant
-On implementera ici la classe dictionnaire voir la classe sévérité.
-TODO: Class DICO! | Reste rien.
+Sert à l'implémentation de notre classe Dictionnaire, qui étend la classe dict de Python, et y ajoute les opérations
+qui nous sont utiles sur les dictionnaires.
+TODO: rien, si ce n'est ajouter des méthodes si la classe est incomplète.
 """
+
+
+class Dictionary(dict):
+        """
+        Extension de la classe dictionnaire. Cette classe possède comme attributs supplémentaires:
+
+        - La liste des clefs du dictionnaire
+
+        """
+
+    def __init__(self, keylist):
+        """
+        Constructeur de classe. Un dictionnaire est initialisé vide à partir de la liste des clefs
+
+        :param keylist: Liste des clefs du dictionnaire.
+        :type keylist: list
+
+        """
+        super(Dictionary, self).__init__()
+        self._keys = keylist
+        for key in self._keys:
+            self[key] = []
+        return
+
+    def __getitem__(self, key):
+        """
+        Retourne les valeurs de la clefs passée en argument.
+
+        :param key: Clef
+        :type key: str
+        :return: Liste contenant les valeurs de la clef passée en argument.
+        :rtype: list
+
+        """
+        if key not in self._keys:
+            raise Exception("'" + key + "'" + " n'est pas une clef valide")
+        return dict.__getitem__(self, key)
+
+    def keys(self):
+        """
+        Retourne les clefs du dictionnaire.
+
+        :return: Liste contenant les clefs du dictionnaire.
+        :rtype: list
+
+        """
+        return self._keys
+
+    def addentry(self, entry):
+        """
+        Ajoute au dicitonnaire une nouvelle valeur dans chacunes de ses clefs à partir d'une liste.
+
+        :param entry: Liste contenant les valeurs pour chacune des clefs
+        :type entry: list
+
+        """
+        if not entry.length == len(self._keys):
+            raise Exception("'" + entry + "'" + " n'est pas de bonne longueur")
+        for i in entry.length:
+            self.__setitem__(self._keys[i], self.__getitem__(self._keys[i]) + entry[i])
+
+    def getentry(self, entrynumber):
+        """
+        Retourne la liste contenant les valeurs de chaques clefs pour un index donné.
+
+        :param entrynumber: index de l'entrée.
+        :type entrynumber: int
+        :return: Liste contenant les valeurs de chaques clefs pour le même index.
+        :rtype: list
+
+        """
+        if not entrynumber < len(self.__getitem__(self._keys[0])) and entrynumber >= 0:
+            raise Exception("'" + entrynumber + "'" + " ne correspond pas à index d'entrée valide")
+        return [self[key][entrynumber] for key in self]
+
+    def itemtoentrynumbers(self, item):
+        """
+        Retourne l'index d'une valeur dans le dictionnaire.
+
+        :param item: index de l'entrée.
+        :type item: int
+        :return: Liste contenant les index associés à la valeur d'entrée.
+        :rtype: list
+
+        """
+        if not item in [self[key] for key in self]:
+            raise Exception("'" + item + "'" + " n'est pas dans le dicitonaire")
+        entrynumbers = []
+        for key in self._keys:
+            if item in self[key]:
+                for i in self[key]:
+                    if i == item: entrynumbers.append(self[key].index(item))
+        return entrynumbers
+
+
