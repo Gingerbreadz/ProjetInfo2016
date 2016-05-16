@@ -11,29 +11,29 @@ from loganalyser import outils
 
 
 def recuperertokens(cheminfichier):
-    log = outils.dictionary()
+    log_dic = outils.dictionary()
     fichierdelog = fichier.FichierDeLog(cheminfichier)
     for i in range(0, fichierdelog.nbLigne):
         ligne = fichierdelog.decouperligne(i)
-        log.addEntry(ligne)
-    return log
+        log_dic.addEntry(ligne)
+    return log_dic
+
 
 def recupererregexp(cheminfichier):
-    regex =
+    regexp_dic = outils.dictionary()
     fichierregexp = fichier.FichierRegExp(cheminfichier)
     for i in range(0, fichierregexp.nbLigne):
-        ligne = fichierregexp.decouperligne()
+        ligne = fichierregexp.decouperligne(i)
+        regexp_dic.addEntry(ligne)
+    return regexp_dic
+
 
 def main():
     logfilepath = sys.argv[0]
-    regexfilepath = sys.argv[1]
-    log = recuperertokens(logfilepath)
-
-
-
-
+    regexpfilepath = sys.argv[1]
+    log_dic = recuperertokens(logfilepath)
+    regexp_dic = recupererregexp(regexpfilepath)
     pass
 
 if __name__ == '__main__':
     sys.exit(main())
-
