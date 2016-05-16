@@ -28,7 +28,7 @@ class Token:
 
         """
         if self.__verifier_type:
-            self.donnee=value
+            self.donnee = value
             self.severite = self.__analyse()
         else:
             raise ValueError("Mauvais type de donnee")
@@ -62,10 +62,10 @@ class IP(Token):
   
     def __verifier_type(self):
         try:
-            socket.inet_pton(socket.AF_INET, self) #"verifie" que l'ip est une ip (ipv4)
+            socket.inet_pton(socket.AF_INET, self)  # "verifie" que l'ip est une ip (ipv4)
         except socket.error: 
             try :
-                socket.inet_pton(socket.AF_INET6, self) #"verifie" que l'ip est une ip (ipv6)
+                socket.inet_pton(socket.AF_INET6, self)  # "verifie" que l'ip est une ip (ipv6)
             except socket.error:
                 return False
         return True
