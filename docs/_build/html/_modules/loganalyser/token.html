@@ -77,7 +77,9 @@
             
             
                 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../loganalyser.html">loganalyser package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../loganalyser.html">Loganalyser package</a></li>
 </ul>
 
             
@@ -153,7 +155,7 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__verifier_type</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">donnee</span><span class="o">=</span><span class="n">value</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">donnee</span> <span class="o">=</span> <span class="n">value</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">severite</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__analyse</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Mauvais type de donnee&quot;</span><span class="p">)</span>
@@ -187,10 +189,10 @@
   
     <span class="k">def</span> <span class="nf">__verifier_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">socket</span><span class="o">.</span><span class="n">inet_pton</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span> <span class="c1">#&quot;verifie&quot; que l&#39;ip est une ip (ipv4)</span>
+            <span class="n">socket</span><span class="o">.</span><span class="n">inet_pton</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>  <span class="c1"># &quot;verifie&quot; que l&#39;ip est une ip (ipv4)</span>
         <span class="k">except</span> <span class="n">socket</span><span class="o">.</span><span class="n">error</span><span class="p">:</span> 
             <span class="k">try</span> <span class="p">:</span>
-                <span class="n">socket</span><span class="o">.</span><span class="n">inet_pton</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET6</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span> <span class="c1">#&quot;verifie&quot; que l&#39;ip est une ip (ipv6)</span>
+                <span class="n">socket</span><span class="o">.</span><span class="n">inet_pton</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET6</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>  <span class="c1"># &quot;verifie&quot; que l&#39;ip est une ip (ipv6)</span>
             <span class="k">except</span> <span class="n">socket</span><span class="o">.</span><span class="n">error</span><span class="p">:</span>
                 <span class="k">return</span> <span class="bp">False</span>
         <span class="k">return</span> <span class="bp">True</span>

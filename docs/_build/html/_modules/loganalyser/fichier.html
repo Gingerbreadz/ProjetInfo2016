@@ -77,7 +77,9 @@
             
             
                 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../loganalyser.html">loganalyser package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../loganalyser.html">Loganalyser package</a></li>
 </ul>
 
             
@@ -192,8 +194,8 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="c1"># RegExp utilisée pour le découpage du fichier</span>
-    <span class="n">c_reg</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;([^ ]*) ([^ ]*) ([^ ]*) \[([^]]*)\] &quot;([^&quot;]*)&quot; ([^ ]*) ([^ ]*)&#39;&#39; &quot;([^&quot;]*)&quot; &quot;([^&quot;]*)&quot;&#39;</span><span class="p">)</span> <span class="c1">#combined log format</span>
+    <span class="c1"># RegExp utilisée pour le découpage du fichier (combined log format)</span>
+    <span class="n">c_reg</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;([^ ]*) ([^ ]*) ([^ ]*) \[([^]]*)\] &quot;([^&quot;]*)&quot; ([^ ]*) ([^ ]*)&#39;&#39; &quot;([^&quot;]*)&quot; &quot;([^&quot;]*)&quot;&#39;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filepath</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
@@ -214,18 +216,19 @@
 <span class="sd">        :rtype: list</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">global</span> <span class="n">c_reg</span>
         <span class="n">log</span> <span class="o">=</span> <span class="n">c_reg</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">contenu</span><span class="p">[</span><span class="n">noligne</span><span class="p">])</span><span class="o">.</span><span class="n">groups</span>  
 
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        ip = log[0]</span>
-<span class="sd">        idclient = log[1]</span>
+<span class="sd">        idclient (name) = log[1]</span>
 <span class="sd">        auth = log[2]</span>
 <span class="sd">        date = log[3]</span>
-<span class="sd">        request = log[4]</span>
-<span class="sd">        status = log[5]</span>
+<span class="sd">        request (URL) = log[4]</span>
+<span class="sd">        status (Response) = log[5]</span>
 <span class="sd">        size = log[6]</span>
-<span class="sd">        referer = log[7]</span>
-<span class="sd">        agent = log[8]</span>
+<span class="sd">        referer (Optional) = log[7]</span>
+<span class="sd">        agent (Optional) = log[8]</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -262,6 +265,7 @@
 <span class="sd">        :rtype: list</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">contenu</span><span class="p">[</span><span class="n">noligne</span><span class="p">]</span>  <span class="c1"># Juste pour écarter le warning (argument not used)</span>
         <span class="k">return</span> <span class="p">[]</span></div></div>
 
 
@@ -274,7 +278,6 @@
 <span class="sd">    - si il est read-only ou non</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-
 <div class="viewcode-block" id="FichierRapportTextuel.__init__"><a class="viewcode-back" href="../../loganalyser.html#loganalyser.fichier.FichierRapportTextuel.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filepath</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Constructeur de classe. Un fichier est initialisé à partir de son chemin d&#39;accès</span>
@@ -289,8 +292,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">nbLigne</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ro</span> <span class="o">=</span> <span class="bp">False</span></div>
 
-    <span class="k">def</span> <span class="nf">lireligne</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">FichierRapportTextuel</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">lireligne</span><span class="p">()</span>
+    <span class="k">def</span> <span class="nf">lireligne</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">noligne</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">FichierRapportTextuel</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">lireligne</span><span class="p">(</span><span class="n">noligne</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">fermerfichier</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">FichierRapportTextuel</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">fermerfichier</span><span class="p">()</span>

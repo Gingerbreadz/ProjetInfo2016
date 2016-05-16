@@ -1,10 +1,7 @@
-loganalyser package
+Loganalyser package
 ===================
 
-Submodules
-----------
-
-loganalyser.diagnostique module
+Diagnostique module
 -------------------------------
 
 .. automodule:: loganalyser.diagnostique
@@ -15,7 +12,7 @@ loganalyser.diagnostique module
     :show-inheritance:
 
 
-loganalyser.fichier module
+Fichier module
 --------------------------
 
 .. automodule:: loganalyser.fichier
@@ -26,7 +23,7 @@ loganalyser.fichier module
     :show-inheritance:
 
 
-loganalyser.token module
+Token module
 ------------------------
 
 .. automodule:: loganalyser.token
@@ -36,6 +33,15 @@ loganalyser.token module
     :inherited-members:
     :show-inheritance:
 
+Outils module
+------------------------
+
+.. automodule:: loganalyser.outils
+    :members:
+    :special-members: __init__
+    :private-members:
+    :inherited-members:
+    :show-inheritance:
 
 Module contents
 ---------------

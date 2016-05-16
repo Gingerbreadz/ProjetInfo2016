@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>loganalyser package &mdash; loganalyser  documentation</title>
+  <title>Loganalyser package &mdash; loganalyser  documentation</title>
   
 
   
@@ -31,7 +31,7 @@
 
   
     <link rel="top" title="loganalyser  documentation" href="index.html"/>
-        <link rel="prev" title="Welcome to loganalyser’s documentation!" href="index.html"/> 
+        <link rel="prev" title="Usage" href="usage.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -77,11 +77,13 @@
             
             
                 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="">loganalyser package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-loganalyser.diagnostique">loganalyser.diagnostique module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-loganalyser.fichier">loganalyser.fichier module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-loganalyser.token">loganalyser.token module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Loganalyser package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-loganalyser.diagnostique">Diagnostique module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-loganalyser.fichier">Fichier module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-loganalyser.token">Token module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-loganalyser.outils">Outils module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-loganalyser">Module contents</a></li>
 </ul>
 </li>
@@ -115,7 +117,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="index.html">Docs</a> &raquo;</li>
       
-    <li>loganalyser package</li>
+    <li>Loganalyser package</li>
       <li class="wy-breadcrumbs-aside">
         
           
@@ -130,12 +132,9 @@
            <div itemprop="articleBody">
             
   <div class="section" id="loganalyser-package">
-<h1>loganalyser package<a class="headerlink" href="#loganalyser-package" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
-</div>
+<h1>Loganalyser package<a class="headerlink" href="#loganalyser-package" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="module-loganalyser.diagnostique">
-<span id="loganalyser-diagnostique-module"></span><h2>loganalyser.diagnostique module<a class="headerlink" href="#module-loganalyser.diagnostique" title="Permalink to this headline">¶</a></h2>
+<span id="diagnostique-module"></span><h2>Diagnostique module<a class="headerlink" href="#module-loganalyser.diagnostique" title="Permalink to this headline">¶</a></h2>
 <p>Implementation du Diagnostique.
 Il reste à écrire les méthode d&#8217;analyse et de statistique.
 TODO: Ecrire la méthode qui génère le rapport. | Reste plus tard.</p>
@@ -226,7 +225,7 @@ TODO: Ecrire la méthode qui génère le rapport. | Reste plus tard.</p>
 
 </div>
 <div class="section" id="module-loganalyser.fichier">
-<span id="loganalyser-fichier-module"></span><h2>loganalyser.fichier module<a class="headerlink" href="#module-loganalyser.fichier" title="Permalink to this headline">¶</a></h2>
+<span id="fichier-module"></span><h2>Fichier module<a class="headerlink" href="#module-loganalyser.fichier" title="Permalink to this headline">¶</a></h2>
 <p>Sert à intéragir avec les fichiers.
 TODO: RegExp &amp; Log &#8212;&gt; découpage | Reste OK</p>
 <dl class="class">
@@ -385,7 +384,7 @@ TODO: RegExp &amp; Log &#8212;&gt; découpage | Reste OK</p>
 
 </div>
 <div class="section" id="module-loganalyser.token">
-<span id="loganalyser-token-module"></span><h2>loganalyser.token module<a class="headerlink" href="#module-loganalyser.token" title="Permalink to this headline">¶</a></h2>
+<span id="token-module"></span><h2>Token module<a class="headerlink" href="#module-loganalyser.token" title="Permalink to this headline">¶</a></h2>
 <p>Module token
 Il reste à écrire pour chacun des types de token les méthodes de vérification et de calcul de la sévérité.
 TODO: Implementer tests type log; Calculs de sévérité | Reste rien.</p>
@@ -924,6 +923,158 @@ TODO: Implementer tests type log; Calculs de sévérité | Reste rien.</p>
 </dd></dl>
 
 </div>
+<div class="section" id="module-loganalyser.outils">
+<span id="outils-module"></span><h2>Outils module<a class="headerlink" href="#module-loganalyser.outils" title="Permalink to this headline">¶</a></h2>
+<p>Sert à l&#8217;implémentation de notre classe Dictionnaire, qui étend la classe dict de Python, et y ajoute les opérations
+qui nous sont utiles sur les dictionnaires.
+TODO: rien, si ce n&#8217;est ajouter des méthodes si la classe est incomplète.</p>
+<dl class="class">
+<dt id="loganalyser.outils.Dictionary">
+<em class="property">class </em><code class="descclassname">loganalyser.outils.</code><code class="descname">Dictionary</code><span class="sig-paren">(</span><em>keylist</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loganalyser/outils.html#Dictionary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loganalyser.outils.Dictionary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">dict</span></code></p>
+<p>Extension de la classe dictionnaire. Cette classe possède comme attributs supplémentaires:</p>
+<ul class="simple">
+<li>La liste des clefs du dictionnaire</li>
+</ul>
+<dl class="method">
+<dt id="loganalyser.outils.Dictionary.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>keylist</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loganalyser/outils.html#Dictionary.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loganalyser.outils.Dictionary.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructeur de classe. Un dictionnaire est initialisé vide à partir de la liste des clefs</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>keylist</strong> (<em>list</em>) &#8211; Liste des clefs du dictionnaire.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="loganalyser.outils.Dictionary.addentry">
+<code class="descname">addentry</code><span class="sig-paren">(</span><em>entry</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loganalyser/outils.html#Dictionary.addentry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loganalyser.outils.Dictionary.addentry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ajoute au dicitonnaire une nouvelle valeur dans chacunes de ses clefs à partir d&#8217;une liste.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>entry</strong> (<em>list</em>) &#8211; Liste contenant les valeurs pour chacune des clefs</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="loganalyser.outils.Dictionary.clear">
+<code class="descname">clear</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; None.  Remove all items from D.<a class="headerlink" href="#loganalyser.outils.Dictionary.clear" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="loganalyser.outils.Dictionary.copy">
+<code class="descname">copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; a shallow copy of D<a class="headerlink" href="#loganalyser.outils.Dictionary.copy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="loganalyser.outils.Dictionary.fromkeys">
+<code class="descname">fromkeys</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.outils.Dictionary.fromkeys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a new dict with keys from iterable and values equal to value.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="loganalyser.outils.Dictionary.get">
+<code class="descname">get</code><span class="sig-paren">(</span><em>k</em><span class="optional">[</span>, <em>d</em><span class="optional">]</span><span class="sig-paren">)</span> &rarr; D[k] if k in D, else d.  d defaults to None.<a class="headerlink" href="#loganalyser.outils.Dictionary.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="loganalyser.outils.Dictionary.getentry">
+<code class="descname">getentry</code><span class="sig-paren">(</span><em>entrynumber</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loganalyser/outils.html#Dictionary.getentry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loganalyser.outils.Dictionary.getentry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retourne la liste contenant les valeurs de chaques clefs pour un index donné.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>entrynumber</strong> (<em>int</em>) &#8211; index de l&#8217;entrée.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Liste contenant les valeurs de chaques clefs pour le même index.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="loganalyser.outils.Dictionary.items">
+<code class="descname">items</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; a set-like object providing a view on D's items<a class="headerlink" href="#loganalyser.outils.Dictionary.items" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="loganalyser.outils.Dictionary.itemtoentrynumbers">
+<code class="descname">itemtoentrynumbers</code><span class="sig-paren">(</span><em>item</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loganalyser/outils.html#Dictionary.itemtoentrynumbers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loganalyser.outils.Dictionary.itemtoentrynumbers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retourne l&#8217;index d&#8217;une valeur dans le dictionnaire.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>item</strong> (<em>int</em>) &#8211; index de l&#8217;entrée.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Liste contenant les index associés à la valeur d&#8217;entrée.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="loganalyser.outils.Dictionary.keys">
+<code class="descname">keys</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/loganalyser/outils.html#Dictionary.keys"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loganalyser.outils.Dictionary.keys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retourne les clefs du dictionnaire.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Liste contenant les clefs du dictionnaire.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="loganalyser.outils.Dictionary.pop">
+<code class="descname">pop</code><span class="sig-paren">(</span><em>k</em><span class="optional">[</span>, <em>d</em><span class="optional">]</span><span class="sig-paren">)</span> &rarr; v, remove specified key and return the corresponding value.<a class="headerlink" href="#loganalyser.outils.Dictionary.pop" title="Permalink to this definition">¶</a></dt>
+<dd><p>If key is not found, d is returned if given, otherwise KeyError is raised</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="loganalyser.outils.Dictionary.popitem">
+<code class="descname">popitem</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; (k, v), remove and return some (key, value) pair as a<a class="headerlink" href="#loganalyser.outils.Dictionary.popitem" title="Permalink to this definition">¶</a></dt>
+<dd><p>2-tuple; but raise KeyError if D is empty.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="loganalyser.outils.Dictionary.setdefault">
+<code class="descname">setdefault</code><span class="sig-paren">(</span><em>k</em><span class="optional">[</span>, <em>d</em><span class="optional">]</span><span class="sig-paren">)</span> &rarr; D.get(k,d), also set D[k]=d if k not in D<a class="headerlink" href="#loganalyser.outils.Dictionary.setdefault" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="loganalyser.outils.Dictionary.update">
+<code class="descname">update</code><span class="sig-paren">(</span><span class="optional">[</span><em>E</em>, <span class="optional">]</span><em>**F</em><span class="sig-paren">)</span> &rarr; None.  Update D from dict/iterable E and F.<a class="headerlink" href="#loganalyser.outils.Dictionary.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>If E is present and has a .keys() method, then does:  for k in E: D[k] = E[k]
+If E is present and lacks a .keys() method, then does:  for k, v in E: D[k] = v
+In either case, this is followed by: for k in F:  D[k] = F[k]</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="loganalyser.outils.Dictionary.values">
+<code class="descname">values</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; an object providing a view on D's values<a class="headerlink" href="#loganalyser.outils.Dictionary.values" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
 <div class="section" id="module-loganalyser">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-loganalyser" title="Permalink to this headline">¶</a></h2>
 <p>Vide mais utile!
@@ -939,7 +1090,7 @@ Même vide, ce fichier permet à python de reconnaitre le dossier courant comme 
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
       
-        <a href="index.html" class="btn btn-neutral" title="Welcome to loganalyser’s documentation!" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="usage.html" class="btn btn-neutral" title="Usage" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
