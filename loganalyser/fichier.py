@@ -67,8 +67,8 @@ class FichierDeLog(Fichier):
 
     """
 
-    # RegExp utilisée pour le découpage du fichier
-    c_reg=re.compile('([^ ]*) ([^ ]*) ([^ ]*) \[([^]]*)\] "([^"]*)" ([^ ]*) ([^ ]*)'' "([^"]*)" "([^"]*)"') #combined log format
+    # RegExp utilisée pour le découpage du fichier (combined log format)
+    c_reg = re.compile('([^ ]*) ([^ ]*) ([^ ]*) \[([^]]*)\] "([^"]*)" ([^ ]*) ([^ ]*)'' "([^"]*)" "([^"]*)"')
 
     def __init__(self, filepath):
         super().__init__(filepath)
@@ -89,6 +89,7 @@ class FichierDeLog(Fichier):
         :rtype: list
 
         """
+        global c_reg
         log = c_reg.match(self.contenu[noligne]).groups  
 
         """
@@ -137,6 +138,7 @@ class FichierRegExp(Fichier):
         :rtype: list
 
         """
+        self.contenu[noligne]  # Juste pour écarter le warning (argument not used)
         return []
 
 
@@ -149,7 +151,6 @@ class FichierRapportTextuel(Fichier):
     - si il est read-only ou non
 
     """
-
     def __init__(self, filepath):
         """
         Constructeur de classe. Un fichier est initialisé à partir de son chemin d'accès
@@ -164,8 +165,8 @@ class FichierRapportTextuel(Fichier):
         self.nbLigne = 0
         self.ro = False
 
-    def lireligne(self):
-        super(FichierRapportTextuel, self).lireligne()
+    def lireligne(self, noligne):
+        super(FichierRapportTextuel, self).lireligne(noligne)
 
     def fermerfichier(self):
         super(FichierRapportTextuel, self).fermerfichier()
