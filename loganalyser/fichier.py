@@ -94,14 +94,14 @@ class FichierDeLog(Fichier):
 
         """
         ip = log[0]
-        idclient = log[1]
+        idclient (name) = log[1]
         auth = log[2]
         date = log[3]
-        request = log[4]
-        status = log[5]
+        request (URL) = log[4]
+        status (Response) = log[5]
         size = log[6]
-        referer = log[7]
-        agent = log[8]
+        referer (Optional) = log[7]
+        agent (Optional) = log[8]
 
         """
 
