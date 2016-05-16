@@ -14,7 +14,6 @@ out = sys.stdout
 tokenlist = ["IP", "Name", "Date", "Ext", "Methode", "URL", "Response", "Byte", "Referrer"]
 
 
-
 def recuperertokens(cheminfichier):
     log_dic = outils.Dictionary(tokenlist)
     fichierdelog = fichier.FichierDeLog(cheminfichier)
@@ -36,10 +35,12 @@ def recupererregexp(cheminfichier):
 def main():
     logfilepath = sys.argv[0]
     regexpfilepath = sys.argv[1]
-    out.write(sys.argv[0])
     log_dic = recuperertokens(logfilepath)
     regexp_dic = recupererregexp(regexpfilepath)
     diag = diagnostique.Diagnostique(log_dic, regexp_dic)
+    report = diag.get_report(False)
+    for ligne in report:
+        out.write(ligne)
     pass
 
 if __name__ == '__main__':
