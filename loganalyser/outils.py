@@ -24,7 +24,7 @@ class Dictionary(dict):
         super(Dictionary, self).__init__()
         self._keys = keylist
         for key in self._keys:
-            self[key] = []
+            self.__setitem__(key, [])
         return
 
     def __getitem__(self, key):
@@ -59,10 +59,12 @@ class Dictionary(dict):
         :type entry: list
 
         """
-        if not entry.length == len(self._keys):
-            raise Exception("'" + entry + "'" + " n'est pas de bonne longueur")
-        for i in entry.length:
-            self.__setitem__(self._keys[i], self.__getitem__(self._keys[i]) + entry[i])
+        if not len(entry) == len(self._keys):
+            raise Exception("La liste n'est pas de bonne longueur")
+        i = 0
+        for key in self._keys:
+            self.__setitem__(key, self.__getitem__(key)+[entry[i]])
+            i += 1
 
     def getentry(self, entrynumber):
         """
