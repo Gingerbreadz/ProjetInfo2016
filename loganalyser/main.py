@@ -19,7 +19,7 @@ def recuperertokens(cheminfichier):
     return log
 
 def recupererregexp(cheminfichier):
-    regex = 
+    regex =
     fichierregexp = fichier.FichierRegExp(cheminfichier)
     for i in range(0, fichierregexp.nbLigne):
         ligne = fichierregexp.decouperligne()
