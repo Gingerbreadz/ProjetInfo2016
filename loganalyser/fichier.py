@@ -7,6 +7,7 @@ TODO: RegExp & Log ---> découpage | Reste OK
 from abc import ABCMeta, abstractmethod
 import re
 
+c_reg = re.compile('([^ ]*) ([^ ]*) ([^ ]*) \[([^]]*)\] "([^"]*)" ([^ ]*) ([^ ]*)'' "([^"]*)" "([^"]*)"')
 
 class Fichier:
     """Classe abstraite interface pour fichier caractérisé par :
@@ -68,7 +69,6 @@ class FichierDeLog(Fichier):
     """
 
     # RegExp utilisée pour le découpage du fichier (combined log format)
-    c_reg = re.compile('([^ ]*) ([^ ]*) ([^ ]*) \[([^]]*)\] "([^"]*)" ([^ ]*) ([^ ]*)'' "([^"]*)" "([^"]*)"')
 
     def __init__(self, filepath):
         super().__init__(filepath)
@@ -89,8 +89,9 @@ class FichierDeLog(Fichier):
         :rtype: list
 
         """
-        global c_reg
-        log = c_reg.match(self.contenu[noligne]).groups  
+        match = c_reg.match(self.contenu[noligne])
+        log_tuple = match.groups('default')
+        log = list(log_tuple)
 
         """
         ip = log[0]
