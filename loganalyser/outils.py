@@ -6,12 +6,12 @@ TODO: rien, si ce n'est ajouter des méthodes si la classe est incomplète.
 
 
 class Dictionary(dict):
-        """
-        Extension de la classe dictionnaire. Cette classe possède comme attributs supplémentaires:
+    """
+    Extension de la classe dictionnaire. Cette classe possède comme attributs supplémentaires:
 
-        - La liste des clefs du dictionnaire
+    - La liste des clefs du dictionnaire
 
-        """
+    """
 
     def __init__(self, keylist):
         """
