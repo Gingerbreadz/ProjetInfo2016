@@ -115,8 +115,12 @@ class Methode(Token):
     """Classe concrète instanciant les token Methode"""
 
     def __verifier_type(self):
-        s = True
-        return s
+        s = ["GET", "HEAD", "POST", "OPTIONS", "CONNECT", "TRACE", "PUT", "DELETE"]
+        self.upper()
+        if self in s:
+            return True
+        else: 
+            return False
 
     def __analyse(self):
         severity_level = 0
