@@ -143,8 +143,14 @@ class Response(Token):
     """Classe concrète instanciant les token Réponse"""
 
     def __verifier_type(self):
-        s = True
-        return s
+        try:
+            a=int(self)
+        except:
+            return False
+        if 99 < a and a < 600:
+            return True
+        else :
+            return False
 
     def __analyse(self):
         severity_level = 0
