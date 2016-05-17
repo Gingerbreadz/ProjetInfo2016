@@ -151,8 +151,12 @@ class Byte(Token):
     """Classe concrète instanciant les token Octet"""
 
     def __verifier_type(self):
-        s = True
-        return s
+        try:
+            int(self)
+        except:
+            return False
+        return True
+            
 
     def __analyse(self):
         severity_level = 0
