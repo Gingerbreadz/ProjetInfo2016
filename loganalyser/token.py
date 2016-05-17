@@ -79,8 +79,7 @@ class Name(Token):
     """Classe concrète instanciant les token Nom"""
 
     def __verifier_type(self):
-        s = True
-        return s
+        return type(self)==str
 
     def __analyse(self):
         severity_level = 0
