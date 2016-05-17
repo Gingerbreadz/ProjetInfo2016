@@ -1,4 +1,4 @@
-"""
+""""
 Boucle principale
 Pour l'instant vide
 C'est ici que seront implémentées les intéractions avec l'utilisateur et utilisées les classes/méthodes des autres modules.
@@ -15,17 +15,17 @@ out = sys.stdout
 tokenkeys = ["IP", "Name", "Date", "Ext", "Methode", "URL", "Response", "Byte", "Referrer"]
 
 
-def listtotokenlist(list):
-    s = list.__init__()
-    s.append(token.IP(list[0]))
-    s.append(token.Name(list[1]))
-    s.append(token.Date(list[2]))
-    s.append(token.EXT(list[3]))
-    s.append(token.Methode(list[4]))
-    s.append(token.URL(list[5]))
-    s.append(token.Response(list[6]))
-    s.append(token.Byte(list[7]))
-    s.append(token.Referer(list[8]))
+def listtotokenlist(liste):
+    s = list()
+    s.append(token.IP(liste[0]))
+    s.append(token.Name(liste[1]))
+    s.append(token.Date(liste[2]))
+    s.append(token.EXT(liste[3]))
+    s.append(token.Methode(liste[4]))
+    s.append(token.URL(liste[5]))
+    s.append(token.Response(liste[6]))
+    s.append(token.Byte(liste[7]))
+    s.append(token.Referer(liste[8]))
     return s
 
 def recuperertokens(cheminfichier):
