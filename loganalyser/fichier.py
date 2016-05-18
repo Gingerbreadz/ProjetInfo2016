@@ -1,10 +1,11 @@
-"""
+&"""
 Sert à intéragir avec les fichiers.
 TODO: RegExp & Log ---> découpage | Reste OK
 """
 
 
 from abc import ABCMeta, abstractmethod
+from urlparse import urlparse
 import re
 
 c_reg = re.compile('([^ ]*) ([^ ]*) ([^ ]*) \[([^]]*)\] "([^"]*)" ([^ ]*) ([^ ]*)'' "([^"]*)" "([^"]*)"')
@@ -105,8 +106,9 @@ class FichierDeLog(Fichier):
         agent (Optional) = log[8]
 
         """
+        url = urlparse(log[4]) 
 
-        return log
+        return (log,url)
 
 
 class FichierRegExp(Fichier):
