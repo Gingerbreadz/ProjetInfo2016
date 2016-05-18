@@ -4,7 +4,7 @@ Il reste à écrire pour chacun des types de token les méthodes de vérificatio
 TODO: Implementer tests type log; Calculs de sévérité | Reste rien.
 """
 import socket
-    
+from urllib.parse import urlparse
 
 from abc import ABCMeta, abstractmethod
 
@@ -64,7 +64,7 @@ class IP(Token):
         try:
             socket.inet_pton(socket.AF_INET, self)  # "verifie" que l'ip est une ip (ipv4)
         except socket.error: 
-            try :
+            try:
                 socket.inet_pton(socket.AF_INET6, self)  # "verifie" que l'ip est une ip (ipv6)
             except socket.error:
                 return False
@@ -79,7 +79,7 @@ class Name(Token):
     """Classe concrète instanciant les token Nom"""
 
     def __verifier_type(self):
-        return type(self)==str
+        return type(self) == str
 
     def __analyse(self):
         severity_level = 0
@@ -115,11 +115,7 @@ class Methode(Token):
 
     def __verifier_type(self):
         s = ["GET", "HEAD", "POST", "OPTIONS", "CONNECT", "TRACE", "PUT", "DELETE"]
-        self.upper()
-        if self in s:
-            return True
-        else: 
-            return False
+        return self.donnee in s
 
     def __analyse(self):
         severity_level = 0
@@ -137,18 +133,22 @@ class URL(Token):
         severity_level = 0
         return severity_level
 
+    def normalisation(self):
+        url = urlparse(self.donnee)
+        return url
+
 
 class Response(Token):
     """Classe concrète instanciant les token Réponse"""
 
     def __verifier_type(self):
         try:
-            a=int(self)
-        except:
+            a = int(self)
+        except ValueError:
             return False
-        if 99 < a and a < 600:
+        if 99 < a < 600:
             return True
-        else :
+        else:
             return False
 
     def __analyse(self):
@@ -162,10 +162,9 @@ class Byte(Token):
     def __verifier_type(self):
         try:
             int(self)
-        except:
+        except ValueError:
             return False
         return True
-            
 
     def __analyse(self):
         severity_level = 0
