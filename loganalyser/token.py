@@ -4,6 +4,7 @@ Il reste à écrire pour chacun des types de token les méthodes de vérificatio
 TODO: Implementer tests type log; Calculs de sévérité | Reste rien.
 """
 import socket
+import re
 from urllib.parse import urlparse
 
 from abc import ABCMeta, abstractmethod
@@ -134,7 +135,9 @@ class URL(Token):
         return severity_level
 
     def normalisation(self):
-        url = urlparse(self.donnee)
+        url_reg = re.compile('([^ ]*) ([^ ]*) ([^ ]*)')
+        tab = url_reg.match(self.donnee).groups('default')
+        url = urlparse(tab[1])
         return url
 
 
