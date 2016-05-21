@@ -63,10 +63,10 @@ class IP(Token):
   
     def __verifier_type(self, value):
         try:
-            socket.inet_pton(socket.AF_INET, self)  # "verifie" que l'ip est une ip (ipv4)
+            socket.inet_pton(socket.AF_INET, value)  # "verifie" que l'ip est une ip (ipv4)
         except socket.error: 
             try:
-                socket.inet_pton(socket.AF_INET6, self)  # "verifie" que l'ip est une ip (ipv6)
+                socket.inet_pton(socket.AF_INET6, value)  # "verifie" que l'ip est une ip (ipv6)
             except socket.error:
                 return False
         return True
@@ -80,7 +80,7 @@ class Name(Token):
     """Classe concrète instanciant les token Nom"""
 
     def __verifier_type(self, value):
-        return type(self) == str
+        return type(value) == str
 
     def __analyse(self):
         severity_level = 0
@@ -146,13 +146,11 @@ class Response(Token):
 
     def __verifier_type(self, value):
         try:
-            a = int(self)
+            int(value)
         except ValueError:
             return False
-        if 99 < a < 600:
-            return True
-        else:
-            return False
+        return 99 < int(value) < 600
+            
 
     def __analyse(self):
         severity_level = 0
@@ -164,7 +162,7 @@ class Byte(Token):
 
     def __verifier_type(self, value):
         try:
-            int(self)
+            int(value)
         except ValueError:
             return False
         return True
