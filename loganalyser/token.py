@@ -116,7 +116,7 @@ class Methode(Token):
 
     def __verifier_type(self, value):
         s = ["GET", "HEAD", "POST", "OPTIONS", "CONNECT", "TRACE", "PUT", "DELETE"]
-        return self.donnee in s
+        return value in s
 
     def __analyse(self):
         severity_level = 0
