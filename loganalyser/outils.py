@@ -1,7 +1,7 @@
 """
 Sert à l'implémentation de notre classe Dictionnaire, qui étend la classe dict de Python, et y ajoute les opérations
 qui nous sont utiles sur les dictionnaires.
-TODO: rien, si ce n'est ajouter des méthodes si la classe est incomplète.
+TODO: rien, si ce n'est ajouter des méthodes si la classe est incomplète et faire fonctionner itemtoentrynumbers.
 """
 
 
