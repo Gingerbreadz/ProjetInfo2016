@@ -126,3 +126,17 @@ except:
 
 
 print("====test itemtoentrynumbers====\n")   #la fonction ne fonctionne pas, cf outils.py
+resObt=testDic.itemtoentrynumbers('1.1.1.1')
+resAtt=[1]
+
+if resObt==resAtt :
+    print("itemtoentrynumbers fonctionne\n")
+else:
+    print("itemtoentrynumbers ne fonctionne pas\n")
+
+print("test levée d'exception itemtoentrynumbers \n")
+print("on teste : testDic.itemetoentrynumbers('2.2.2.2') : une exception doit être levée\n")
+try:
+    testDic.itemetoentrynumbers('2.2.2.2')
+except:
+    print("une exception a bien été levée\n")
