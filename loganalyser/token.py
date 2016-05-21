@@ -27,7 +27,7 @@ class Token:
         :type value: str
 
         """
-        if self.__verifier_type:
+        if self.__verifier_type(value):
             self.donnee = value
             self.severite = self.__analyse()
         else:
@@ -35,7 +35,7 @@ class Token:
         return
 
     @abstractmethod
-    def __verifier_type(self):
+    def __verifier_type(self, value):
         """
         Vérifie si la donnee peut bien être instanciée sous cette classe de Token.
 
@@ -60,7 +60,7 @@ class Token:
 class IP(Token):
     """Classe concrète instanciant les token IP"""
   
-    def __verifier_type(self):
+    def __verifier_type(self, value):
         try:
             socket.inet_pton(socket.AF_INET, self)  # "verifie" que l'ip est une ip (ipv4)
         except socket.error: 
@@ -78,7 +78,7 @@ class IP(Token):
 class Name(Token):
     """Classe concrète instanciant les token Nom"""
 
-    def __verifier_type(self):
+    def __verifier_type(self, value):
         return type(self) == str
 
     def __analyse(self):
@@ -89,7 +89,7 @@ class Name(Token):
 class Date(Token):
     """Classe concrète instanciant les token Date"""
 
-    def __verifier_type(self):
+    def __verifier_type(self, value):
         s = True
         return s
 
@@ -101,7 +101,7 @@ class Date(Token):
 class EXT(Token):
     """Classe concrète instanciant les token Ext"""
 
-    def __verifier_type(self):
+    def __verifier_type(self, value):
         s = True
         return s
 
@@ -113,7 +113,7 @@ class EXT(Token):
 class Methode(Token):
     """Classe concrète instanciant les token Methode"""
 
-    def __verifier_type(self):
+    def __verifier_type(self, value):
         s = ["GET", "HEAD", "POST", "OPTIONS", "CONNECT", "TRACE", "PUT", "DELETE"]
         return self.donnee in s
 
@@ -125,7 +125,7 @@ class Methode(Token):
 class URL(Token):
     """Classe concrète instanciant les token URL"""
 
-    def __verifier_type(self):
+    def __verifier_type(self, value):
         s = True
         return s
 
@@ -141,7 +141,7 @@ class URL(Token):
 class Response(Token):
     """Classe concrète instanciant les token Réponse"""
 
-    def __verifier_type(self):
+    def __verifier_type(self, value):
         try:
             a = int(self)
         except ValueError:
@@ -159,7 +159,7 @@ class Response(Token):
 class Byte(Token):
     """Classe concrète instanciant les token Octet"""
 
-    def __verifier_type(self):
+    def __verifier_type(self, value):
         try:
             int(self)
         except ValueError:
@@ -174,7 +174,7 @@ class Byte(Token):
 class Referer(Token):
     """Classe concrète instanciant les token Referer"""
 
-    def __verifier_type(self):
+    def __verifier_type(self, value):
         s = True
         return s
 
