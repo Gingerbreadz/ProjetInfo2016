@@ -62,9 +62,11 @@ print("test levée d'exception addentry \n")
 print("on teste : testDic.addentry(['0.0.0.0']) : une exception doit être levée\n")
 try:
     testDic.addentry(['0.0.0.0'])
-except:
+except Exception:
     print("une exception a bien été levée\n")
-
+else:
+    print("l'exception n'a pas été levée")
+    quit()
      
      
      
@@ -92,8 +94,11 @@ print("test levée d'exception __getitem__\n")
 print("on teste : testDic.__getitem__('WrongKey') : une exception doit être levée\n")
 try:
     testDic.__getitem__('WrongKey')
-except:
+except Exception:
     print("l'exception a bien été levée\n")
+else:
+    print("l'exception n'a pas été levée")
+    quit()
 
 print("====test getentry====\n")
 newEntry2=['1.1.1.1','toto1','09/05/2016:18:58:48', '-0700', 'DELETE', 'www.urlexemple2.com', '404', '4652','http://www.example2.com/start.html']
@@ -119,9 +124,11 @@ print("test levée d'exception getentry \n")
 print("on teste : testDic.getentry(len(self.__getitem__(self._keys[0]))) : une exception doit être levée\n")
 try:
     testDic.getentry(len(testDic.__getitem__(testDic._keys[0])))
-except:
+except Exception:
     print("une exception a bien été levée\n")
-
+else:
+    print("l'exception n'a pas été levée") 
+    quit()
 
 
 
@@ -138,5 +145,8 @@ print("test levée d'exception itemtoentrynumbers \n")
 print("on teste : testDic.itemetoentrynumbers('2.2.2.2') : une exception doit être levée\n")
 try:
     testDic.itemetoentrynumbers('2.2.2.2')
-except:
+except Exception:
     print("une exception a bien été levée\n")
+else:
+    print("l'exception n'a pas été levée")
+    quit()
