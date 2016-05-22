@@ -1,7 +1,6 @@
 """
 Module token
-Il reste à écrire pour chacun des types de token les méthodes de vérification et de calcul de la sévérité.
-TODO: Implementer tests type log; Calculs de sévérité | Reste rien.
+Ce sont les classes qui sont utilisés pour caractériser les différents champs de log.
 """
 import socket
 import re

@@ -1,6 +1,5 @@
 """
 Sert à intéragir avec les fichiers.
-TODO: RegExp & Log ---> découpage | Reste OK
 """
 
 
