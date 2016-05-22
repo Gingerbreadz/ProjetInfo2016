@@ -13,7 +13,7 @@ from loganalyser import token
 
 out = sys.stdout
 tokenkeys = ["IP", "Name", "Date", "Ext", "Method", "URL", "Response", "Byte", "Referrer"]
-regexkeys = ["Number", "Regex", "Description", "Impact"]
+regexkeys = ["Number", "Rule", "Description", "Impact"]
 
 
 def listtotokenlist(liste):
