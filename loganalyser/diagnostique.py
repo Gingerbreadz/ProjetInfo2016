@@ -167,7 +167,6 @@ class Diagnostique:
                     self.attack_dict["Impact"] += [self.regexp_dict["Impact"][i]]
 
     def get_report(self, fileformat):
-        print "on est dedans"
         """
         Ordonne les donnée issues des statistiques et des analyses, prépare pour l'affichage finale.
 
