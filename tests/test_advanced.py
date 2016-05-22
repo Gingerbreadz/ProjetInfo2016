@@ -10,8 +10,8 @@ from loganalyser import token
 tokenkeys = ["IP", "Name", "Date", "Ext", "Method", "URL", "Response", "Byte", "Referrer"]
 regexkeys = ["Number", "Rule", "Description", "Impact"]
 
-logfilepath = "/home/anatole/Ecole/TSP/ProjetInfo/ProjetInfo2016/res/wwwminet-access.log"
-regexpfilepath = "/home/anatole/Ecole/TSP/ProjetInfo/ProjetInfo2016/res/default_filter.xml"
+logfilepath = "./res/wwwassos-access.log"
+regexpfilepath = "./res/default_filter.xml"
 
 
 def listtotokenlist(liste):
