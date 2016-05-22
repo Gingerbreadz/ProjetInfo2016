@@ -384,7 +384,8 @@
 <div class="section" id="module-loganalyser.token">
 <span id="token-module"></span><h2>Token module<a class="headerlink" href="#module-loganalyser.token" title="Permalink to this headline">¶</a></h2>
 <p>Module token
-Ce sont les classes qui sont utilisés pour caractériser les différents champs de log.</p>
+Ce sont les classes qui sont utilisées pour caractériser les différents champs de log.
+A l&#8217;instanciation de chacune des classes correspondant à un champ, la vérification du type de la donnée est effectuée et lève une erreur si le type n&#8217;est pas le bon.</p>
 <dl class="class">
 <dt id="loganalyser.token.Token">
 <em class="property">class </em><code class="descclassname">loganalyser.token.</code><code class="descname">Token</code><span class="sig-paren">(</span><em>value</em>, <em>istypeok</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loganalyser/token.html#Token"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loganalyser.token.Token" title="Permalink to this definition">¶</a></dt>
@@ -450,7 +451,7 @@ Ce sont les classes qui sont utilisés pour caractériser les différents champs
 <dt id="loganalyser.token.IP">
 <em class="property">class </em><code class="descclassname">loganalyser.token.</code><code class="descname">IP</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loganalyser/token.html#IP"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loganalyser.token.IP" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#loganalyser.token.Token" title="loganalyser.token.Token"><code class="xref py py-class docutils literal"><span class="pre">loganalyser.token.Token</span></code></a></p>
-<p>Classe concrète instanciant les token IP</p>
+<p>Classe concrète instanciant les token IP, le format attendu étant une adresse ipv4 ou ipv6</p>
 <dl class="method">
 <dt id="loganalyser.token.IP._Token__analyse">
 <code class="descname">_Token__analyse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.IP._Token__analyse" title="Permalink to this definition">¶</a></dt>
@@ -491,7 +492,7 @@ Ce sont les classes qui sont utilisés pour caractériser les différents champs
 <dt id="loganalyser.token.Name">
 <em class="property">class </em><code class="descclassname">loganalyser.token.</code><code class="descname">Name</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loganalyser/token.html#Name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loganalyser.token.Name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#loganalyser.token.Token" title="loganalyser.token.Token"><code class="xref py py-class docutils literal"><span class="pre">loganalyser.token.Token</span></code></a></p>
-<p>Classe concrète instanciant les token Nom</p>
+<p>Classe concrète instanciant les token Nom, le format attendu étant une chaine de caractères</p>
 <dl class="method">
 <dt id="loganalyser.token.Name._Token__analyse">
 <code class="descname">_Token__analyse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.Name._Token__analyse" title="Permalink to this definition">¶</a></dt>
@@ -532,7 +533,7 @@ Ce sont les classes qui sont utilisés pour caractériser les différents champs
 <dt id="loganalyser.token.Date">
 <em class="property">class </em><code class="descclassname">loganalyser.token.</code><code class="descname">Date</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loganalyser/token.html#Date"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loganalyser.token.Date" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#loganalyser.token.Token" title="loganalyser.token.Token"><code class="xref py py-class docutils literal"><span class="pre">loganalyser.token.Token</span></code></a></p>
-<p>Classe concrète instanciant les token Date</p>
+<p>Classe concrète instanciant les token Date, le format attendu étant JJ/MM/YYYY:HH:MM:SS</p>
 <dl class="method">
 <dt id="loganalyser.token.Date._Token__analyse">
 <code class="descname">_Token__analyse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.Date._Token__analyse" title="Permalink to this definition">¶</a></dt>
@@ -573,7 +574,7 @@ Ce sont les classes qui sont utilisés pour caractériser les différents champs
 <dt id="loganalyser.token.EXT">
 <em class="property">class </em><code class="descclassname">loganalyser.token.</code><code class="descname">EXT</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loganalyser/token.html#EXT"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loganalyser.token.EXT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#loganalyser.token.Token" title="loganalyser.token.Token"><code class="xref py py-class docutils literal"><span class="pre">loganalyser.token.Token</span></code></a></p>
-<p>Classe concrète instanciant les token Ext</p>
+<p>Classe concrète instanciant les token Ext, le format attendu étant un entier</p>
 <dl class="method">
 <dt id="loganalyser.token.EXT._Token__analyse">
 <code class="descname">_Token__analyse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.EXT._Token__analyse" title="Permalink to this definition">¶</a></dt>
@@ -614,7 +615,7 @@ Ce sont les classes qui sont utilisés pour caractériser les différents champs
 <dt id="loganalyser.token.Method">
 <em class="property">class </em><code class="descclassname">loganalyser.token.</code><code class="descname">Method</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loganalyser/token.html#Method"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loganalyser.token.Method" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#loganalyser.token.Token" title="loganalyser.token.Token"><code class="xref py py-class docutils literal"><span class="pre">loganalyser.token.Token</span></code></a></p>
-<p>Classe concrète instanciant les token Methode</p>
+<p>Classe concrète instanciant les token Methode, le format attendu étant l&#8217;une des chaines de caractères suivante : GET, HEAD, POST, OPTIONS, CONNECT, TRACE, PUT, DELETE</p>
 <dl class="method">
 <dt id="loganalyser.token.Method._Token__analyse">
 <code class="descname">_Token__analyse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.Method._Token__analyse" title="Permalink to this definition">¶</a></dt>
@@ -696,7 +697,7 @@ Ce sont les classes qui sont utilisés pour caractériser les différents champs
 <dt id="loganalyser.token.Response">
 <em class="property">class </em><code class="descclassname">loganalyser.token.</code><code class="descname">Response</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loganalyser/token.html#Response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loganalyser.token.Response" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#loganalyser.token.Token" title="loganalyser.token.Token"><code class="xref py py-class docutils literal"><span class="pre">loganalyser.token.Token</span></code></a></p>
-<p>Classe concrète instanciant les token Réponse</p>
+<p>Classe concrète instanciant les token Réponse, le format attendu étant un entier entre 100 et 599 (compris)</p>
 <dl class="method">
 <dt id="loganalyser.token.Response._Token__analyse">
 <code class="descname">_Token__analyse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.Response._Token__analyse" title="Permalink to this definition">¶</a></dt>
@@ -737,7 +738,7 @@ Ce sont les classes qui sont utilisés pour caractériser les différents champs
 <dt id="loganalyser.token.Byte">
 <em class="property">class </em><code class="descclassname">loganalyser.token.</code><code class="descname">Byte</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loganalyser/token.html#Byte"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loganalyser.token.Byte" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#loganalyser.token.Token" title="loganalyser.token.Token"><code class="xref py py-class docutils literal"><span class="pre">loganalyser.token.Token</span></code></a></p>
-<p>Classe concrète instanciant les token Octet</p>
+<p>Classe concrète instanciant les token Octet, le fomat attendu étant un entier</p>
 <dl class="method">
 <dt id="loganalyser.token.Byte._Token__analyse">
 <code class="descname">_Token__analyse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.Byte._Token__analyse" title="Permalink to this definition">¶</a></dt>

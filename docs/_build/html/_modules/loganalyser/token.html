@@ -128,7 +128,8 @@
   <h1>Source code for loganalyser.token</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Module token</span>
-<span class="sd">Ce sont les classes qui sont utilisés pour caractériser les différents champs de log.</span>
+<span class="sd">Ce sont les classes qui sont utilisées pour caractériser les différents champs de log.</span>
+<span class="sd">A l&#39;instanciation de chacune des classes correspondant à un champ, la vérification du type de la donnée est effectuée et lève une erreur si le type n&#39;est pas le bon.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">socket</span>
 <span class="kn">import</span> <span class="nn">re</span>
@@ -186,7 +187,7 @@
 
 
 <div class="viewcode-block" id="IP"><a class="viewcode-back" href="../../loganalyser.html#loganalyser.token.IP">[docs]</a><span class="k">class</span> <span class="nc">IP</span><span class="p">(</span><span class="n">Token</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Classe concrète instanciant les token IP&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Classe concrète instanciant les token IP, le format attendu étant une adresse ipv4 ou ipv6&quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__verifier_type</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
 
@@ -206,7 +207,7 @@
 
 
 <div class="viewcode-block" id="Name"><a class="viewcode-back" href="../../loganalyser.html#loganalyser.token.Name">[docs]</a><span class="k">class</span> <span class="nc">Name</span><span class="p">(</span><span class="n">Token</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Classe concrète instanciant les token Nom&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Classe concrète instanciant les token Nom, le format attendu étant une chaine de caractères&quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__verifier_type</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
 
@@ -219,7 +220,7 @@
 
 
 <div class="viewcode-block" id="Date"><a class="viewcode-back" href="../../loganalyser.html#loganalyser.token.Date">[docs]</a><span class="k">class</span> <span class="nc">Date</span><span class="p">(</span><span class="n">Token</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Classe concrète instanciant les token Date&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Classe concrète instanciant les token Date, le format attendu étant JJ/MM/YYYY:HH:MM:SS&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__verifier_type</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
@@ -238,7 +239,7 @@
 
 
 <div class="viewcode-block" id="EXT"><a class="viewcode-back" href="../../loganalyser.html#loganalyser.token.EXT">[docs]</a><span class="k">class</span> <span class="nc">EXT</span><span class="p">(</span><span class="n">Token</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Classe concrète instanciant les token Ext&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Classe concrète instanciant les token Ext, le format attendu étant un entier&quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__verifier_type</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
 
@@ -255,7 +256,7 @@
 
 
 <div class="viewcode-block" id="Method"><a class="viewcode-back" href="../../loganalyser.html#loganalyser.token.Method">[docs]</a><span class="k">class</span> <span class="nc">Method</span><span class="p">(</span><span class="n">Token</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Classe concrète instanciant les token Methode&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Classe concrète instanciant les token Methode, le format attendu étant l&#39;une des chaines de caractères suivante : GET, HEAD, POST, OPTIONS, CONNECT, TRACE, PUT, DELETE&quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__verifier_type</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
 
@@ -290,7 +291,7 @@
 
 
 <div class="viewcode-block" id="Response"><a class="viewcode-back" href="../../loganalyser.html#loganalyser.token.Response">[docs]</a><span class="k">class</span> <span class="nc">Response</span><span class="p">(</span><span class="n">Token</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Classe concrète instanciant les token Réponse&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Classe concrète instanciant les token Réponse, le format attendu étant un entier entre 100 et 599 (compris)&quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__verifier_type</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
 
@@ -307,7 +308,7 @@
 
 
 <div class="viewcode-block" id="Byte"><a class="viewcode-back" href="../../loganalyser.html#loganalyser.token.Byte">[docs]</a><span class="k">class</span> <span class="nc">Byte</span><span class="p">(</span><span class="n">Token</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Classe concrète instanciant les token Octet&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Classe concrète instanciant les token Octet, le fomat attendu étant un entier&quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__verifier_type</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
 
