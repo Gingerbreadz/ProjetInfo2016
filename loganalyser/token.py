@@ -23,7 +23,9 @@ class Token:
         Constructeur de classe. Un fichier est initialisé à partir de son chemin d'accès
 
         :param value: donnee du token e.g. "127.0.0.1", "404".
+        :param istypeok: booléen rendant autorisant la création du token.
         :type value: str
+        :type istypeok: bool
 
         """
         if istypeok:
@@ -37,6 +39,8 @@ class Token:
         """
         Vérifie si la donnee peut bien être instanciée sous cette classe de Token.
 
+        :param value: valeur de création du token
+        :type value: str
         :return: Retourne la réponse de la vérification
         :rtype: bool
 
