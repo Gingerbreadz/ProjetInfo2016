@@ -54,7 +54,7 @@ def recupererregexp(cheminfichier):
 
 def main():
     logfilepath = sys.argv[0]
-    regexpfilepath = sys.argv[1]
+    regexpfilepath = "./res/default_filter.xml"
     log_dic = recuperertokens(logfilepath)
     regexp_dic = recupererregexp(regexpfilepath)
     diag = diagnostique.Diagnostique(log_dic, regexp_dic)
