@@ -55,10 +55,10 @@ else:
 
 print("====test Classe Date====\n")   
 print("=====test du constructeur===")
-dateTest=t.Date('06/Sep/2014:15;25:45')
-print("résultat attendu : \n dateTest.donnee = '06/Sep/2014:15;25:45' \n ")
+dateTest=t.Date('06/Sep/2014:15:25:45')
+print("résultat attendu : \n dateTest.donnee = '06/Sep/2014:15:25:45' \n ")
 print("résultat obtenu : \n dateTest.donnee = ", dateTest.donnee,"\n")
-if datetime.strptime(dateTest.donnee, '%d/%b/%Y:%H:%M:%S')==datetime.strptime('06/Sep/2014:15;25:45', '%d/%b/%Y:%H:%M:%S'):
+if datetime.strptime(dateTest.donnee, '%d/%b/%Y:%H:%M:%S')==datetime.strptime('06/Sep/2014:15:25:45', '%d/%b/%Y:%H:%M:%S'):
     print("le constructeur fonctionne !\n")
 else :
     print("le constructeur ne fonctionne pas ...")
@@ -111,12 +111,12 @@ else :
     print("le constructeur ne fonctionne pas ...")
     quit()
 
-print("on teste : byteTest.donnee='NotAnInt' : une exception doit être levée\n")
+print("on teste : bbyteTest=t.Byte('NotAnInt') : une exception doit être levée\n")
+
 try:
-    byteTest.donnee='NotAnInt'
+    byteTest=t.Byte('NotAnInt')
 except ValueError:
     print("ValueError : une exception a bien été levée\n")
 else:
     print("l'exception n'a pas été levée")
     quit()
-    
