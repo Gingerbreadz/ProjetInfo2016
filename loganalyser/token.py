@@ -143,11 +143,11 @@ class URL(Token):
         severity_level = 0
         return severity_level
 
-    def normalisation(self):
+    """def normalisation(self):
         url_reg = re.compile('([^ ]*) ([^ ]*) ([^ ]*)')
         tab = url_reg.match(self.donnee).groups('default')
         url = urlparse(tab[1])
-        return url
+        return url"""
 
 
 class Response(Token):
