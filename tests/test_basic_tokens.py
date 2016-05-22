@@ -75,10 +75,10 @@ else:
     
     
     
-print("====test Classe Methode====\n")
+print("====test Classe Method====\n")
 print("=====test du constructeur===")
-methTest=t.Methode('GET')
-print("résultat attendu : \n methTest = t.Methode('GET') \n ")
+methTest=t.Method('GET')
+print("résultat attendu : \n methTest = t.Method('GET') \n ")
 print("résultat obtenu : \n methTest.donnee = ", methTest.donnee,"\n")
 if methTest.donnee=="GET":
     print("le constructeur fonctionne !\n")
@@ -88,7 +88,7 @@ else :
 
 print("on teste : methTest=token.Methode('notaMethode'): une exception doit être levée\n")
 try:
-    methTest=t.Methode('NotAMethode')
+    methTest=t.Method('NotAMethod')
 except ValueError:
     print("ValueError : une exception a bien été levée\n")
 else:
