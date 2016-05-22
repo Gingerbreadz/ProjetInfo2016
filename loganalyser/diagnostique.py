@@ -44,7 +44,10 @@ class Diagnostique:
         self.stat_dict = outils.Dictionary(["UniqueVisitors", "TotalVisitors", "TopFiles", "TopReferrers",
                                             "TopVisitors", "ValidRequest", "NotFoundURL"])
 
-        def uniquevisitors(): return len(list(set(self.token_dict["IP"])))
+        def uniquevisitors():
+            ip_list = [ip.donnee for ip in self.token_dict["IP"]]
+            ip_distinct_list = list(set(ip_list))
+            return len(ip_distinct_list)
 
         def totalvisitors(): return len(self.token_dict["IP"])
 
@@ -81,14 +84,14 @@ class Diagnostique:
                 url = url_distinct_list[i]
                 lines = self.token_dict.itemtoentrynumbers(url)
                 counted_ip = []
-                topfiles_dic["Hits"][i] = url_list.count(url)
-                topfiles_dic["Method"][i] = method_list[i]
-                topfiles_dic["URL"][i] = url
+                byte_count = 0
+                visitors = 0
                 for j in lines:
-                    topfiles_dic["Bandwidth"][i] += byte_list[j]
+                    byte_count += byte_list[j]
                     if ip_list[j] not in counted_ip:
                         counted_ip.append(ip_list[j])
-                        topfiles_dic["Visitors"][i] += 1
+                        visitors += 1
+                topfiles_dic.addentry([url_list.count(url), visitors, byte_count, method_list[i], url])
             return topfiles_dic
 
         def topreferrers():
@@ -102,14 +105,14 @@ class Diagnostique:
                 referrer = referrer_distinct_list[i]
                 lines = self.token_dict.itemtoentrynumbers(referrer)
                 counted_ip = []
-                topreferrers_dic["Referrer"][i] = referrer
-                topreferrers_dic["Method"][i] = method_list[i]
-                topreferrers_dic["Hits"][i] = referrer_list.count(referrer)
+                byte_count = 0
+                visitors = 0
                 for j in lines:
-                    topreferrers_dic["Bandwidth"][i] += byte_list[j]
+                    byte_count += byte_list[j]
                     if ip_list[j] not in counted_ip:
                         counted_ip.append(ip_list[j])
-                        topreferrers_dic["Visitors"][i] += 1
+                        visitors += 1
+                topreferrers_dic.addentry([referrer, referrer_list.count(referrer), visitors, byte_count, method_list[i]])
             return topreferrers_dic
 
         def topvisitors():
@@ -122,13 +125,14 @@ class Diagnostique:
                 ip = ip_distinct_list[i]
                 lines = self.token_dict.itemtoentrynumbers(ip)
                 counted_url = []
-                topvisitors_dic["Hits"][i] = ip_list.count(ip)
-                topvisitors_dic["IP"][i] = ip
+                byte_count = 0
+                visitors = 0
                 for j in lines:
-                    topvisitors_dic["Bandwidth"][i] += byte_list[j]
+                    byte_count += byte_list[j]
                     if url_list[j] not in counted_url:
                         counted_url.append(url_list[j])
-                        topvisitors_dic["Visits"][i] += 1
+                        visitors += 1
+                topvisitors_dic.addentry([ip_list.count(ip), visitors, byte_count, ip])
             return topvisitors_dic
 
         self.stat_dict["UniqueVisitors"] = uniquevisitors()  # Int
@@ -151,6 +155,7 @@ class Diagnostique:
         :rtype: dict
 
         """
+        self.attack_dict = outils.Dictionary(["LogLineNumber", "URL", "Description", "Impact"])
         url_list = [url.donnee for url in self.token_dict["URL"]]
         for i in range(0, len(self.regexp_dict["Number"])):
             rule = self.regexp_dict["Rule"][i]
@@ -182,11 +187,8 @@ class Diagnostique:
             for key in stat_keys:
                 stat = self.stat_dict[key]
                 report.append(str(key))
-                if type(stat) == int:
-                    report.append(str(stat))
-                else:
-                    for attr in stat:
-                        report.append(str(attr))
+                if type(stat) == int: report.append(str(stat))
+            report.append(str(self.attack_dict))
         return report
 
 

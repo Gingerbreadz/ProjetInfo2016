@@ -10,7 +10,7 @@ from loganalyser import token
 tokenkeys = ["IP", "Name", "Date", "Ext", "Method", "URL", "Response", "Byte", "Referrer"]
 regexkeys = ["Number", "Rule", "Description", "Impact"]
 
-logfilepath = "/home/anatole/Ecole/TSP/ProjetInfo/ProjetInfo2016/res/wwwassos-access.log"
+logfilepath = "/home/anatole/Ecole/TSP/ProjetInfo/ProjetInfo2016/res/wwwminet-access.log"
 regexpfilepath = "/home/anatole/Ecole/TSP/ProjetInfo/ProjetInfo2016/res/default_filter.xml"
 
 
@@ -53,8 +53,5 @@ log_dict = recuperertokens(logfilepath)
 regexp_dict = recupererregexp(regexpfilepath)
 diag = diagnostique.Diagnostique(log_dict, regexp_dict)
 report = diag.get_report(False)
-print(diag.token_dict)
-print(diag.stat_dict)
-print(diag.attack_dict)
 for ligne in report:
     print(ligne)
