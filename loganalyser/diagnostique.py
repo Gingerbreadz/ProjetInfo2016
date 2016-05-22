@@ -5,6 +5,7 @@ TODO: Ecrire la méthode qui génère le rapport. | Reste plus tard.
 """
 
 from loganalyser import outils  # Gestion des Dictionnaires
+import re
 
 
 class Diagnostique:
@@ -27,7 +28,7 @@ class Diagnostique:
         self.stat_dict = {}
         self.attack_dict = {}
         self.__statistique()
-        self.__analyse_multitoken()
+        self.__analyse()
         return
 
     def __statistique(self):
@@ -70,7 +71,7 @@ class Diagnostique:
             return s
 
         def topfiles():
-            url_list = [url.donnee for url in self.token_dict["URL"]]
+            url_list = [url.url_cut for url in self.token_dict["URL"]]
             ip_list = [ip.donnee for ip in self.token_dict["IP"]]
             method_list = [method.donnee for method in self.token_dict["Method"]]
             byte_list = [int(byte.donnee) for byte in self.token_dict["Byte"]]
@@ -115,7 +116,7 @@ class Diagnostique:
             topvisitors_dic = outils.Dictionary(["Hits", "Visits", "Bandwidth", "IP"])
             ip_list = [ip.donnee for ip in self.token_dict["IP"]]
             byte_list = [int(byte.donnee) for byte in self.token_dict["Byte"]]
-            url_list = [url.donnee for url in self.token_dict["URL"]]
+            url_list = [url.url_cut for url in self.token_dict["URL"]]
             ip_distinct_list = list(set(ip_list))
             for i in range(0, len(ip_distinct_list)):
                 ip = ip_distinct_list[i]
@@ -138,7 +139,7 @@ class Diagnostique:
         self.stat_dict["ValidRequest"] = validrequest()      # Int
         self.stat_dict["NotFoundURL"] = notfoundurl()        # Int
 
-    def __analyse_multitoken(self):
+    def __analyse(self):
         """
         Analyse les tokens par groupe selon certains motifs.
 
@@ -150,8 +151,17 @@ class Diagnostique:
         :rtype: dict
 
         """
-        self.attack_dict = {}
-        return
+        url_list = [url.donnee for url in self.token_dict["URL"]]
+        for i in self.regexp_dict["Number"]:
+            rule = self.regexp_dict["Rule"][i]
+            rule_reg = re.compile(rule)
+            for j in range(0, len(url_list)):
+                url = url_list[j]
+                if rule_reg.search(url):
+                    self.attack_dict["LogLineNumber"] += [j]
+                    self.attack_dict["URL"] += [url]
+                    self.attack_dict["Description"] += [self.regexp_dict["Description"][i]]
+                    self.attack_dict["Impact"] += [self.regexp_dict["Impact"][i]]
 
     def get_report(self, fileformat):
         """
