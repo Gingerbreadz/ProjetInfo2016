@@ -6,10 +6,10 @@ TODO: RegExp & Log ---> découpage | Reste OK
 
 from abc import ABCMeta, abstractmethod
 import re
-import xml.etree.ElementTree as Et
+import xml.etree.ElementTree as Etree
 
 # c_reg = re.compile('([^ ]*) ([^ ]*) ([^ ]*) \[([^]]*)\] "([^"]*)" ([^ ]*) ([^ ]*)'' "([^"]*)" "([^"]*)"')
-c_reg = re.compile('^(.+) - (-.*)\[(.+) [-|+](\d+)\] "([A-Z]+) ?(.+) HTTP/\d.\d" (\d+)(\s[\d]+)? "(.+)" (.*)$')
+c_reg = re.compile('(.+) - (-.*)\[(.+) [-|+](\d+)\] "([A-Z]+) ?(.+) HTTP/\d.\d" (\d+)(\s[\d]+)? "(.+)" (.*)$')
 
 
 class Fichier:
@@ -92,9 +92,11 @@ class FichierDeLog(Fichier):
         :rtype: list
 
         """
-        match = c_reg.match(self.contenu[noligne])
-        log_tuple = match.groups('default')
-        log = list(log_tuple)
+        log = []
+        if c_reg.search(self.contenu[noligne]):
+            match = c_reg.match(self.contenu[noligne])
+            log_tuple = match.groups('default')
+            log = list(log_tuple)
 
         """
         ip = log[0]
@@ -124,8 +126,8 @@ class FichierRegExp(Fichier):
     """
 
     def __init__(self, filepath):
-        self.doc = Et.parse(self.file).getroot()
         super(FichierRegExp, self).__init__(filepath)
+        self.doc = Etree.parse(filepath).getroot()
 
     def lireligne(self, noligne):
         super(FichierRegExp, self).lireligne(noligne)

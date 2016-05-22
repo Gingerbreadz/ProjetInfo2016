@@ -84,8 +84,8 @@ class Dictionary(dict):
         """
         Retourne l'index d'une valeur dans le dictionnaire.
 
-        :param item: index de l'entrée.
-        :type item: int
+        :param item: valeur recherchée.
+        :type item: str
         :return: Liste contenant les index associés à la valeur d'entrée.
         :rtype: list
 
@@ -97,7 +97,7 @@ class Dictionary(dict):
             raise Exception("'" + str(item) + "'" + " n'est pas dans le dicitonaire")
         entrynumbers = []
         for key in self._keys:
-            if item in [self[key][i].donnee for i in self[key]]:
+            if item in self[key]:
                 for i in range(0, len(self[key])):
                     if self[key][i].donnee == item:
                         entrynumbers.append(i)

@@ -35,8 +35,9 @@ def recuperertokens(cheminfichier):
     fichierdelog = fichier.FichierDeLog(cheminfichier)
     for i in range(0, fichierdelog.nbLigne):
         ligne = fichierdelog.decouperligne(i)
-        tokenlist = listtotokenlist(ligne)
-        log_dic.addentry(tokenlist)
+        if ligne:
+            tokenlist = listtotokenlist(ligne)
+            log_dic.addentry(tokenlist)
     fichierdelog.fermerfichier()
     return log_dic
 

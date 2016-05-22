@@ -71,7 +71,7 @@ class Diagnostique:
             return s
 
         def topfiles():
-            url_list = [url.url_cut for url in self.token_dict["URL"]]
+            url_list = [url.donnee for url in self.token_dict["URL"]]
             ip_list = [ip.donnee for ip in self.token_dict["IP"]]
             method_list = [method.donnee for method in self.token_dict["Method"]]
             byte_list = [int(byte.donnee) for byte in self.token_dict["Byte"]]
@@ -152,7 +152,7 @@ class Diagnostique:
 
         """
         url_list = [url.donnee for url in self.token_dict["URL"]]
-        for i in self.regexp_dict["Number"]:
+        for i in range(0, len(self.regexp_dict["Number"])):
             rule = self.regexp_dict["Rule"][i]
             rule_reg = re.compile(rule)
             for j in range(0, len(url_list)):
@@ -170,21 +170,23 @@ class Diagnostique:
         :param fileformat: indique si le rapport doit etre enregistré sous forme de fchier texte ou seulement être présenté dans la console
         :type fileformat: bool
         :return: tableau des lignes de résultats à partir des dictionnaires
-        :rtype: String array
+        :rtype: list
 
         """
         if fileformat:
             report = ["Ceci est la première ligne du Fichier Rapport", "Ceci est la deuxième"]
         else:
-            report=["                         ===Stats===                       "]
-            L=[]
-            Stat_keys=self.stat_dict.keys()
-            for skey in Stat_keys: #Stock les clé correspondant aux différents types de stats
-                stat=self.stat_dict[skey] #Stock le dictionnaire correspondant à un type de stat dans la varaible 
-                report=report.append(skey)  # on affichera le clé si celle-ci correspond au nom de la stat
-                for key in stat.keys():
-                    L.append(key, stat[key]) #on affiche chaque champ de la stat 
-                    report=report+L
+            report = list()
+            report.append("                         ===Stats===                       ")
+            stat_keys = self.stat_dict.keys()
+            for key in stat_keys:
+                stat = self.stat_dict[key]
+                report.append(str(key))
+                if type(stat) == int:
+                    report.append(str(stat))
+                else:
+                    for attr in stat:
+                        report.append(str(attr))
         return report
 
 
