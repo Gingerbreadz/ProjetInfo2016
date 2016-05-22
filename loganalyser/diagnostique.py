@@ -187,4 +187,11 @@ class Diagnostique:
                 report.append(str(key))
                 if type(stat) == int:
                     report.append(str(stat))
+            report.append("\r\n                         ===Attaques===                       ")
+            attack_keys = self.attack_dict.keys()
+            for key in attack_keys:
+                attack = self.attack_dict[key]
+                report.append(str(key))
+                if type(attack) == int:
+                    report.append(str(attack))
         return report
