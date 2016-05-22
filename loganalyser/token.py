@@ -1,6 +1,7 @@
 """
 Module token
-Ce sont les classes qui sont utilisés pour caractériser les différents champs de log.
+Ce sont les classes qui sont utilisées pour caractériser les différents champs de log.
+A l'instanciation de chacune des classes correspondant à un champ, la vérification du type de la donnée est effectuée et lève une erreur si le type n'est pas le bon.
 """
 import socket
 import re
@@ -58,7 +59,7 @@ class Token:
 
 
 class IP(Token):
-    """Classe concrète instanciant les token IP"""
+    """Classe concrète instanciant les token IP, le format attendu étant une adresse ipv4 ou ipv6"""
     def __init__(self, value):
         super().__init__(value, self.__verifier_type(value))
 
@@ -78,7 +79,7 @@ class IP(Token):
 
 
 class Name(Token):
-    """Classe concrète instanciant les token Nom"""
+    """Classe concrète instanciant les token Nom, le format attendu étant une chaine de caractères"""
     def __init__(self, value):
         super().__init__(value, self.__verifier_type(value))
 
@@ -91,7 +92,7 @@ class Name(Token):
 
 
 class Date(Token):
-    """Classe concrète instanciant les token Date"""
+    """Classe concrète instanciant les token Date, le format attendu étant JJ/MM/YYYY:HH:MM:SS"""
 
     def __init__(self, value):
         super().__init__(value, self.__verifier_type(value))
@@ -110,7 +111,7 @@ class Date(Token):
 
 
 class EXT(Token):
-    """Classe concrète instanciant les token Ext"""
+    """Classe concrète instanciant les token Ext, le format attendu étant un entier"""
     def __init__(self, value):
         super().__init__(value, self.__verifier_type(value))
 
@@ -127,7 +128,7 @@ class EXT(Token):
 
 
 class Method(Token):
-    """Classe concrète instanciant les token Methode"""
+    """Classe concrète instanciant les token Methode, le format attendu étant l'une des chaines de caractères suivante : GET, HEAD, POST, OPTIONS, CONNECT, TRACE, PUT, DELETE"""
     def __init__(self, value):
         super().__init__(value, self.__verifier_type(value))
 
@@ -162,7 +163,7 @@ class URL(Token):
 
 
 class Response(Token):
-    """Classe concrète instanciant les token Réponse"""
+    """Classe concrète instanciant les token Réponse, le format attendu étant un entier entre 100 et 599 (compris)"""
     def __init__(self, value):
         super().__init__(value, self.__verifier_type(value))
 
@@ -179,7 +180,7 @@ class Response(Token):
 
 
 class Byte(Token):
-    """Classe concrète instanciant les token Octet"""
+    """Classe concrète instanciant les token Octet, le fomat attendu étant un entier"""
     def __init__(self, value):
         super().__init__(value, self.__verifier_type(value))
 
