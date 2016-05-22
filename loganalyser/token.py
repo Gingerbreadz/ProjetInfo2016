@@ -88,9 +88,9 @@ class Date(Token):
         super().__init__(value, self.__verifier_type(value))
 
     def __verifier_type(self, value):
-        try :
-             datetime.strptime(value, '%d/%b/%Y:%H:%M:%S')
-        except :
+        try:
+            datetime.strptime(value, '%d/%b/%Y:%H:%M:%S')
+        except ValueError:
             return False
         else:
             return True
@@ -131,6 +131,8 @@ class Method(Token):
 class URL(Token):
     """Classe concrète instanciant les token URL"""
     def __init__(self, value):
+        url_cut_reg = re.compile("^([^?]*)(.*)$")
+        self.url_cut = list(url_cut_reg.match(value).groups('defaults'))[1]
         super().__init__(value, self.__verifier_type(value))
 
     def __verifier_type(self, value):
@@ -185,6 +187,8 @@ class Byte(Token):
 class Referer(Token):
     """Classe concrète instanciant les token Referer"""
     def __init__(self, value):
+        url_cut_reg = re.compile("^(.*[/]{2}[w]?[w]?[w]?[.]?)(\w*[.]\w*)(.*)$")
+        self.domain = list(url_cut_reg.match(value).groups('defaults'))[2]
         super().__init__(value, self.__verifier_type(value))
 
     def __verifier_type(self, value):
