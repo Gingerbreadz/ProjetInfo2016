@@ -4,8 +4,8 @@ Il reste à écrire les méthode d'analyse et de statistique.
 TODO: Ecrire la méthode qui génère le rapport. | Reste plus tard.
 """
 
-from loganalyser import token   #Gestion des tokens
-from loganalyser import outils  #Gestion des Dictionnaires
+from loganalyser import outils  # Gestion des Dictionnaires
+
 
 class Diagnostique:
     """Classe instanciant le diagnostique, qui contient les résultats d'analyse et les fait.
@@ -34,8 +34,8 @@ class Diagnostique:
         """
         Effectue des calculs statistiques sur les token.
 
-        :param token_dict: dictionnaire de token
-        :type token_dict: dict
+        :param self.token_dict: dictionnaire de token
+        :type self.token_dict: dict
         :return: Dictionnaire contenant les statistiques
         :rtype: dict
 
@@ -43,15 +43,15 @@ class Diagnostique:
         self.stat_dict = outils.Dictionary(["UniqueVisitors", "TotalVisitors", "TopFiles", "TopReferrers",
                                             "TopVisitors", "ValidRequest", "NotFoundURL"])
 
-        def uniquevisitors(): return len(list(set(self.token_dict[self.token_dict.keys()[0]])))
+        def uniquevisitors(): return len(list(set(self.token_dict["IP"])))
 
-        def totalvisitors(): return len(self.token_dict[self.token_dict.keys()[0]])
+        def totalvisitors(): return len(self.token_dict["IP"])
 
         def validrequest():
             code_list = self.token_dict["Response"]
             url_list = self.token_dict["URL"]
             counted_url = []
-            s= 0
+            s = 0
             for i in range(0, len(code_list)):
                 if 200 <= int(code_list[i].donnee) <= 226 and url_list[i].donnee not in counted_url:
                     counted_url.append(url_list[i].donnee)
@@ -142,10 +142,10 @@ class Diagnostique:
         """
         Analyse les tokens par groupe selon certains motifs.
 
-        :param token_dict: dictionnaire de token
-        :param regexp_dict: dictionnaire d'expression régulière
-        :type token_dict: dict
-        :type regexp_dict: dict
+        :param self.token_dict: dictionnaire de token
+        :param self.regexp_dict: dictionnaire d'expression régulière
+        :type self.token_dict: dict
+        :type self.regexp_dict: dict
         :return: Dictionnaire contenant le rapport des attaques subit
         :rtype: dict
 
