@@ -6,7 +6,7 @@ Le projet reprend la structure standard d'un package Python, et peut donc facile
 Conçu pour ``python3.X``, il convient avant de procéder à l'installation de s'assurer de la version de l'environnement
 Python courant.
 
-Installation Directe
+Installation directe
 ====================
 
 Cette procedure installera le package au sein de Python comme module. Le projet a été conçu pour que les étapes à suivre
