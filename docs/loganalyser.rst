@@ -6,6 +6,7 @@ Diagnostique module
 
 .. automodule:: loganalyser.diagnostique
     :members:
+    :member-order: bysource
     :special-members: __init__
     :private-members:
     :inherited-members:
@@ -17,6 +18,7 @@ Fichier module
 
 .. automodule:: loganalyser.fichier
     :members:
+    :member-order: bysource
     :special-members: __init__
     :private-members:
     :inherited-members:
@@ -39,6 +41,7 @@ Outils module
 
 .. automodule:: loganalyser.outils
     :members:
+    :member-order: bysource
     :special-members: __init__
     :private-members:
     :show-inheritance:
@@ -48,6 +51,7 @@ Module contents
 
 .. automodule:: loganalyser
     :members:
+    :member-order: bysource
     :special-members: __init__
     :private-members:
     :inherited-members:
