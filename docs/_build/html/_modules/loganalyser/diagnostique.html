@@ -128,8 +128,6 @@
   <h1>Source code for loganalyser.diagnostique</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Implementation du Diagnostique.</span>
-<span class="sd">Il reste à écrire les méthode d&#39;analyse et de statistique.</span>
-<span class="sd">TODO: Ecrire la méthode qui génère le rapport. | Reste plus tard.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">loganalyser</span> <span class="kn">import</span> <span class="n">outils</span>  <span class="c1"># Gestion des Dictionnaires</span>
@@ -317,7 +315,6 @@
                 <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
                 <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">stat</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span>
                     <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">stat</span><span class="p">))</span>
-            <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">attack_dict</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">report</span></div></div>
 </pre></div>
 

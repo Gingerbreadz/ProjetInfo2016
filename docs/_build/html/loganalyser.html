@@ -136,9 +136,7 @@
 <h1>Loganalyser package<a class="headerlink" href="#loganalyser-package" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="module-loganalyser.diagnostique">
 <span id="diagnostique-module"></span><h2>Diagnostique module<a class="headerlink" href="#module-loganalyser.diagnostique" title="Permalink to this headline">¶</a></h2>
-<p>Implementation du Diagnostique.
-Il reste à écrire les méthode d&#8217;analyse et de statistique.
-TODO: Ecrire la méthode qui génère le rapport. | Reste plus tard.</p>
+<p>Implementation du Diagnostique.</p>
 <dl class="class">
 <dt id="loganalyser.diagnostique.Diagnostique">
 <em class="property">class </em><code class="descclassname">loganalyser.diagnostique.</code><code class="descname">Diagnostique</code><span class="sig-paren">(</span><em>token_dictionary</em>, <em>regexp_dictionary</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loganalyser/diagnostique.html#Diagnostique"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loganalyser.diagnostique.Diagnostique" title="Permalink to this definition">¶</a></dt>
@@ -227,8 +225,7 @@ TODO: Ecrire la méthode qui génère le rapport. | Reste plus tard.</p>
 </div>
 <div class="section" id="module-loganalyser.fichier">
 <span id="fichier-module"></span><h2>Fichier module<a class="headerlink" href="#module-loganalyser.fichier" title="Permalink to this headline">¶</a></h2>
-<p>Sert à intéragir avec les fichiers.
-TODO: RegExp &amp; Log &#8212;&gt; découpage | Reste OK</p>
+<p>Sert à intéragir avec les fichiers.</p>
 <dl class="class">
 <dt id="loganalyser.fichier.Fichier">
 <em class="property">class </em><code class="descclassname">loganalyser.fichier.</code><code class="descname">Fichier</code><span class="sig-paren">(</span><em>filepath</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loganalyser/fichier.html#Fichier"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loganalyser.fichier.Fichier" title="Permalink to this definition">¶</a></dt>
@@ -387,8 +384,7 @@ TODO: RegExp &amp; Log &#8212;&gt; découpage | Reste OK</p>
 <div class="section" id="module-loganalyser.token">
 <span id="token-module"></span><h2>Token module<a class="headerlink" href="#module-loganalyser.token" title="Permalink to this headline">¶</a></h2>
 <p>Module token
-Il reste à écrire pour chacun des types de token les méthodes de vérification et de calcul de la sévérité.
-TODO: Implementer tests type log; Calculs de sévérité | Reste rien.</p>
+Ce sont les classes qui sont utilisés pour caractériser les différents champs de log.</p>
 <dl class="class">
 <dt id="loganalyser.token.Byte">
 <em class="property">class </em><code class="descclassname">loganalyser.token.</code><code class="descname">Byte</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loganalyser/token.html#Byte"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loganalyser.token.Byte" title="Permalink to this definition">¶</a></dt>
@@ -397,17 +393,33 @@ TODO: Implementer tests type log; Calculs de sévérité | Reste rien.</p>
 <dl class="method">
 <dt id="loganalyser.token.Byte._Token__analyse">
 <code class="descname">_Token__analyse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.Byte._Token__analyse" title="Permalink to this definition">¶</a></dt>
-<dd><p>Analyse la donnee contenue dans le token pour obtenir la sévérité de cette donnee. Non implémenté car non-utile.
-:return: Retourne la sévérité de la donnee de ce token
-:rtype: int</p>
+<dd><p>Analyse la donnee contenue dans le token pour obtenir la sévérité de cette donnee. Non implémenté car non-utile.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Retourne la sévérité de la donnee de ce token</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="loganalyser.token.Byte._Token__verifier_type">
 <code class="descname">_Token__verifier_type</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.Byte._Token__verifier_type" title="Permalink to this definition">¶</a></dt>
-<dd><p>Vérifie si la donnee peut bien être instanciée sous cette classe de Token.
-:return: Retourne la réponse de la vérification
-:rtype: bool</p>
+<dd><p>Vérifie si la donnee peut bien être instanciée sous cette classe de Token.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Retourne la réponse de la vérification</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>
@@ -420,17 +432,33 @@ TODO: Implementer tests type log; Calculs de sévérité | Reste rien.</p>
 <dl class="method">
 <dt id="loganalyser.token.Date._Token__analyse">
 <code class="descname">_Token__analyse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.Date._Token__analyse" title="Permalink to this definition">¶</a></dt>
-<dd><p>Analyse la donnee contenue dans le token pour obtenir la sévérité de cette donnee. Non implémenté car non-utile.
-:return: Retourne la sévérité de la donnee de ce token
-:rtype: int</p>
+<dd><p>Analyse la donnee contenue dans le token pour obtenir la sévérité de cette donnee. Non implémenté car non-utile.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Retourne la sévérité de la donnee de ce token</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="loganalyser.token.Date._Token__verifier_type">
 <code class="descname">_Token__verifier_type</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.Date._Token__verifier_type" title="Permalink to this definition">¶</a></dt>
-<dd><p>Vérifie si la donnee peut bien être instanciée sous cette classe de Token.
-:return: Retourne la réponse de la vérification
-:rtype: bool</p>
+<dd><p>Vérifie si la donnee peut bien être instanciée sous cette classe de Token.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Retourne la réponse de la vérification</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>
@@ -443,17 +471,33 @@ TODO: Implementer tests type log; Calculs de sévérité | Reste rien.</p>
 <dl class="method">
 <dt id="loganalyser.token.EXT._Token__analyse">
 <code class="descname">_Token__analyse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.EXT._Token__analyse" title="Permalink to this definition">¶</a></dt>
-<dd><p>Analyse la donnee contenue dans le token pour obtenir la sévérité de cette donnee. Non implémenté car non-utile.
-:return: Retourne la sévérité de la donnee de ce token
-:rtype: int</p>
+<dd><p>Analyse la donnee contenue dans le token pour obtenir la sévérité de cette donnee. Non implémenté car non-utile.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Retourne la sévérité de la donnee de ce token</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="loganalyser.token.EXT._Token__verifier_type">
 <code class="descname">_Token__verifier_type</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.EXT._Token__verifier_type" title="Permalink to this definition">¶</a></dt>
-<dd><p>Vérifie si la donnee peut bien être instanciée sous cette classe de Token.
-:return: Retourne la réponse de la vérification
-:rtype: bool</p>
+<dd><p>Vérifie si la donnee peut bien être instanciée sous cette classe de Token.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Retourne la réponse de la vérification</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>
@@ -466,17 +510,33 @@ TODO: Implementer tests type log; Calculs de sévérité | Reste rien.</p>
 <dl class="method">
 <dt id="loganalyser.token.IP._Token__analyse">
 <code class="descname">_Token__analyse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.IP._Token__analyse" title="Permalink to this definition">¶</a></dt>
-<dd><p>Analyse la donnee contenue dans le token pour obtenir la sévérité de cette donnee. Non implémenté car non-utile.
-:return: Retourne la sévérité de la donnee de ce token
-:rtype: int</p>
+<dd><p>Analyse la donnee contenue dans le token pour obtenir la sévérité de cette donnee. Non implémenté car non-utile.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Retourne la sévérité de la donnee de ce token</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="loganalyser.token.IP._Token__verifier_type">
 <code class="descname">_Token__verifier_type</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.IP._Token__verifier_type" title="Permalink to this definition">¶</a></dt>
-<dd><p>Vérifie si la donnee peut bien être instanciée sous cette classe de Token.
-:return: Retourne la réponse de la vérification
-:rtype: bool</p>
+<dd><p>Vérifie si la donnee peut bien être instanciée sous cette classe de Token.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Retourne la réponse de la vérification</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>
@@ -489,17 +549,33 @@ TODO: Implementer tests type log; Calculs de sévérité | Reste rien.</p>
 <dl class="method">
 <dt id="loganalyser.token.Method._Token__analyse">
 <code class="descname">_Token__analyse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.Method._Token__analyse" title="Permalink to this definition">¶</a></dt>
-<dd><p>Analyse la donnee contenue dans le token pour obtenir la sévérité de cette donnee. Non implémenté car non-utile.
-:return: Retourne la sévérité de la donnee de ce token
-:rtype: int</p>
+<dd><p>Analyse la donnee contenue dans le token pour obtenir la sévérité de cette donnee. Non implémenté car non-utile.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Retourne la sévérité de la donnee de ce token</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="loganalyser.token.Method._Token__verifier_type">
 <code class="descname">_Token__verifier_type</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.Method._Token__verifier_type" title="Permalink to this definition">¶</a></dt>
-<dd><p>Vérifie si la donnee peut bien être instanciée sous cette classe de Token.
-:return: Retourne la réponse de la vérification
-:rtype: bool</p>
+<dd><p>Vérifie si la donnee peut bien être instanciée sous cette classe de Token.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Retourne la réponse de la vérification</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>
@@ -512,17 +588,33 @@ TODO: Implementer tests type log; Calculs de sévérité | Reste rien.</p>
 <dl class="method">
 <dt id="loganalyser.token.Name._Token__analyse">
 <code class="descname">_Token__analyse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.Name._Token__analyse" title="Permalink to this definition">¶</a></dt>
-<dd><p>Analyse la donnee contenue dans le token pour obtenir la sévérité de cette donnee. Non implémenté car non-utile.
-:return: Retourne la sévérité de la donnee de ce token
-:rtype: int</p>
+<dd><p>Analyse la donnee contenue dans le token pour obtenir la sévérité de cette donnee. Non implémenté car non-utile.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Retourne la sévérité de la donnee de ce token</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="loganalyser.token.Name._Token__verifier_type">
 <code class="descname">_Token__verifier_type</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.Name._Token__verifier_type" title="Permalink to this definition">¶</a></dt>
-<dd><p>Vérifie si la donnee peut bien être instanciée sous cette classe de Token.
-:return: Retourne la réponse de la vérification
-:rtype: bool</p>
+<dd><p>Vérifie si la donnee peut bien être instanciée sous cette classe de Token.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Retourne la réponse de la vérification</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>
@@ -535,17 +627,33 @@ TODO: Implementer tests type log; Calculs de sévérité | Reste rien.</p>
 <dl class="method">
 <dt id="loganalyser.token.Referer._Token__analyse">
 <code class="descname">_Token__analyse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.Referer._Token__analyse" title="Permalink to this definition">¶</a></dt>
-<dd><p>Analyse la donnee contenue dans le token pour obtenir la sévérité de cette donnee. Non implémenté car non-utile.
-:return: Retourne la sévérité de la donnee de ce token
-:rtype: int</p>
+<dd><p>Analyse la donnee contenue dans le token pour obtenir la sévérité de cette donnee. Non implémenté car non-utile.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Retourne la sévérité de la donnee de ce token</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="loganalyser.token.Referer._Token__verifier_type">
 <code class="descname">_Token__verifier_type</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.Referer._Token__verifier_type" title="Permalink to this definition">¶</a></dt>
-<dd><p>Vérifie si la donnee peut bien être instanciée sous cette classe de Token.
-:return: Retourne la réponse de la vérification
-:rtype: bool</p>
+<dd><p>Vérifie si la donnee peut bien être instanciée sous cette classe de Token.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Retourne la réponse de la vérification</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>
@@ -558,17 +666,33 @@ TODO: Implementer tests type log; Calculs de sévérité | Reste rien.</p>
 <dl class="method">
 <dt id="loganalyser.token.Response._Token__analyse">
 <code class="descname">_Token__analyse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.Response._Token__analyse" title="Permalink to this definition">¶</a></dt>
-<dd><p>Analyse la donnee contenue dans le token pour obtenir la sévérité de cette donnee. Non implémenté car non-utile.
-:return: Retourne la sévérité de la donnee de ce token
-:rtype: int</p>
+<dd><p>Analyse la donnee contenue dans le token pour obtenir la sévérité de cette donnee. Non implémenté car non-utile.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Retourne la sévérité de la donnee de ce token</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="loganalyser.token.Response._Token__verifier_type">
 <code class="descname">_Token__verifier_type</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.Response._Token__verifier_type" title="Permalink to this definition">¶</a></dt>
-<dd><p>Vérifie si la donnee peut bien être instanciée sous cette classe de Token.
-:return: Retourne la réponse de la vérification
-:rtype: bool</p>
+<dd><p>Vérifie si la donnee peut bien être instanciée sous cette classe de Token.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Retourne la réponse de la vérification</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>
@@ -583,25 +707,47 @@ TODO: Implementer tests type log; Calculs de sévérité | Reste rien.</p>
 <dl class="method">
 <dt id="loganalyser.token.Token._Token__analyse">
 <code class="descname">_Token__analyse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.Token._Token__analyse" title="Permalink to this definition">¶</a></dt>
-<dd><p>Analyse la donnee contenue dans le token pour obtenir la sévérité de cette donnee. Non implémenté car non-utile.
-:return: Retourne la sévérité de la donnee de ce token
-:rtype: int</p>
+<dd><p>Analyse la donnee contenue dans le token pour obtenir la sévérité de cette donnee. Non implémenté car non-utile.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Retourne la sévérité de la donnee de ce token</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="loganalyser.token.Token._Token__verifier_type">
 <code class="descname">_Token__verifier_type</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.Token._Token__verifier_type" title="Permalink to this definition">¶</a></dt>
-<dd><p>Vérifie si la donnee peut bien être instanciée sous cette classe de Token.
-:return: Retourne la réponse de la vérification
-:rtype: bool</p>
+<dd><p>Vérifie si la donnee peut bien être instanciée sous cette classe de Token.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Retourne la réponse de la vérification</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="loganalyser.token.Token.__init__">
 <code class="descname">__init__</code><span class="sig-paren">(</span><em>value</em>, <em>istypeok</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loganalyser/token.html#Token.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loganalyser.token.Token.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Constructeur de classe. Un fichier est initialisé à partir de son chemin d&#8217;accès
-:param value: donnee du token e.g. &#8220;127.0.0.1&#8221;, &#8220;404&#8221;.
-:type value: str</p>
+<dd><p>Constructeur de classe. Un fichier est initialisé à partir de son chemin d&#8217;accès</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>value</strong> (<em>str</em>) &#8211; donnee du token e.g. &#8220;127.0.0.1&#8221;, &#8220;404&#8221;.</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>
@@ -614,17 +760,33 @@ TODO: Implementer tests type log; Calculs de sévérité | Reste rien.</p>
 <dl class="method">
 <dt id="loganalyser.token.URL._Token__analyse">
 <code class="descname">_Token__analyse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.URL._Token__analyse" title="Permalink to this definition">¶</a></dt>
-<dd><p>Analyse la donnee contenue dans le token pour obtenir la sévérité de cette donnee. Non implémenté car non-utile.
-:return: Retourne la sévérité de la donnee de ce token
-:rtype: int</p>
+<dd><p>Analyse la donnee contenue dans le token pour obtenir la sévérité de cette donnee. Non implémenté car non-utile.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Retourne la sévérité de la donnee de ce token</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="loganalyser.token.URL._Token__verifier_type">
 <code class="descname">_Token__verifier_type</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.URL._Token__verifier_type" title="Permalink to this definition">¶</a></dt>
-<dd><p>Vérifie si la donnee peut bien être instanciée sous cette classe de Token.
-:return: Retourne la réponse de la vérification
-:rtype: bool</p>
+<dd><p>Vérifie si la donnee peut bien être instanciée sous cette classe de Token.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Retourne la réponse de la vérification</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>
@@ -633,8 +795,7 @@ TODO: Implementer tests type log; Calculs de sévérité | Reste rien.</p>
 <div class="section" id="module-loganalyser.outils">
 <span id="outils-module"></span><h2>Outils module<a class="headerlink" href="#module-loganalyser.outils" title="Permalink to this headline">¶</a></h2>
 <p>Sert à l&#8217;implémentation de notre classe Dictionnaire, qui étend la classe dict de Python, et y ajoute les opérations
-qui nous sont utiles sur les dictionnaires.
-TODO: rien, si ce n&#8217;est ajouter des méthodes si la classe est incomplète et faire fonctionner itemtoentrynumbers.</p>
+qui nous sont utiles sur les dictionnaires.</p>
 <dl class="class">
 <dt id="loganalyser.outils.Dictionary">
 <em class="property">class </em><code class="descclassname">loganalyser.outils.</code><code class="descname">Dictionary</code><span class="sig-paren">(</span><em>keylist</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loganalyser/outils.html#Dictionary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loganalyser.outils.Dictionary" title="Permalink to this definition">¶</a></dt>
