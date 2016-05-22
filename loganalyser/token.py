@@ -6,6 +6,7 @@ TODO: Implementer tests type log; Calculs de sévérité | Reste rien.
 import socket
 import re
 from urllib.parse import urlparse
+from datetime import datetime
 
 from abc import ABCMeta, abstractmethod
 
@@ -87,8 +88,12 @@ class Date(Token):
         super().__init__(value, self.__verifier_type(value))
 
     def __verifier_type(self, value):
-        s = True
-        return s
+        try :
+             datetime.strptime(value, '%d/%b/%Y:%H:%M:%S')
+        except :
+            return False
+        else:
+            return True
 
     def __analyse(self):
         severity_level = 0
