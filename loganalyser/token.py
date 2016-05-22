@@ -106,8 +106,11 @@ class EXT(Token):
         super().__init__(value, self.__verifier_type(value))
 
     def __verifier_type(self, value):
-        s = True
-        return s
+        try:
+            int(value)
+        except ValueError:
+            return False
+        return True
 
     def __analyse(self):
         severity_level = 0
@@ -136,8 +139,7 @@ class URL(Token):
         super().__init__(value, self.__verifier_type(value))
 
     def __verifier_type(self, value):
-        s = True
-        return s
+        return type(value) == str
 
     def __analyse(self):
         severity_level = 0
@@ -194,8 +196,7 @@ class Referer(Token):
         super().__init__(value, self.__verifier_type(value))
 
     def __verifier_type(self, value):
-        s = True
-        return s
+        return type(value) == str
 
     def __analyse(self):
         severity_level = 0
