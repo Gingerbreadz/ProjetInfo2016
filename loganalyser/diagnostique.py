@@ -191,7 +191,5 @@ class Diagnostique:
             attack_keys = self.attack_dict.keys()
             for key in attack_keys:
                 attack = self.attack_dict[key]
-                report.append(str(key))
-                if type(attack) == int:
-                    report.append(str(attack))
+                report.append(str(key) + " : " + str(attack))
         return report
