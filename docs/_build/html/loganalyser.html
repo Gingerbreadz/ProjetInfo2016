@@ -31,7 +31,7 @@
 
   
     <link rel="top" title="loganalyser  documentation" href="index.html"/>
-        <link rel="prev" title="Usage" href="usage.html"/> 
+        <link rel="prev" title="Tests" href="tests.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -79,6 +79,7 @@
                 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tests.html">Tests</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">Loganalyser package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#module-loganalyser.diagnostique">Diagnostique module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-loganalyser.fichier">Fichier module</a></li>
@@ -144,16 +145,16 @@ TODO: Ecrire la méthode qui génère le rapport. | Reste plus tard.</p>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
 <p>Classe instanciant le diagnostique, qui contient les résultats d&#8217;analyse et les fait.</p>
 <dl class="method">
-<dt id="loganalyser.diagnostique.Diagnostique._Diagnostique__analyse_multitoken">
-<code class="descname">_Diagnostique__analyse_multitoken</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.diagnostique.Diagnostique._Diagnostique__analyse_multitoken" title="Permalink to this definition">¶</a></dt>
+<dt id="loganalyser.diagnostique.Diagnostique._Diagnostique__analyse">
+<code class="descname">_Diagnostique__analyse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.diagnostique.Diagnostique._Diagnostique__analyse" title="Permalink to this definition">¶</a></dt>
 <dd><p>Analyse les tokens par groupe selon certains motifs.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>token_dict</strong> (<em>dict</em>) &#8211; dictionnaire de token</li>
-<li><strong>regexp_dict</strong> (<em>dict</em>) &#8211; dictionnaire d&#8217;expression régulière</li>
+<li><strong>self.token_dict</strong> (<em>dict</em>) &#8211; dictionnaire de token</li>
+<li><strong>self.regexp_dict</strong> (<em>dict</em>) &#8211; dictionnaire d&#8217;expression régulière</li>
 </ul>
 </td>
 </tr>
@@ -175,7 +176,7 @@ TODO: Ecrire la méthode qui génère le rapport. | Reste plus tard.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>token_dict</strong> (<em>dict</em>) &#8211; dictionnaire de token</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>self.token_dict</strong> (<em>dict</em>) &#8211; dictionnaire de token</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Dictionnaire contenant les statistiques</td>
 </tr>
@@ -215,7 +216,7 @@ TODO: Ecrire la méthode qui génère le rapport. | Reste plus tard.</p>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">tableau des lignes de résultats à partir des dictionnaires</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">String array</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
 </tr>
 </tbody>
 </table>
@@ -396,47 +397,17 @@ TODO: Implementer tests type log; Calculs de sévérité | Reste rien.</p>
 <dl class="method">
 <dt id="loganalyser.token.Byte._Token__analyse">
 <code class="descname">_Token__analyse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.Byte._Token__analyse" title="Permalink to this definition">¶</a></dt>
-<dd><p>Analyse la donnee contenue dans le token pour obtenir la sévérité de cette donnee.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Retourne la sévérité de la donnee de ce token</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
-</tr>
-</tbody>
-</table>
+<dd><p>Analyse la donnee contenue dans le token pour obtenir la sévérité de cette donnee. Non implémenté car non-utile.
+:return: Retourne la sévérité de la donnee de ce token
+:rtype: int</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="loganalyser.token.Byte._Token__verifier_type">
-<code class="descname">_Token__verifier_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.Byte._Token__verifier_type" title="Permalink to this definition">¶</a></dt>
-<dd><p>Vérifie si la donnee peut bien être instanciée sous cette classe de Token.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Retourne la réponse de la vérification</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="loganalyser.token.Byte.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.Byte.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Constructeur de classe. Un fichier est initialisé à partir de son chemin d&#8217;accès</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>value</strong> (<em>str</em>) &#8211; donnee du token e.g. &#8220;127.0.0.1&#8221;, &#8220;404&#8221;.</td>
-</tr>
-</tbody>
-</table>
+<code class="descname">_Token__verifier_type</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.Byte._Token__verifier_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vérifie si la donnee peut bien être instanciée sous cette classe de Token.
+:return: Retourne la réponse de la vérification
+:rtype: bool</p>
 </dd></dl>
 
 </dd></dl>
@@ -449,47 +420,17 @@ TODO: Implementer tests type log; Calculs de sévérité | Reste rien.</p>
 <dl class="method">
 <dt id="loganalyser.token.Date._Token__analyse">
 <code class="descname">_Token__analyse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.Date._Token__analyse" title="Permalink to this definition">¶</a></dt>
-<dd><p>Analyse la donnee contenue dans le token pour obtenir la sévérité de cette donnee.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Retourne la sévérité de la donnee de ce token</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
-</tr>
-</tbody>
-</table>
+<dd><p>Analyse la donnee contenue dans le token pour obtenir la sévérité de cette donnee. Non implémenté car non-utile.
+:return: Retourne la sévérité de la donnee de ce token
+:rtype: int</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="loganalyser.token.Date._Token__verifier_type">
-<code class="descname">_Token__verifier_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.Date._Token__verifier_type" title="Permalink to this definition">¶</a></dt>
-<dd><p>Vérifie si la donnee peut bien être instanciée sous cette classe de Token.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Retourne la réponse de la vérification</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="loganalyser.token.Date.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.Date.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Constructeur de classe. Un fichier est initialisé à partir de son chemin d&#8217;accès</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>value</strong> (<em>str</em>) &#8211; donnee du token e.g. &#8220;127.0.0.1&#8221;, &#8220;404&#8221;.</td>
-</tr>
-</tbody>
-</table>
+<code class="descname">_Token__verifier_type</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.Date._Token__verifier_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vérifie si la donnee peut bien être instanciée sous cette classe de Token.
+:return: Retourne la réponse de la vérification
+:rtype: bool</p>
 </dd></dl>
 
 </dd></dl>
@@ -502,47 +443,17 @@ TODO: Implementer tests type log; Calculs de sévérité | Reste rien.</p>
 <dl class="method">
 <dt id="loganalyser.token.EXT._Token__analyse">
 <code class="descname">_Token__analyse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.EXT._Token__analyse" title="Permalink to this definition">¶</a></dt>
-<dd><p>Analyse la donnee contenue dans le token pour obtenir la sévérité de cette donnee.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Retourne la sévérité de la donnee de ce token</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
-</tr>
-</tbody>
-</table>
+<dd><p>Analyse la donnee contenue dans le token pour obtenir la sévérité de cette donnee. Non implémenté car non-utile.
+:return: Retourne la sévérité de la donnee de ce token
+:rtype: int</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="loganalyser.token.EXT._Token__verifier_type">
-<code class="descname">_Token__verifier_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.EXT._Token__verifier_type" title="Permalink to this definition">¶</a></dt>
-<dd><p>Vérifie si la donnee peut bien être instanciée sous cette classe de Token.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Retourne la réponse de la vérification</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="loganalyser.token.EXT.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.EXT.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Constructeur de classe. Un fichier est initialisé à partir de son chemin d&#8217;accès</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>value</strong> (<em>str</em>) &#8211; donnee du token e.g. &#8220;127.0.0.1&#8221;, &#8220;404&#8221;.</td>
-</tr>
-</tbody>
-</table>
+<code class="descname">_Token__verifier_type</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.EXT._Token__verifier_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vérifie si la donnee peut bien être instanciée sous cette classe de Token.
+:return: Retourne la réponse de la vérification
+:rtype: bool</p>
 </dd></dl>
 
 </dd></dl>
@@ -555,100 +466,40 @@ TODO: Implementer tests type log; Calculs de sévérité | Reste rien.</p>
 <dl class="method">
 <dt id="loganalyser.token.IP._Token__analyse">
 <code class="descname">_Token__analyse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.IP._Token__analyse" title="Permalink to this definition">¶</a></dt>
-<dd><p>Analyse la donnee contenue dans le token pour obtenir la sévérité de cette donnee.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Retourne la sévérité de la donnee de ce token</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
-</tr>
-</tbody>
-</table>
+<dd><p>Analyse la donnee contenue dans le token pour obtenir la sévérité de cette donnee. Non implémenté car non-utile.
+:return: Retourne la sévérité de la donnee de ce token
+:rtype: int</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="loganalyser.token.IP._Token__verifier_type">
-<code class="descname">_Token__verifier_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.IP._Token__verifier_type" title="Permalink to this definition">¶</a></dt>
-<dd><p>Vérifie si la donnee peut bien être instanciée sous cette classe de Token.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Retourne la réponse de la vérification</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="loganalyser.token.IP.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.IP.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Constructeur de classe. Un fichier est initialisé à partir de son chemin d&#8217;accès</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>value</strong> (<em>str</em>) &#8211; donnee du token e.g. &#8220;127.0.0.1&#8221;, &#8220;404&#8221;.</td>
-</tr>
-</tbody>
-</table>
+<code class="descname">_Token__verifier_type</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.IP._Token__verifier_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vérifie si la donnee peut bien être instanciée sous cette classe de Token.
+:return: Retourne la réponse de la vérification
+:rtype: bool</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="loganalyser.token.Methode">
-<em class="property">class </em><code class="descclassname">loganalyser.token.</code><code class="descname">Methode</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loganalyser/token.html#Methode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loganalyser.token.Methode" title="Permalink to this definition">¶</a></dt>
+<dt id="loganalyser.token.Method">
+<em class="property">class </em><code class="descclassname">loganalyser.token.</code><code class="descname">Method</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loganalyser/token.html#Method"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loganalyser.token.Method" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#loganalyser.token.Token" title="loganalyser.token.Token"><code class="xref py py-class docutils literal"><span class="pre">loganalyser.token.Token</span></code></a></p>
 <p>Classe concrète instanciant les token Methode</p>
 <dl class="method">
-<dt id="loganalyser.token.Methode._Token__analyse">
-<code class="descname">_Token__analyse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.Methode._Token__analyse" title="Permalink to this definition">¶</a></dt>
-<dd><p>Analyse la donnee contenue dans le token pour obtenir la sévérité de cette donnee.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Retourne la sévérité de la donnee de ce token</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
-</tr>
-</tbody>
-</table>
+<dt id="loganalyser.token.Method._Token__analyse">
+<code class="descname">_Token__analyse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.Method._Token__analyse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analyse la donnee contenue dans le token pour obtenir la sévérité de cette donnee. Non implémenté car non-utile.
+:return: Retourne la sévérité de la donnee de ce token
+:rtype: int</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="loganalyser.token.Methode._Token__verifier_type">
-<code class="descname">_Token__verifier_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.Methode._Token__verifier_type" title="Permalink to this definition">¶</a></dt>
-<dd><p>Vérifie si la donnee peut bien être instanciée sous cette classe de Token.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Retourne la réponse de la vérification</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="loganalyser.token.Methode.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.Methode.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Constructeur de classe. Un fichier est initialisé à partir de son chemin d&#8217;accès</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>value</strong> (<em>str</em>) &#8211; donnee du token e.g. &#8220;127.0.0.1&#8221;, &#8220;404&#8221;.</td>
-</tr>
-</tbody>
-</table>
+<dt id="loganalyser.token.Method._Token__verifier_type">
+<code class="descname">_Token__verifier_type</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.Method._Token__verifier_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vérifie si la donnee peut bien être instanciée sous cette classe de Token.
+:return: Retourne la réponse de la vérification
+:rtype: bool</p>
 </dd></dl>
 
 </dd></dl>
@@ -661,47 +512,17 @@ TODO: Implementer tests type log; Calculs de sévérité | Reste rien.</p>
 <dl class="method">
 <dt id="loganalyser.token.Name._Token__analyse">
 <code class="descname">_Token__analyse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.Name._Token__analyse" title="Permalink to this definition">¶</a></dt>
-<dd><p>Analyse la donnee contenue dans le token pour obtenir la sévérité de cette donnee.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Retourne la sévérité de la donnee de ce token</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
-</tr>
-</tbody>
-</table>
+<dd><p>Analyse la donnee contenue dans le token pour obtenir la sévérité de cette donnee. Non implémenté car non-utile.
+:return: Retourne la sévérité de la donnee de ce token
+:rtype: int</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="loganalyser.token.Name._Token__verifier_type">
-<code class="descname">_Token__verifier_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.Name._Token__verifier_type" title="Permalink to this definition">¶</a></dt>
-<dd><p>Vérifie si la donnee peut bien être instanciée sous cette classe de Token.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Retourne la réponse de la vérification</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="loganalyser.token.Name.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.Name.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Constructeur de classe. Un fichier est initialisé à partir de son chemin d&#8217;accès</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>value</strong> (<em>str</em>) &#8211; donnee du token e.g. &#8220;127.0.0.1&#8221;, &#8220;404&#8221;.</td>
-</tr>
-</tbody>
-</table>
+<code class="descname">_Token__verifier_type</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.Name._Token__verifier_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vérifie si la donnee peut bien être instanciée sous cette classe de Token.
+:return: Retourne la réponse de la vérification
+:rtype: bool</p>
 </dd></dl>
 
 </dd></dl>
@@ -714,47 +535,17 @@ TODO: Implementer tests type log; Calculs de sévérité | Reste rien.</p>
 <dl class="method">
 <dt id="loganalyser.token.Referer._Token__analyse">
 <code class="descname">_Token__analyse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.Referer._Token__analyse" title="Permalink to this definition">¶</a></dt>
-<dd><p>Analyse la donnee contenue dans le token pour obtenir la sévérité de cette donnee.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Retourne la sévérité de la donnee de ce token</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
-</tr>
-</tbody>
-</table>
+<dd><p>Analyse la donnee contenue dans le token pour obtenir la sévérité de cette donnee. Non implémenté car non-utile.
+:return: Retourne la sévérité de la donnee de ce token
+:rtype: int</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="loganalyser.token.Referer._Token__verifier_type">
-<code class="descname">_Token__verifier_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.Referer._Token__verifier_type" title="Permalink to this definition">¶</a></dt>
-<dd><p>Vérifie si la donnee peut bien être instanciée sous cette classe de Token.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Retourne la réponse de la vérification</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="loganalyser.token.Referer.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.Referer.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Constructeur de classe. Un fichier est initialisé à partir de son chemin d&#8217;accès</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>value</strong> (<em>str</em>) &#8211; donnee du token e.g. &#8220;127.0.0.1&#8221;, &#8220;404&#8221;.</td>
-</tr>
-</tbody>
-</table>
+<code class="descname">_Token__verifier_type</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.Referer._Token__verifier_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vérifie si la donnee peut bien être instanciée sous cette classe de Token.
+:return: Retourne la réponse de la vérification
+:rtype: bool</p>
 </dd></dl>
 
 </dd></dl>
@@ -767,104 +558,50 @@ TODO: Implementer tests type log; Calculs de sévérité | Reste rien.</p>
 <dl class="method">
 <dt id="loganalyser.token.Response._Token__analyse">
 <code class="descname">_Token__analyse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.Response._Token__analyse" title="Permalink to this definition">¶</a></dt>
-<dd><p>Analyse la donnee contenue dans le token pour obtenir la sévérité de cette donnee.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Retourne la sévérité de la donnee de ce token</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
-</tr>
-</tbody>
-</table>
+<dd><p>Analyse la donnee contenue dans le token pour obtenir la sévérité de cette donnee. Non implémenté car non-utile.
+:return: Retourne la sévérité de la donnee de ce token
+:rtype: int</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="loganalyser.token.Response._Token__verifier_type">
-<code class="descname">_Token__verifier_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.Response._Token__verifier_type" title="Permalink to this definition">¶</a></dt>
-<dd><p>Vérifie si la donnee peut bien être instanciée sous cette classe de Token.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Retourne la réponse de la vérification</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="loganalyser.token.Response.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.Response.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Constructeur de classe. Un fichier est initialisé à partir de son chemin d&#8217;accès</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>value</strong> (<em>str</em>) &#8211; donnee du token e.g. &#8220;127.0.0.1&#8221;, &#8220;404&#8221;.</td>
-</tr>
-</tbody>
-</table>
+<code class="descname">_Token__verifier_type</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.Response._Token__verifier_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vérifie si la donnee peut bien être instanciée sous cette classe de Token.
+:return: Retourne la réponse de la vérification
+:rtype: bool</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="class">
 <dt id="loganalyser.token.Token">
-<em class="property">class </em><code class="descclassname">loganalyser.token.</code><code class="descname">Token</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loganalyser/token.html#Token"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loganalyser.token.Token" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">loganalyser.token.</code><code class="descname">Token</code><span class="sig-paren">(</span><em>value</em>, <em>istypeok</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loganalyser/token.html#Token"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loganalyser.token.Token" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
-<p>Classe abstraite interface pour token caractérisé par :</p>
-<ul class="simple">
-<li>sa donnée</li>
-<li>sa sévérité</li>
-</ul>
+<p>Classe abstraite interface pour token caractérisé par :
+- sa donnée
+- sa sévérité</p>
 <dl class="method">
 <dt id="loganalyser.token.Token._Token__analyse">
 <code class="descname">_Token__analyse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.Token._Token__analyse" title="Permalink to this definition">¶</a></dt>
-<dd><p>Analyse la donnee contenue dans le token pour obtenir la sévérité de cette donnee.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Retourne la sévérité de la donnee de ce token</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
-</tr>
-</tbody>
-</table>
+<dd><p>Analyse la donnee contenue dans le token pour obtenir la sévérité de cette donnee. Non implémenté car non-utile.
+:return: Retourne la sévérité de la donnee de ce token
+:rtype: int</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="loganalyser.token.Token._Token__verifier_type">
-<code class="descname">_Token__verifier_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.Token._Token__verifier_type" title="Permalink to this definition">¶</a></dt>
-<dd><p>Vérifie si la donnee peut bien être instanciée sous cette classe de Token.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Retourne la réponse de la vérification</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
-</tr>
-</tbody>
-</table>
+<code class="descname">_Token__verifier_type</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.Token._Token__verifier_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vérifie si la donnee peut bien être instanciée sous cette classe de Token.
+:return: Retourne la réponse de la vérification
+:rtype: bool</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="loganalyser.token.Token.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loganalyser/token.html#Token.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loganalyser.token.Token.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Constructeur de classe. Un fichier est initialisé à partir de son chemin d&#8217;accès</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>value</strong> (<em>str</em>) &#8211; donnee du token e.g. &#8220;127.0.0.1&#8221;, &#8220;404&#8221;.</td>
-</tr>
-</tbody>
-</table>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>value</em>, <em>istypeok</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loganalyser/token.html#Token.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loganalyser.token.Token.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructeur de classe. Un fichier est initialisé à partir de son chemin d&#8217;accès
+:param value: donnee du token e.g. &#8220;127.0.0.1&#8221;, &#8220;404&#8221;.
+:type value: str</p>
 </dd></dl>
 
 </dd></dl>
@@ -877,47 +614,17 @@ TODO: Implementer tests type log; Calculs de sévérité | Reste rien.</p>
 <dl class="method">
 <dt id="loganalyser.token.URL._Token__analyse">
 <code class="descname">_Token__analyse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.URL._Token__analyse" title="Permalink to this definition">¶</a></dt>
-<dd><p>Analyse la donnee contenue dans le token pour obtenir la sévérité de cette donnee.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Retourne la sévérité de la donnee de ce token</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
-</tr>
-</tbody>
-</table>
+<dd><p>Analyse la donnee contenue dans le token pour obtenir la sévérité de cette donnee. Non implémenté car non-utile.
+:return: Retourne la sévérité de la donnee de ce token
+:rtype: int</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="loganalyser.token.URL._Token__verifier_type">
-<code class="descname">_Token__verifier_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.URL._Token__verifier_type" title="Permalink to this definition">¶</a></dt>
-<dd><p>Vérifie si la donnee peut bien être instanciée sous cette classe de Token.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Retourne la réponse de la vérification</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="loganalyser.token.URL.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.URL.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Constructeur de classe. Un fichier est initialisé à partir de son chemin d&#8217;accès</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>value</strong> (<em>str</em>) &#8211; donnee du token e.g. &#8220;127.0.0.1&#8221;, &#8220;404&#8221;.</td>
-</tr>
-</tbody>
-</table>
+<code class="descname">_Token__verifier_type</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.token.URL._Token__verifier_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vérifie si la donnee peut bien être instanciée sous cette classe de Token.
+:return: Retourne la réponse de la vérification
+:rtype: bool</p>
 </dd></dl>
 
 </dd></dl>
@@ -927,7 +634,7 @@ TODO: Implementer tests type log; Calculs de sévérité | Reste rien.</p>
 <span id="outils-module"></span><h2>Outils module<a class="headerlink" href="#module-loganalyser.outils" title="Permalink to this headline">¶</a></h2>
 <p>Sert à l&#8217;implémentation de notre classe Dictionnaire, qui étend la classe dict de Python, et y ajoute les opérations
 qui nous sont utiles sur les dictionnaires.
-TODO: rien, si ce n&#8217;est ajouter des méthodes si la classe est incomplète.</p>
+TODO: rien, si ce n&#8217;est ajouter des méthodes si la classe est incomplète et faire fonctionner itemtoentrynumbers.</p>
 <dl class="class">
 <dt id="loganalyser.outils.Dictionary">
 <em class="property">class </em><code class="descclassname">loganalyser.outils.</code><code class="descname">Dictionary</code><span class="sig-paren">(</span><em>keylist</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loganalyser/outils.html#Dictionary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loganalyser.outils.Dictionary" title="Permalink to this definition">¶</a></dt>
@@ -965,27 +672,6 @@ TODO: rien, si ce n&#8217;est ajouter des méthodes si la classe est incomplète
 </dd></dl>
 
 <dl class="method">
-<dt id="loganalyser.outils.Dictionary.clear">
-<code class="descname">clear</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; None.  Remove all items from D.<a class="headerlink" href="#loganalyser.outils.Dictionary.clear" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="loganalyser.outils.Dictionary.copy">
-<code class="descname">copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; a shallow copy of D<a class="headerlink" href="#loganalyser.outils.Dictionary.copy" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="loganalyser.outils.Dictionary.fromkeys">
-<code class="descname">fromkeys</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#loganalyser.outils.Dictionary.fromkeys" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a new dict with keys from iterable and values equal to value.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="loganalyser.outils.Dictionary.get">
-<code class="descname">get</code><span class="sig-paren">(</span><em>k</em><span class="optional">[</span>, <em>d</em><span class="optional">]</span><span class="sig-paren">)</span> &rarr; D[k] if k in D, else d.  d defaults to None.<a class="headerlink" href="#loganalyser.outils.Dictionary.get" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
 <dt id="loganalyser.outils.Dictionary.getentry">
 <code class="descname">getentry</code><span class="sig-paren">(</span><em>entrynumber</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loganalyser/outils.html#Dictionary.getentry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loganalyser.outils.Dictionary.getentry" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retourne la liste contenant les valeurs de chaques clefs pour un index donné.</p>
@@ -1004,11 +690,6 @@ TODO: rien, si ce n&#8217;est ajouter des méthodes si la classe est incomplète
 </dd></dl>
 
 <dl class="method">
-<dt id="loganalyser.outils.Dictionary.items">
-<code class="descname">items</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; a set-like object providing a view on D's items<a class="headerlink" href="#loganalyser.outils.Dictionary.items" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
 <dt id="loganalyser.outils.Dictionary.itemtoentrynumbers">
 <code class="descname">itemtoentrynumbers</code><span class="sig-paren">(</span><em>item</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loganalyser/outils.html#Dictionary.itemtoentrynumbers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loganalyser.outils.Dictionary.itemtoentrynumbers" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retourne l&#8217;index d&#8217;une valeur dans le dictionnaire.</p>
@@ -1016,7 +697,7 @@ TODO: rien, si ce n&#8217;est ajouter des méthodes si la classe est incomplète
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>item</strong> (<em>int</em>) &#8211; index de l&#8217;entrée.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>item</strong> (<em>str</em>) &#8211; valeur recherchée.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Liste contenant les index associés à la valeur d&#8217;entrée.</td>
 </tr>
@@ -1042,36 +723,6 @@ TODO: rien, si ce n&#8217;est ajouter des méthodes si la classe est incomplète
 </table>
 </dd></dl>
 
-<dl class="method">
-<dt id="loganalyser.outils.Dictionary.pop">
-<code class="descname">pop</code><span class="sig-paren">(</span><em>k</em><span class="optional">[</span>, <em>d</em><span class="optional">]</span><span class="sig-paren">)</span> &rarr; v, remove specified key and return the corresponding value.<a class="headerlink" href="#loganalyser.outils.Dictionary.pop" title="Permalink to this definition">¶</a></dt>
-<dd><p>If key is not found, d is returned if given, otherwise KeyError is raised</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="loganalyser.outils.Dictionary.popitem">
-<code class="descname">popitem</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; (k, v), remove and return some (key, value) pair as a<a class="headerlink" href="#loganalyser.outils.Dictionary.popitem" title="Permalink to this definition">¶</a></dt>
-<dd><p>2-tuple; but raise KeyError if D is empty.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="loganalyser.outils.Dictionary.setdefault">
-<code class="descname">setdefault</code><span class="sig-paren">(</span><em>k</em><span class="optional">[</span>, <em>d</em><span class="optional">]</span><span class="sig-paren">)</span> &rarr; D.get(k,d), also set D[k]=d if k not in D<a class="headerlink" href="#loganalyser.outils.Dictionary.setdefault" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="loganalyser.outils.Dictionary.update">
-<code class="descname">update</code><span class="sig-paren">(</span><span class="optional">[</span><em>E</em>, <span class="optional">]</span><em>**F</em><span class="sig-paren">)</span> &rarr; None.  Update D from dict/iterable E and F.<a class="headerlink" href="#loganalyser.outils.Dictionary.update" title="Permalink to this definition">¶</a></dt>
-<dd><p>If E is present and has a .keys() method, then does:  for k in E: D[k] = E[k]
-If E is present and lacks a .keys() method, then does:  for k, v in E: D[k] = v
-In either case, this is followed by: for k in F:  D[k] = F[k]</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="loganalyser.outils.Dictionary.values">
-<code class="descname">values</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; an object providing a view on D's values<a class="headerlink" href="#loganalyser.outils.Dictionary.values" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
 </dd></dl>
 
 </div>
@@ -1090,7 +741,7 @@ Même vide, ce fichier permet à python de reconnaitre le dossier courant comme 
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
       
-        <a href="usage.html" class="btn btn-neutral" title="Usage" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="tests.html" class="btn btn-neutral" title="Tests" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

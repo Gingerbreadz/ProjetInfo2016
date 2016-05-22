@@ -78,8 +78,13 @@
             
             
                 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation-directe">Installation Directe</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation-dans-pip">Installation dans pip</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tests.html">Tests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="loganalyser.html">Loganalyser package</a></li>
 </ul>
 
@@ -127,6 +132,35 @@
             
   <div class="section" id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<p>Le projet reprend la structure standard d&#8217;un package Python, et peut donc facilement être installé via le <code class="docutils literal"><span class="pre">setup.py</span></code>.
+Conçu pour <code class="docutils literal"><span class="pre">python3.X</span></code>, il convient avant de procéder à l&#8217;installation de s&#8217;assurer de la version de l&#8217;environnement
+Python courant.</p>
+<div class="section" id="installation-directe">
+<h2>Installation Directe<a class="headerlink" href="#installation-directe" title="Permalink to this headline">¶</a></h2>
+<p>Cette procedure installera le package au sein de Python comme module. Le projet a été conçu pour que les étapes à suivre
+soient les même que pour tout autre module.</p>
+<p>Il est possible de se placer, avant d&#8217;initier la procedure, dans un environnement Python virtuelle <code class="docutils literal"><span class="pre">venv</span></code> si
+l&#8217;environnement courant n&#8217;est pas approprié.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git clone https://github.com/Gingerbreadz/ProjetInfo2016
+$ <span class="nb">cd</span> ./ProjetInfo2016
+$ python setup.py install
+</pre></div>
+</div>
+</div>
+<div class="section" id="installation-dans-pip">
+<h2>Installation dans pip<a class="headerlink" href="#installation-dans-pip" title="Permalink to this headline">¶</a></h2>
+<p>Une procédure alternative permet d&#8217;installer le projet comme package <code class="docutils literal"><span class="pre">pip</span></code> et ainsi de plus facilement le désinstaller.
+Le projet n&#8217;étant pas disponible sur les dépots PyPi, l&#8217;installation se déroule comme suit.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git clone https://github.com/Gingerbreadz/ProjetInfo2016
+$ <span class="nb">cd</span> ./ProjetInfo2016
+$ python setup.py sdist
+$ pip install ./dist/loganalyser-0.0.1.tar.gz
+</pre></div>
+</div>
+<p>La désinstallation peut alors être faite avec un <code class="docutils literal"><span class="pre">pip</span> <span class="pre">uninstall</span></code> comme pour tout autre package pip. En cas de
+difficultés à identifier le nom du package, <code class="docutils literal"><span class="pre">pip</span> <span class="pre">freeze</span></code> permet de lister tout les package pip installés dans
+l&#8217;environnement Python courant.</p>
+</div>
 </div>
 
 

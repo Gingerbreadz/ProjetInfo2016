@@ -79,6 +79,7 @@
                 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tests.html">Tests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../loganalyser.html">Loganalyser package</a></li>
 </ul>
 
@@ -131,8 +132,9 @@
 <span class="sd">TODO: Ecrire la méthode qui génère le rapport. | Reste plus tard.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">loganalyser</span> <span class="kn">import</span> <span class="n">token</span>   <span class="c1">#Gestion des tokens</span>
-<span class="kn">from</span> <span class="nn">loganalyser</span> <span class="kn">import</span> <span class="n">outils</span>  <span class="c1">#Gestion des Dictionnaires</span>
+<span class="kn">from</span> <span class="nn">loganalyser</span> <span class="kn">import</span> <span class="n">outils</span>  <span class="c1"># Gestion des Dictionnaires</span>
+<span class="kn">import</span> <span class="nn">re</span>
+
 
 <div class="viewcode-block" id="Diagnostique"><a class="viewcode-back" href="../../loganalyser.html#loganalyser.diagnostique.Diagnostique">[docs]</a><span class="k">class</span> <span class="nc">Diagnostique</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Classe instanciant le diagnostique, qui contient les résultats d&#39;analyse et les fait.</span>
@@ -154,36 +156,145 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">stat_dict</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">attack_dict</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__statistique</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__analyse_multitoken</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__analyse</span><span class="p">()</span>
         <span class="k">return</span></div>
 
     <span class="k">def</span> <span class="nf">__statistique</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Effectue des calculs statistiques sur les token.</span>
 
-<span class="sd">        :param token_dict: dictionnaire de token</span>
-<span class="sd">        :type token_dict: dict</span>
+<span class="sd">        :param self.token_dict: dictionnaire de token</span>
+<span class="sd">        :type self.token_dict: dict</span>
 <span class="sd">        :return: Dictionnaire contenant les statistiques</span>
 <span class="sd">        :rtype: dict</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">stat_dict</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="k">return</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stat_dict</span> <span class="o">=</span> <span class="n">outils</span><span class="o">.</span><span class="n">Dictionary</span><span class="p">([</span><span class="s2">&quot;UniqueVisitors&quot;</span><span class="p">,</span> <span class="s2">&quot;TotalVisitors&quot;</span><span class="p">,</span> <span class="s2">&quot;TopFiles&quot;</span><span class="p">,</span> <span class="s2">&quot;TopReferrers&quot;</span><span class="p">,</span>
+                                            <span class="s2">&quot;TopVisitors&quot;</span><span class="p">,</span> <span class="s2">&quot;ValidRequest&quot;</span><span class="p">,</span> <span class="s2">&quot;NotFoundURL&quot;</span><span class="p">])</span>
 
-    <span class="k">def</span> <span class="nf">__analyse_multitoken</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">uniquevisitors</span><span class="p">():</span>
+            <span class="n">ip_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">ip</span><span class="o">.</span><span class="n">donnee</span> <span class="k">for</span> <span class="n">ip</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">token_dict</span><span class="p">[</span><span class="s2">&quot;IP&quot;</span><span class="p">]]</span>
+            <span class="n">ip_distinct_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">ip_list</span><span class="p">))</span>
+            <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">ip_distinct_list</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">totalvisitors</span><span class="p">():</span> <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">token_dict</span><span class="p">[</span><span class="s2">&quot;IP&quot;</span><span class="p">])</span>
+
+        <span class="k">def</span> <span class="nf">validrequest</span><span class="p">():</span>
+            <span class="n">code_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">token_dict</span><span class="p">[</span><span class="s2">&quot;Response&quot;</span><span class="p">]</span>
+            <span class="n">url_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">token_dict</span><span class="p">[</span><span class="s2">&quot;URL&quot;</span><span class="p">]</span>
+            <span class="n">counted_url</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">code_list</span><span class="p">)):</span>
+                <span class="k">if</span> <span class="mi">200</span> <span class="o">&lt;=</span> <span class="nb">int</span><span class="p">(</span><span class="n">code_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">donnee</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">226</span> <span class="ow">and</span> <span class="n">url_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">donnee</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">counted_url</span><span class="p">:</span>
+                    <span class="n">counted_url</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">url_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">donnee</span><span class="p">)</span>
+                    <span class="n">s</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">return</span> <span class="n">s</span>
+
+        <span class="k">def</span> <span class="nf">notfoundurl</span><span class="p">():</span>
+            <span class="n">code_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">token_dict</span><span class="p">[</span><span class="s2">&quot;Response&quot;</span><span class="p">]</span>
+            <span class="n">ip_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">token_dict</span><span class="p">[</span><span class="s2">&quot;IP&quot;</span><span class="p">]</span>
+            <span class="n">counted_ip</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">code_list</span><span class="p">)):</span>
+                <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">code_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">donnee</span><span class="p">)</span> <span class="o">==</span> <span class="mi">404</span> <span class="ow">and</span> <span class="n">ip_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">donnee</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">counted_ip</span><span class="p">:</span>
+                    <span class="n">counted_ip</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ip_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">donnee</span><span class="p">)</span>
+                    <span class="n">s</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">return</span> <span class="n">s</span>
+
+        <span class="k">def</span> <span class="nf">topfiles</span><span class="p">():</span>
+            <span class="n">url_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">url</span><span class="o">.</span><span class="n">donnee</span> <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">token_dict</span><span class="p">[</span><span class="s2">&quot;URL&quot;</span><span class="p">]]</span>
+            <span class="n">ip_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">ip</span><span class="o">.</span><span class="n">donnee</span> <span class="k">for</span> <span class="n">ip</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">token_dict</span><span class="p">[</span><span class="s2">&quot;IP&quot;</span><span class="p">]]</span>
+            <span class="n">method_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">method</span><span class="o">.</span><span class="n">donnee</span> <span class="k">for</span> <span class="n">method</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">token_dict</span><span class="p">[</span><span class="s2">&quot;Method&quot;</span><span class="p">]]</span>
+            <span class="n">byte_list</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">byte</span><span class="o">.</span><span class="n">donnee</span><span class="p">)</span> <span class="k">for</span> <span class="n">byte</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">token_dict</span><span class="p">[</span><span class="s2">&quot;Byte&quot;</span><span class="p">]]</span>
+            <span class="n">url_distinct_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">url_list</span><span class="p">))</span>
+            <span class="n">topfiles_dic</span> <span class="o">=</span> <span class="n">outils</span><span class="o">.</span><span class="n">Dictionary</span><span class="p">([</span><span class="s2">&quot;Hits&quot;</span><span class="p">,</span> <span class="s2">&quot;Visitors&quot;</span><span class="p">,</span> <span class="s2">&quot;Bandwidth&quot;</span><span class="p">,</span> <span class="s2">&quot;Method&quot;</span><span class="p">,</span> <span class="s2">&quot;URL&quot;</span><span class="p">])</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">url_distinct_list</span><span class="p">)):</span>
+                <span class="n">url</span> <span class="o">=</span> <span class="n">url_distinct_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="n">lines</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">token_dict</span><span class="o">.</span><span class="n">itemtoentrynumbers</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+                <span class="n">counted_ip</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="n">byte_count</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">visitors</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+                    <span class="n">byte_count</span> <span class="o">+=</span> <span class="n">byte_list</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="n">ip_list</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">counted_ip</span><span class="p">:</span>
+                        <span class="n">counted_ip</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ip_list</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+                        <span class="n">visitors</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">topfiles_dic</span><span class="o">.</span><span class="n">addentry</span><span class="p">([</span><span class="n">url_list</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">url</span><span class="p">),</span> <span class="n">visitors</span><span class="p">,</span> <span class="n">byte_count</span><span class="p">,</span> <span class="n">method_list</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">url</span><span class="p">])</span>
+            <span class="k">return</span> <span class="n">topfiles_dic</span>
+
+        <span class="k">def</span> <span class="nf">topreferrers</span><span class="p">():</span>
+            <span class="n">referrer_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">referrer</span><span class="o">.</span><span class="n">donnee</span> <span class="k">for</span> <span class="n">referrer</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">token_dict</span><span class="p">[</span><span class="s2">&quot;Referrer&quot;</span><span class="p">]]</span>
+            <span class="n">ip_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">ip</span><span class="o">.</span><span class="n">donnee</span> <span class="k">for</span> <span class="n">ip</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">token_dict</span><span class="p">[</span><span class="s2">&quot;IP&quot;</span><span class="p">]]</span>
+            <span class="n">method_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">method</span><span class="o">.</span><span class="n">donnee</span> <span class="k">for</span> <span class="n">method</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">token_dict</span><span class="p">[</span><span class="s2">&quot;Method&quot;</span><span class="p">]]</span>
+            <span class="n">byte_list</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">byte</span><span class="o">.</span><span class="n">donnee</span><span class="p">)</span> <span class="k">for</span> <span class="n">byte</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">token_dict</span><span class="p">[</span><span class="s2">&quot;Byte&quot;</span><span class="p">]]</span>
+            <span class="n">referrer_distinct_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">referrer_list</span><span class="p">))</span>
+            <span class="n">topreferrers_dic</span> <span class="o">=</span> <span class="n">outils</span><span class="o">.</span><span class="n">Dictionary</span><span class="p">([</span><span class="s2">&quot;Referrer&quot;</span><span class="p">,</span> <span class="s2">&quot;Hits&quot;</span><span class="p">,</span> <span class="s2">&quot;Visitors&quot;</span><span class="p">,</span> <span class="s2">&quot;Bandwidth&quot;</span><span class="p">,</span> <span class="s2">&quot;Method&quot;</span><span class="p">])</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">referrer_distinct_list</span><span class="p">)):</span>
+                <span class="n">referrer</span> <span class="o">=</span> <span class="n">referrer_distinct_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="n">lines</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">token_dict</span><span class="o">.</span><span class="n">itemtoentrynumbers</span><span class="p">(</span><span class="n">referrer</span><span class="p">)</span>
+                <span class="n">counted_ip</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="n">byte_count</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">visitors</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+                    <span class="n">byte_count</span> <span class="o">+=</span> <span class="n">byte_list</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="n">ip_list</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">counted_ip</span><span class="p">:</span>
+                        <span class="n">counted_ip</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ip_list</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+                        <span class="n">visitors</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">topreferrers_dic</span><span class="o">.</span><span class="n">addentry</span><span class="p">([</span><span class="n">referrer</span><span class="p">,</span> <span class="n">referrer_list</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">referrer</span><span class="p">),</span> <span class="n">visitors</span><span class="p">,</span> <span class="n">byte_count</span><span class="p">,</span> <span class="n">method_list</span><span class="p">[</span><span class="n">i</span><span class="p">]])</span>
+            <span class="k">return</span> <span class="n">topreferrers_dic</span>
+
+        <span class="k">def</span> <span class="nf">topvisitors</span><span class="p">():</span>
+            <span class="n">topvisitors_dic</span> <span class="o">=</span> <span class="n">outils</span><span class="o">.</span><span class="n">Dictionary</span><span class="p">([</span><span class="s2">&quot;Hits&quot;</span><span class="p">,</span> <span class="s2">&quot;Visits&quot;</span><span class="p">,</span> <span class="s2">&quot;Bandwidth&quot;</span><span class="p">,</span> <span class="s2">&quot;IP&quot;</span><span class="p">])</span>
+            <span class="n">ip_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">ip</span><span class="o">.</span><span class="n">donnee</span> <span class="k">for</span> <span class="n">ip</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">token_dict</span><span class="p">[</span><span class="s2">&quot;IP&quot;</span><span class="p">]]</span>
+            <span class="n">byte_list</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">byte</span><span class="o">.</span><span class="n">donnee</span><span class="p">)</span> <span class="k">for</span> <span class="n">byte</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">token_dict</span><span class="p">[</span><span class="s2">&quot;Byte&quot;</span><span class="p">]]</span>
+            <span class="n">url_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">url</span><span class="o">.</span><span class="n">url_cut</span> <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">token_dict</span><span class="p">[</span><span class="s2">&quot;URL&quot;</span><span class="p">]]</span>
+            <span class="n">ip_distinct_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">ip_list</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">ip_distinct_list</span><span class="p">)):</span>
+                <span class="n">ip</span> <span class="o">=</span> <span class="n">ip_distinct_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="n">lines</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">token_dict</span><span class="o">.</span><span class="n">itemtoentrynumbers</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>
+                <span class="n">counted_url</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="n">byte_count</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">visitors</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+                    <span class="n">byte_count</span> <span class="o">+=</span> <span class="n">byte_list</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="n">url_list</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">counted_url</span><span class="p">:</span>
+                        <span class="n">counted_url</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">url_list</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+                        <span class="n">visitors</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">topvisitors_dic</span><span class="o">.</span><span class="n">addentry</span><span class="p">([</span><span class="n">ip_list</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">ip</span><span class="p">),</span> <span class="n">visitors</span><span class="p">,</span> <span class="n">byte_count</span><span class="p">,</span> <span class="n">ip</span><span class="p">])</span>
+            <span class="k">return</span> <span class="n">topvisitors_dic</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">stat_dict</span><span class="p">[</span><span class="s2">&quot;UniqueVisitors&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">uniquevisitors</span><span class="p">()</span>  <span class="c1"># Int</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stat_dict</span><span class="p">[</span><span class="s2">&quot;TotalVisitors&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">totalvisitors</span><span class="p">()</span>    <span class="c1"># Int</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stat_dict</span><span class="p">[</span><span class="s2">&quot;TopFiles&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">topfiles</span><span class="p">()</span>              <span class="c1"># SubDict:[&quot;Hits&quot;, &quot;Visitors&quot;, &quot;Bandwidth&quot;, &quot;Method&quot;, &quot;URL&quot;]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stat_dict</span><span class="p">[</span><span class="s2">&quot;TopReferrers&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">topreferrers</span><span class="p">()</span>      <span class="c1"># SubDict:[&quot;Referrer&quot;, &quot;Hits&quot;, &quot;Visitors&quot;, &quot;Bandwidth&quot;, &quot;Method&quot;]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stat_dict</span><span class="p">[</span><span class="s2">&quot;TopVisitors&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">topvisitors</span><span class="p">()</span>        <span class="c1"># SubDict:[&quot;Hits&quot;, &quot;Visits&quot;, &quot;Bandwidth&quot;, &quot;IP&quot;]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stat_dict</span><span class="p">[</span><span class="s2">&quot;ValidRequest&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">validrequest</span><span class="p">()</span>      <span class="c1"># Int</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stat_dict</span><span class="p">[</span><span class="s2">&quot;NotFoundURL&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">notfoundurl</span><span class="p">()</span>        <span class="c1"># Int</span>
+
+    <span class="k">def</span> <span class="nf">__analyse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Analyse les tokens par groupe selon certains motifs.</span>
 
-<span class="sd">        :param token_dict: dictionnaire de token</span>
-<span class="sd">        :param regexp_dict: dictionnaire d&#39;expression régulière</span>
-<span class="sd">        :type token_dict: dict</span>
-<span class="sd">        :type regexp_dict: dict</span>
+<span class="sd">        :param self.token_dict: dictionnaire de token</span>
+<span class="sd">        :param self.regexp_dict: dictionnaire d&#39;expression régulière</span>
+<span class="sd">        :type self.token_dict: dict</span>
+<span class="sd">        :type self.regexp_dict: dict</span>
 <span class="sd">        :return: Dictionnaire contenant le rapport des attaques subit</span>
 <span class="sd">        :rtype: dict</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">attack_dict</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="k">return</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attack_dict</span> <span class="o">=</span> <span class="n">outils</span><span class="o">.</span><span class="n">Dictionary</span><span class="p">([</span><span class="s2">&quot;LogLineNumber&quot;</span><span class="p">,</span> <span class="s2">&quot;URL&quot;</span><span class="p">,</span> <span class="s2">&quot;Description&quot;</span><span class="p">,</span> <span class="s2">&quot;Impact&quot;</span><span class="p">])</span>
+        <span class="n">url_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">url</span><span class="o">.</span><span class="n">donnee</span> <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">token_dict</span><span class="p">[</span><span class="s2">&quot;URL&quot;</span><span class="p">]]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">regexp_dict</span><span class="p">[</span><span class="s2">&quot;Number&quot;</span><span class="p">])):</span>
+            <span class="n">rule</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">regexp_dict</span><span class="p">[</span><span class="s2">&quot;Rule&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">rule_reg</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">rule</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">url_list</span><span class="p">)):</span>
+                <span class="n">url</span> <span class="o">=</span> <span class="n">url_list</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">rule_reg</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">attack_dict</span><span class="p">[</span><span class="s2">&quot;LogLineNumber&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">attack_dict</span><span class="p">[</span><span class="s2">&quot;URL&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="p">[</span><span class="n">url</span><span class="p">]</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">attack_dict</span><span class="p">[</span><span class="s2">&quot;Description&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">regexp_dict</span><span class="p">[</span><span class="s2">&quot;Description&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]]</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">attack_dict</span><span class="p">[</span><span class="s2">&quot;Impact&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">regexp_dict</span><span class="p">[</span><span class="s2">&quot;Impact&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]]</span>
 
 <div class="viewcode-block" id="Diagnostique.get_report"><a class="viewcode-back" href="../../loganalyser.html#loganalyser.diagnostique.Diagnostique.get_report">[docs]</a>    <span class="k">def</span> <span class="nf">get_report</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fileformat</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -192,24 +303,22 @@
 <span class="sd">        :param fileformat: indique si le rapport doit etre enregistré sous forme de fchier texte ou seulement être présenté dans la console</span>
 <span class="sd">        :type fileformat: bool</span>
 <span class="sd">        :return: tableau des lignes de résultats à partir des dictionnaires</span>
-<span class="sd">        :rtype: String array</span>
+<span class="sd">        :rtype: list</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">fileformat</span><span class="p">:</span>
             <span class="n">report</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Ceci est la première ligne du Fichier Rapport&quot;</span><span class="p">,</span> <span class="s2">&quot;Ceci est la deuxième&quot;</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">report</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;                         ===Stats===                       &quot;</span><span class="p">]</span>
-            <span class="n">L</span><span class="o">=</span><span class="p">[]</span>
-            <span class="n">Stat_keys</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">stat_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
-            <span class="k">for</span> <span class="n">skey</span> <span class="ow">in</span> <span class="n">Stat_keys</span><span class="p">:</span> <span class="c1">#Stock les clé correspondant aux différents types de stats</span>
-                <span class="n">stat</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">stat_dict</span><span class="p">[</span><span class="n">skey</span><span class="p">]</span> <span class="c1">#Stock le dictionnaire correspondant à un type de stat dans la varaible </span>
-                <span class="n">report</span><span class="o">=</span><span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">skey</span><span class="p">)</span>  <span class="c1"># on affichera le clé si celle-ci correspond au nom de la stat</span>
-                <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">stat</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-                    <span class="n">L</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">stat</span><span class="p">[</span><span class="n">key</span><span class="p">])</span> <span class="c1">#on affiche chaque champ de la stat </span>
-                    <span class="n">report</span><span class="o">=</span><span class="n">report</span><span class="o">+</span><span class="n">L</span>
+            <span class="n">report</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+            <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;                         ===Stats===                       &quot;</span><span class="p">)</span>
+            <span class="n">stat_keys</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stat_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">stat_keys</span><span class="p">:</span>
+                <span class="n">stat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stat_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+                <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
+                <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">stat</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span>
+                    <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">stat</span><span class="p">))</span>
+            <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">attack_dict</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">report</span></div></div>
-
-
 </pre></div>
 
            </div>

@@ -79,6 +79,7 @@
                 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tests.html">Tests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../loganalyser.html">Loganalyser package</a></li>
 </ul>
 
@@ -131,7 +132,9 @@
 <span class="sd">TODO: Implementer tests type log; Calculs de sévérité | Reste rien.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">socket</span>
-    
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="c1">#from urllib.parse import urlparse</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 
 <span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABCMeta</span><span class="p">,</span> <span class="n">abstractmethod</span>
 
@@ -139,60 +142,51 @@
 <div class="viewcode-block" id="Token"><a class="viewcode-back" href="../../loganalyser.html#loganalyser.token.Token">[docs]</a><span class="k">class</span> <span class="nc">Token</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Classe abstraite interface pour token caractérisé par :</span>
-
 <span class="sd">    - sa donnée</span>
 <span class="sd">    - sa sévérité</span>
-
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__metaclass__</span> <span class="o">=</span> <span class="n">ABCMeta</span>
 
-<div class="viewcode-block" id="Token.__init__"><a class="viewcode-back" href="../../loganalyser.html#loganalyser.token.Token.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+<div class="viewcode-block" id="Token.__init__"><a class="viewcode-back" href="../../loganalyser.html#loganalyser.token.Token.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">istypeok</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Constructeur de classe. Un fichier est initialisé à partir de son chemin d&#39;accès</span>
-
 <span class="sd">        :param value: donnee du token e.g. &quot;127.0.0.1&quot;, &quot;404&quot;.</span>
 <span class="sd">        :type value: str</span>
-
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__verifier_type</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">istypeok</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">donnee</span> <span class="o">=</span> <span class="n">value</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">severite</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__analyse</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Mauvais type de donnee&quot;</span><span class="p">)</span>
-        <span class="k">return</span></div>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Mauvais type de donnee&quot;</span><span class="p">)</span></div>
 
     <span class="nd">@abstractmethod</span>
-    <span class="k">def</span> <span class="nf">__verifier_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__verifier_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Vérifie si la donnee peut bien être instanciée sous cette classe de Token.</span>
-
 <span class="sd">        :return: Retourne la réponse de la vérification</span>
 <span class="sd">        :rtype: bool</span>
-
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span>
 
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span> <span class="nf">__analyse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Analyse la donnee contenue dans le token pour obtenir la sévérité de cette donnee.</span>
-
+<span class="sd">        Analyse la donnee contenue dans le token pour obtenir la sévérité de cette donnee. Non implémenté car non-utile.</span>
 <span class="sd">        :return: Retourne la sévérité de la donnee de ce token</span>
 <span class="sd">        :rtype: int</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span></div>
+<span class="sd">        &quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="IP"><a class="viewcode-back" href="../../loganalyser.html#loganalyser.token.IP">[docs]</a><span class="k">class</span> <span class="nc">IP</span><span class="p">(</span><span class="n">Token</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Classe concrète instanciant les token IP&quot;&quot;&quot;</span>
-  
-    <span class="k">def</span> <span class="nf">__verifier_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__verifier_type</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">__verifier_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">socket</span><span class="o">.</span><span class="n">inet_pton</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>  <span class="c1"># &quot;verifie&quot; que l&#39;ip est une ip (ipv4)</span>
+            <span class="n">socket</span><span class="o">.</span><span class="n">inet_pton</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>  <span class="c1"># &quot;verifie&quot; que l&#39;ip est une ip (ipv4)</span>
         <span class="k">except</span> <span class="n">socket</span><span class="o">.</span><span class="n">error</span><span class="p">:</span> 
-            <span class="k">try</span> <span class="p">:</span>
-                <span class="n">socket</span><span class="o">.</span><span class="n">inet_pton</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET6</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>  <span class="c1"># &quot;verifie&quot; que l&#39;ip est une ip (ipv6)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">socket</span><span class="o">.</span><span class="n">inet_pton</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET6</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>  <span class="c1"># &quot;verifie&quot; que l&#39;ip est une ip (ipv6)</span>
             <span class="k">except</span> <span class="n">socket</span><span class="o">.</span><span class="n">error</span><span class="p">:</span>
                 <span class="k">return</span> <span class="bp">False</span>
         <span class="k">return</span> <span class="bp">True</span>
@@ -204,10 +198,11 @@
 
 <div class="viewcode-block" id="Name"><a class="viewcode-back" href="../../loganalyser.html#loganalyser.token.Name">[docs]</a><span class="k">class</span> <span class="nc">Name</span><span class="p">(</span><span class="n">Token</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Classe concrète instanciant les token Nom&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__verifier_type</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">__verifier_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">s</span> <span class="o">=</span> <span class="bp">True</span>
-        <span class="k">return</span> <span class="n">s</span>
+    <span class="k">def</span> <span class="nf">__verifier_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span>
 
     <span class="k">def</span> <span class="nf">__analyse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">severity_level</span> <span class="o">=</span> <span class="mi">0</span>
@@ -217,9 +212,16 @@
 <div class="viewcode-block" id="Date"><a class="viewcode-back" href="../../loganalyser.html#loganalyser.token.Date">[docs]</a><span class="k">class</span> <span class="nc">Date</span><span class="p">(</span><span class="n">Token</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Classe concrète instanciant les token Date&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__verifier_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">s</span> <span class="o">=</span> <span class="bp">True</span>
-        <span class="k">return</span> <span class="n">s</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__verifier_type</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">__verifier_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%d</span><span class="s1">/%b/%Y:%H:%M:%S&#39;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">True</span>
 
     <span class="k">def</span> <span class="nf">__analyse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">severity_level</span> <span class="o">=</span> <span class="mi">0</span>
@@ -228,22 +230,29 @@
 
 <div class="viewcode-block" id="EXT"><a class="viewcode-back" href="../../loganalyser.html#loganalyser.token.EXT">[docs]</a><span class="k">class</span> <span class="nc">EXT</span><span class="p">(</span><span class="n">Token</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Classe concrète instanciant les token Ext&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__verifier_type</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">__verifier_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">s</span> <span class="o">=</span> <span class="bp">True</span>
-        <span class="k">return</span> <span class="n">s</span>
+    <span class="k">def</span> <span class="nf">__verifier_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">return</span> <span class="bp">True</span>
 
     <span class="k">def</span> <span class="nf">__analyse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">severity_level</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">return</span> <span class="n">severity_level</span></div>
 
 
-<div class="viewcode-block" id="Methode"><a class="viewcode-back" href="../../loganalyser.html#loganalyser.token.Methode">[docs]</a><span class="k">class</span> <span class="nc">Methode</span><span class="p">(</span><span class="n">Token</span><span class="p">):</span>
+<div class="viewcode-block" id="Method"><a class="viewcode-back" href="../../loganalyser.html#loganalyser.token.Method">[docs]</a><span class="k">class</span> <span class="nc">Method</span><span class="p">(</span><span class="n">Token</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Classe concrète instanciant les token Methode&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__verifier_type</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">__verifier_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">s</span> <span class="o">=</span> <span class="bp">True</span>
-        <span class="k">return</span> <span class="n">s</span>
+    <span class="k">def</span> <span class="nf">__verifier_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;HEAD&quot;</span><span class="p">,</span> <span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="s2">&quot;OPTIONS&quot;</span><span class="p">,</span> <span class="s2">&quot;CONNECT&quot;</span><span class="p">,</span> <span class="s2">&quot;TRACE&quot;</span><span class="p">,</span> <span class="s2">&quot;PUT&quot;</span><span class="p">,</span> <span class="s2">&quot;DELETE&quot;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">s</span>
 
     <span class="k">def</span> <span class="nf">__analyse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">severity_level</span> <span class="o">=</span> <span class="mi">0</span>
@@ -252,22 +261,36 @@
 
 <div class="viewcode-block" id="URL"><a class="viewcode-back" href="../../loganalyser.html#loganalyser.token.URL">[docs]</a><span class="k">class</span> <span class="nc">URL</span><span class="p">(</span><span class="n">Token</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Classe concrète instanciant les token URL&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="n">url_cut_reg</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;^([^?]*)(.*)$&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">url_cut</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">url_cut_reg</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="n">groups</span><span class="p">(</span><span class="s1">&#39;defaults&#39;</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__verifier_type</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">__verifier_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">s</span> <span class="o">=</span> <span class="bp">True</span>
-        <span class="k">return</span> <span class="n">s</span>
+    <span class="k">def</span> <span class="nf">__verifier_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span>
 
     <span class="k">def</span> <span class="nf">__analyse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">severity_level</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">return</span> <span class="n">severity_level</span></div>
+        <span class="k">return</span> <span class="n">severity_level</span>
+
+    <span class="sd">&quot;&quot;&quot;def normalisation(self):</span>
+<span class="sd">        url_reg = re.compile(&#39;([^ ]*) ([^ ]*) ([^ ]*)&#39;)</span>
+<span class="sd">        tab = url_reg.match(self.donnee).groups(&#39;default&#39;)</span>
+<span class="sd">        url = urlparse(tab[1])</span>
+<span class="sd">        return url&quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="Response"><a class="viewcode-back" href="../../loganalyser.html#loganalyser.token.Response">[docs]</a><span class="k">class</span> <span class="nc">Response</span><span class="p">(</span><span class="n">Token</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Classe concrète instanciant les token Réponse&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__verifier_type</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">__verifier_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">s</span> <span class="o">=</span> <span class="bp">True</span>
-        <span class="k">return</span> <span class="n">s</span>
+    <span class="k">def</span> <span class="nf">__verifier_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">return</span> <span class="mi">99</span> <span class="o">&lt;</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">600</span>
 
     <span class="k">def</span> <span class="nf">__analyse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">severity_level</span> <span class="o">=</span> <span class="mi">0</span>
@@ -276,10 +299,15 @@
 
 <div class="viewcode-block" id="Byte"><a class="viewcode-back" href="../../loganalyser.html#loganalyser.token.Byte">[docs]</a><span class="k">class</span> <span class="nc">Byte</span><span class="p">(</span><span class="n">Token</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Classe concrète instanciant les token Octet&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__verifier_type</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">__verifier_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">s</span> <span class="o">=</span> <span class="bp">True</span>
-        <span class="k">return</span> <span class="n">s</span>
+    <span class="k">def</span> <span class="nf">__verifier_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">return</span> <span class="bp">True</span>
 
     <span class="k">def</span> <span class="nf">__analyse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">severity_level</span> <span class="o">=</span> <span class="mi">0</span>
@@ -288,10 +316,15 @@
 
 <div class="viewcode-block" id="Referer"><a class="viewcode-back" href="../../loganalyser.html#loganalyser.token.Referer">[docs]</a><span class="k">class</span> <span class="nc">Referer</span><span class="p">(</span><span class="n">Token</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Classe concrète instanciant les token Referer&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="n">url_cut_reg</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;^(.*[/]{2}[w]?[w]?[w]?[.]?)(\w*[.]\w*)(.*)$&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">domain</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">if</span> <span class="n">url_cut_reg</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">domain</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">url_cut_reg</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="n">groups</span><span class="p">(</span><span class="s1">&#39;defaults&#39;</span><span class="p">))[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__verifier_type</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">__verifier_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">s</span> <span class="o">=</span> <span class="bp">True</span>
-        <span class="k">return</span> <span class="n">s</span>
+    <span class="k">def</span> <span class="nf">__verifier_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span>
 
     <span class="k">def</span> <span class="nf">__analyse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">severity_level</span> <span class="o">=</span> <span class="mi">0</span>

@@ -2,7 +2,7 @@ Loganalyser package
 ===================
 
 Diagnostique module
--------------------------------
+-------------------
 
 .. automodule:: loganalyser.diagnostique
     :members:
@@ -13,7 +13,7 @@ Diagnostique module
 
 
 Fichier module
---------------------------
+--------------
 
 .. automodule:: loganalyser.fichier
     :members:
@@ -24,7 +24,7 @@ Fichier module
 
 
 Token module
-------------------------
+------------
 
 .. automodule:: loganalyser.token
     :members:
@@ -34,13 +34,12 @@ Token module
     :show-inheritance:
 
 Outils module
-------------------------
+-------------
 
 .. automodule:: loganalyser.outils
     :members:
     :special-members: __init__
     :private-members:
-    :inherited-members:
     :show-inheritance:
 
 Module contents
