@@ -151,7 +151,9 @@
 <span class="sd">        Constructeur de classe. Un fichier est initialisé à partir de son chemin d&#39;accès</span>
 
 <span class="sd">        :param value: donnee du token e.g. &quot;127.0.0.1&quot;, &quot;404&quot;.</span>
+<span class="sd">        :param istypeok: booléen rendant autorisant la création du token.</span>
 <span class="sd">        :type value: str</span>
+<span class="sd">        :type istypeok: bool</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">istypeok</span><span class="p">:</span>
@@ -165,6 +167,8 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Vérifie si la donnee peut bien être instanciée sous cette classe de Token.</span>
 
+<span class="sd">        :param value: valeur de création du token</span>
+<span class="sd">        :type value: str</span>
 <span class="sd">        :return: Retourne la réponse de la vérification</span>
 <span class="sd">        :rtype: bool</span>
 
