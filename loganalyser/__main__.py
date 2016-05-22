@@ -12,8 +12,8 @@ from loganalyser import diagnostique
 from loganalyser import token
 
 out = sys.stdout
-tokenkeys = ["IP", "Name", "Date", "Ext", "Methode", "URL", "Response", "Byte", "Referrer"]
-regexkeys = ["number", "regex", "description", "impact"]
+tokenkeys = ["IP", "Name", "Date", "Ext", "Method", "URL", "Response", "Byte", "Referrer"]
+regexkeys = ["Number", "Regex", "Description", "Impact"]
 
 
 def listtotokenlist(liste):
@@ -22,7 +22,7 @@ def listtotokenlist(liste):
     s.append(token.Name(liste[1]))
     s.append(token.Date(liste[2]))
     s.append(token.EXT(liste[3]))
-    s.append(token.Methode(liste[4]))
+    s.append(token.Method(liste[4]))
     s.append(token.URL(liste[5]))
     s.append(token.Response(liste[6]))
     s.append(token.Byte(liste[7]))

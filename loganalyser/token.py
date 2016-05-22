@@ -38,7 +38,6 @@ class Token:
         :rtype: bool
         """
 
-
     @abstractmethod
     def __analyse(self):
         """
@@ -110,7 +109,7 @@ class EXT(Token):
         return severity_level
 
 
-class Methode(Token):
+class Method(Token):
     """Classe concrète instanciant les token Methode"""
     def __init__(self, value):
         super().__init__(value, self.__verifier_type(value))

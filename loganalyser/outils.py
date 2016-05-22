@@ -77,8 +77,8 @@ class Dictionary(dict):
 
         """
         if not entrynumber < len(self.__getitem__(self._keys[0])) and entrynumber >= 0:
-            raise Exception("'" + entrynumber + "'" + " ne correspond pas à index d'entrée valide")
-        return [self[key][entrynumber] for key in self]
+            raise Exception("'" + str(entrynumber) + "'" + " ne correspond pas à index d'entrée valide")
+        return [self[key][entrynumber] for key in self.keys()]
 
     def itemtoentrynumbers(self, item):
         """
@@ -90,14 +90,15 @@ class Dictionary(dict):
         :rtype: list
 
         """
-        if not item in [self[key] for key in self]:
-            raise Exception("'" + item + "'" + " n'est pas dans le dicitonaire")
+        a = []
+        for key in self.keys():
+            a += self[key]
+        if item not in a:
+            raise Exception("'" + str(item) + "'" + " n'est pas dans le dicitonaire")
         entrynumbers = []
         for key in self._keys:
-            if item in self[key]:
-                for i in range(0,len(self[key])):
-                    if self[key][i] == item:
+            if item in [self[key][i].donnee for i in self[key]]:
+                for i in range(0, len(self[key])):
+                    if self[key][i].donnee == item:
                         entrynumbers.append(i)
         return entrynumbers
-
-

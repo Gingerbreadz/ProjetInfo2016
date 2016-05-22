@@ -6,7 +6,7 @@ TODO: RegExp & Log ---> découpage | Reste OK
 
 from abc import ABCMeta, abstractmethod
 import re
-import xml.etree.ElementTree as ET
+import xml.etree.ElementTree as Et
 
 c_reg = re.compile('([^ ]*) ([^ ]*) ([^ ]*) \[([^]]*)\] "([^"]*)" ([^ ]*) ([^ ]*)'' "([^"]*)" "([^"]*)"')
 
@@ -123,7 +123,7 @@ class FichierRegExp(Fichier):
     """
 
     def __init__(self, filepath):
-        self.doc = ET.parse(self.file).getroot()
+        self.doc = Et.parse(self.file).getroot()
         super(FichierRegExp, self).__init__(filepath)
 
     def lireligne(self, noligne):
@@ -142,7 +142,8 @@ class FichierRegExp(Fichier):
         :rtype: list
 
         """
-        return [int(self.doc[noligne][0].text), self.doc[noligne][1].text, self.doc[noligne][2].text, self.doc[noligne][4]]
+        return [int(self.doc[noligne][0].text), self.doc[noligne][1].text,
+                self.doc[noligne][2].text, self.doc[noligne][4]]
 
 
 class FichierRapportTextuel(Fichier):
