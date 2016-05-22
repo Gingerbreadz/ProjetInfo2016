@@ -189,5 +189,4 @@ class Diagnostique:
                 report.append(str(key))
                 if type(stat) == int:
                     report.append(str(stat))
-            report.append(str(self.attack_dict))
         return report
