@@ -7,7 +7,7 @@ import sys
 path = "/home/antoine/ProjetInfo/ProjetInfo2016"   #à retirer pour la version finale
 sys.path.append(path)
 from loganalyser import token as t
-
+from datetime import datetime
 
 print("-----test token.py-----")
 print("====test Classe IP====\n\ħ")
@@ -53,12 +53,12 @@ else:
     quit()
     
 
-print("====test Classe Date====\n")   #à revoir ! il faut que les méthode pour la classe soient faites d'abord
+print("====test Classe Date====\n")   
 print("=====test du constructeur===")
 dateTest=t.Date('06/Sep/2014:15;25:45')
 print("résultat attendu : \n dateTest.donnee = '06/Sep/2014:15;25:45' \n ")
 print("résultat obtenu : \n dateTest.donnee = ", dateTest.donnee,"\n")
-if nameTest.donnee=="Toto":
+if datetime.strptime(dateTest.donnee, '%d/%b/%Y:%H:%M:%S')==datetime.strptime('06/Sep/2014:15;25:45', '%d/%b/%Y:%H:%M:%S'):
     print("le constructeur fonctionne !\n")
 else :
     print("le constructeur ne fonctionne pas ...")
@@ -66,7 +66,7 @@ else :
 
 print("on teste : dateTest=token.Name(45) : une exception doit être levée\n")
 try:
-    dateTest=t.Name(45)   #test à revoir
+    dateTest=t.Date(45)   #test à revoir
 except ValueError:
     print("ValueError : une exception a bien été levée\n")
 else:
