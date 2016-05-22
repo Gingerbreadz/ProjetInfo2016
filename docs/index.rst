@@ -6,7 +6,14 @@
 Welcome to loganalyser's documentation!
 =======================================
 
-Contents:
+Description
+-----------
+
+loganalyser est un analyseur de journal d'activité de serveur web Apache, réalisé dans le cadre du projet
+développement informatique en première année du cursus ingénieur de Télécom SudParis.
+
+Table des matières
+------------------
 
 .. toctree::
    :maxdepth: 4
@@ -17,10 +24,8 @@ Contents:
    loganalyser
 
 
-Indices and tables
-==================
+Crédits
+-------
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
-
+Projet conduit par Jeremy Venin, Clément Aubry, Antoine Tadros, Anatole Lefort dans le cadre du programme
+d'enseignement de Telecom SudParis.
