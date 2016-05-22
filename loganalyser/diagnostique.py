@@ -184,8 +184,10 @@ class Diagnostique:
             stat_keys = self.stat_dict.keys()
             for key in stat_keys:
                 stat = self.stat_dict[key]
-                report.append(str(key))
                 if type(stat) == int:
+                    report.append(str(key) + " : " + str(stat))
+                else:
+                    report.append(str(key))
                     report.append(str(stat))
             report.append("\r\n                         ===Attaques===                       ")
             attack_keys = self.attack_dict.keys()
