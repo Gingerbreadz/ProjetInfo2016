@@ -8,7 +8,8 @@ from abc import ABCMeta, abstractmethod
 import re
 import xml.etree.ElementTree as Et
 
-c_reg = re.compile('([^ ]*) ([^ ]*) ([^ ]*) \[([^]]*)\] "([^"]*)" ([^ ]*) ([^ ]*)'' "([^"]*)" "([^"]*)"')
+# c_reg = re.compile('([^ ]*) ([^ ]*) ([^ ]*) \[([^]]*)\] "([^"]*)" ([^ ]*) ([^ ]*)'' "([^"]*)" "([^"]*)"')
+c_reg = re.compile('^(.+) - (-.*)\[(.+) [-|+](\d+)\] "([A-Z]+) ?(.+) HTTP/\d.\d" (\d+)(\s[\d]+)? "(.+)" (.*)$')
 
 
 class Fichier:
