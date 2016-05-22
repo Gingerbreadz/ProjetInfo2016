@@ -13,6 +13,7 @@ from loganalyser import token
 
 out = sys.stdout
 tokenkeys = ["IP", "Name", "Date", "Ext", "Methode", "URL", "Response", "Byte", "Referrer"]
+regexkeys = ["number", "regex", "description", "impact"]
 
 
 def listtotokenlist(liste):
@@ -28,6 +29,7 @@ def listtotokenlist(liste):
     s.append(token.Referer(liste[8]))
     return s
 
+
 def recuperertokens(cheminfichier):
     log_dic = outils.Dictionary(tokenkeys)
     fichierdelog = fichier.FichierDeLog(cheminfichier)
@@ -35,15 +37,17 @@ def recuperertokens(cheminfichier):
         ligne = fichierdelog.decouperligne(i)
         tokenlist = listtotokenlist(ligne)
         log_dic.addentry(tokenlist)
+    fichierdelog.fermerfichier()
     return log_dic
 
 
 def recupererregexp(cheminfichier):
-    regexp_dic = []
+    regexp_dic = outils.Dictionary(regexkeys)
     fichierregexp = fichier.FichierRegExp(cheminfichier)
-    for i in range(0, fichierregexp.nbLigne):
+    for i in range(0, len(fichierregexp.doc)):
         ligne = fichierregexp.decouperligne(i)
         regexp_dic.addentry(ligne)
+    fichierregexp.fermerfichier()
     return regexp_dic
 
 
