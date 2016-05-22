@@ -5,10 +5,10 @@ Aucun test n'a pour l'instant été écrit.
 import sys
 path = "/home/antoine/ProjetInfo/ProjetInfo2016"   #à retirer pour la version finale
 sys.path.append(path)
-from loganalyser import fichier as f
+
 from loganalyser import outils as o
-from loganalyser import diagnostique as d
-from loganalyser import token as t
+
+
 
 
 
