@@ -5,7 +5,7 @@ TODO: Implementer tests type log; Calculs de sévérité | Reste rien.
 """
 import socket
 import re
-from urllib.parse import urlparse
+#from urllib.parse import urlparse
 from datetime import datetime
 
 from abc import ABCMeta, abstractmethod
