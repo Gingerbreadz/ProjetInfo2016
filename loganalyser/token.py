@@ -42,7 +42,7 @@ class Token:
     @abstractmethod
     def __analyse(self):
         """
-        Analyse la donnee contenue dans le token pour obtenir la sévérité de cette donnee.
+        Analyse la donnee contenue dans le token pour obtenir la sévérité de cette donnee. Non implémenté car non-utile.
         :return: Retourne la sévérité de la donnee de ce token
         :rtype: int
         """
