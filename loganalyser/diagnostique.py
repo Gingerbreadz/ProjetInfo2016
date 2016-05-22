@@ -180,7 +180,7 @@ class Diagnostique:
             report = ["Ceci est la première ligne du Fichier Rapport", "Ceci est la deuxième"]
         else:
             report = list()
-            report.append("                         ===Stats===                       ")
+            report.append("                         ===Stats2===                       ")
             stat_keys = self.stat_dict.keys()
             for key in stat_keys:
                 stat = self.stat_dict[key]
