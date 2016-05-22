@@ -34,10 +34,9 @@ def recuperertokens(cheminfichier):
     log_dic = outils.Dictionary(tokenkeys)
     fichierdelog = fichier.FichierDeLog(cheminfichier)
     for i in range(0, fichierdelog.nbLigne):
-        ligne = fichierdelog.decouperligne(i)
-        out.write(str(ligne))
-        if ligne:
-            tokenlist = listtotokenlist(ligne)
+        ligne_log = fichierdelog.decouperligne(i)
+        if ligne_log:
+            tokenlist = listtotokenlist(ligne_log)
             log_dic.addentry(tokenlist)
     fichierdelog.fermerfichier()
     return log_dic
@@ -47,8 +46,8 @@ def recupererregexp(cheminfichier):
     regexp_dic = outils.Dictionary(regexkeys)
     fichierregexp = fichier.FichierRegExp(cheminfichier)
     for i in range(0, len(fichierregexp.doc)):
-        ligne = fichierregexp.decouperligne(i)
-        regexp_dic.addentry(ligne)
+        ligne_reg = fichierregexp.decouperligne(i)
+        regexp_dic.addentry(ligne_reg)
     fichierregexp.fermerfichier()
     return regexp_dic
 
@@ -62,7 +61,7 @@ def main():
     report = diag.get_report(False)
     for ligne in report:
         out.write(ligne)
-    pass
+    return
 
 if __name__ == '__main__':
     sys.exit(main())
