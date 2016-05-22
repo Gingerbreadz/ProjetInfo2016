@@ -28,6 +28,7 @@ Token module
 
 .. automodule:: loganalyser.token
     :members:
+    :member-order: bysource
     :special-members: __init__
     :private-members:
     :inherited-members:
