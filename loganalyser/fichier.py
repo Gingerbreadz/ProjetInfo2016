@@ -144,7 +144,7 @@ class FichierRegExp(Fichier):
 
         """
         return [int(self.doc[noligne][0].text), self.doc[noligne][1].text,
-                self.doc[noligne][2].text, self.doc[noligne][4]]
+                self.doc[noligne][2].text, int(self.doc[noligne][4].text)]
 
 
 class FichierRapportTextuel(Fichier):
