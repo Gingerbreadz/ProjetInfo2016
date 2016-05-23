@@ -174,7 +174,7 @@ class Diagnostique:
                 ind = valeurs.index(min(valeurs))
                 indices[ind] = i
                 valeurs[ind] = liste[i]
-        return 
+        return indices
     
     def get_topfiles(self, stat):
         indices = self.get_indices_topfiles(stat["Hits"])
