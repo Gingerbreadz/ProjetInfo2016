@@ -94,7 +94,7 @@ class Dictionary(dict):
             for attr in self[key]:
                 a.append(attr.donnee)
         if item not in a:
-            raise Exception("'" + str(item) + "'" + " n'est pas dans le dicitonaire")
+            raise Exception("'" + str(item) + "'" + " n'est pas dans le dictionnaire")
         entrynumbers = []
         for key in self._keys:
             if item in self[key]:
