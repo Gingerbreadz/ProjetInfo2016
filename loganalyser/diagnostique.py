@@ -206,7 +206,7 @@ class Diagnostique:
                 d[url][0] += 1
                 d[url][1].append(str(attack["LogLineNumber"][i]))
             else:
-                d[url] = [0, str(attack["LogLineNumber"][i]), attack["Description"][i], attack["Impact"][i]]
+                d[url] = [0, [str(attack["LogLineNumber"][i])], attack["Description"][i], attack["Impact"][i]]
         sorted(d.items(), key=lambda e: -e[1][0]) # tri le dictionnaire en fonction du nombre d'apparition décroissant (d'ou le signe negatif)
         L = []
         for url, e in d[:5]:
