@@ -168,7 +168,7 @@ class Diagnostique:
 
     def get_indices_topfiles(self, liste):
         indices = [0] * 5
-        valeurs = [stat[0]] * 5
+        valeurs = [liste[0]] * 5
         for i in range(liste):
             if liste[i] > min(valeurs):
                 ind = values.index(min(valeurs))
