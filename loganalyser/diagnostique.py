@@ -171,7 +171,7 @@ class Diagnostique:
         valeurs = [liste[0]] * 5
         for i in range(len(liste)):
             if liste[i] > min(valeurs):
-                ind = values.index(min(valeurs))
+                ind = valeurs.index(min(valeurs))
                 indices[ind] = i
                 valeurs[ind] = liste[i]
         return indices
