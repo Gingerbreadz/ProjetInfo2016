@@ -198,7 +198,20 @@ class Diagnostique:
             L.append(str(stat["Bandwidth"][i]) + "\t\t" + str(stat["Hits"][i]) + "\t" + str(stat["Visits"][i]) + "\t" + str(stat["IP"][i]))
         return L
         
-        
+    def get_attack(self, attack):
+        d = {}
+        for i in range(len(attack["URL"])):
+            url = attack["URL"][i]
+            if url in d:
+                d[url][0] += 1
+                d[url][1].append(str(attack["LogLineNumber"][i]))
+            else:
+                d[url] = [0, str(attack["LogLineNumber"][i]), attack["Description"][i], attack["Impact"][i]]
+        sorted(d.items(), key=lambda e: -e[1][0]) # tri le dictionnaire en fonction du nombre d'apparition décroissant (d'ou le signe negatif)
+        L = []
+        for url, e in d[:5]:
+            L.append("Impact\t" + str(e[3]) + "\tDescription\t" + str(e[2]) + "\n\t" + "URL\t" + str(url) + "\n\t" + "LogLineNumbers\t" + ", ".join(e[1]) + "\n\n")
+        return L
         
     
     def get_report(self, fileformat):
@@ -251,8 +264,8 @@ class Diagnostique:
                     else:
                         report.append(str(key) + " ------->" + str(stat))
             report.append("\r\n                         ===Attaques===                       ")
-            attack_keys = self.attack_dict.keys()
-            for key in attack_keys:
-                attack = self.attack_dict[key]
-                report.append(str(key) + " : " + str(attack))
+            attack = self.attack_dict
+            attacks = self.get_attack(attack)
+            for ligne in attacks:
+                report.append(ligne)
         return report
