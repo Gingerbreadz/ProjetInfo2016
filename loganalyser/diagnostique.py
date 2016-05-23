@@ -210,7 +210,7 @@ class Diagnostique:
         L2 = sorted(d.items(), key=lambda e: -e[1][0]) # tri le dictionnaire en fonction du nombre d'apparition décroissant (d'ou le signe negatif)
         L = []
         for url, e in L2[:5]:
-            L.append("URL > " + str(url) + "\n\t" + "Impact\t\t" + str(e[3]) + "\n\tDescription\t" + str(e[2]) + "\n\tLogLineNumbers\t" + ", ".join(e[1]) + "\n\n")
+            L.append("URL " + str(url) + "\n\t" + "Impact\t\t" + str(e[3]) + "\n\tDescription\t" + str(e[2]) + "\n\tLogLineNumbers\t" + ", ".join(e[1]) + "\n\n")
         return L
         
     
