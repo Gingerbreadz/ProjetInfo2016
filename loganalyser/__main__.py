@@ -59,7 +59,7 @@ def main():
     diag = diagnostique.Diagnostique(log_dic, regexp_dic, n)
     report = diag.get_report(False)
     for ligne in report:
-        out.write(ligne)
+        print(ligne)
     return
 
 if __name__ == '__main__':
