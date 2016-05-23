@@ -64,12 +64,12 @@ class Diagnostique:
 
         def notfoundurl():
             code_list = self.token_dict["Response"]
-            ip_list = self.token_dict["IP"]
-            counted_ip = []
+            url_list = self.token_dict["URL"]
+            counted_url = []
             s = 0
             for i in range(0, len(code_list)):
-                if int(code_list[i].donnee) == 404 and ip_list[i].donnee not in counted_ip:
-                    counted_ip.append(ip_list[i].donnee)
+                if int(code_list[i].donnee) == 404 and url_list[i].url_cut not in counted_url:
+                    counted_url.append(url_list[i].url_cut)
                     s += 1
             return s
 
