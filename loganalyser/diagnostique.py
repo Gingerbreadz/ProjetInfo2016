@@ -167,13 +167,19 @@ class Diagnostique:
                     self.attack_dict["Impact"] += [self.regexp_dict["Impact"][i]]
 
     def get_indices_top(self, liste):
-        indices = [0] * min(len(liste), self.line)
-        valeurs = [liste[0]] * min(len(liste), self.line)
+#        indices = [0] * min(len(liste), self.line)
+#        valeurs = [liste[0]] * min(len(liste), self.line)
+        indices = [0]
+        valeurs = [liste[0]]
         for i in range(len(liste)):
-            if liste[i] >= min(valeurs):
-                ind = valeurs.index(min(valeurs))
-                indices[ind] = i
-                valeurs[ind] = liste[i]
+            if len(valeurs) < self.line:
+                indices[] = i
+                valeurs[] = liste[i]
+            else:
+                if liste[i] >= min(valeurs):
+                    ind = valeurs.index(min(valeurs))
+                    indices[ind] = i
+                    valeurs[ind] = liste[i]
         valeurs, indices = (list(t) for t in zip(*sorted(zip(valeurs, indices), reverse=True)))
         return indices
     
