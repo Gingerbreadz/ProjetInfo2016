@@ -289,7 +289,7 @@ class Diagnostique:
             for key in stat_keys:
                 stat = self.stat_dict[key]
                 if key == "TotalVisitors":
-                    key = "Total Hits"
+                    key = "TotalHits"
                 if type(stat) == int:
                     report.append("\t\033[97m" + str(key) + "\033[0m\033[92m\t " + str(stat) + "\033[0m")
             for key in stat_keys:
