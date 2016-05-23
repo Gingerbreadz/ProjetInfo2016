@@ -83,7 +83,7 @@ class Diagnostique:
                 lines = self.token_dict.itemtoentrynumbers(url)
                 counted_ip = []
                 byte_count = 0
-                visitors = 0
+                visitors = 1
                 for j in lines:
                     byte_count += byte_list[j]
                     if ip_list[j] not in counted_ip:
