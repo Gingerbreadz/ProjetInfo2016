@@ -52,7 +52,7 @@ def recupererregexp(cheminfichier):
 
 def main():
     n = input("combien de lignes à afficher ?\n")
-    logfilepath = sys.argv[0]
+    logfilepath = "./res/wwwassos-access.log"
     regexpfilepath = "./res/default_filter.xml"
     log_dic = recuperertokens(logfilepath)
     regexp_dic = recupererregexp(regexpfilepath)
