@@ -81,11 +81,11 @@ class Diagnostique:
             for i in range(0, len(url_distinct_list)):
                 url = url_distinct_list[i]
                 lines = self.token_dict.itemtoentrynumbers(url)
+                print(lines)
                 counted_ip = []
                 byte_count = 0
                 visitors = 0
                 for j in lines:
-                    print("PD")
                     byte_count += byte_list[j]
                     if ip_list[j] not in counted_ip:
                         counted_ip.append(ip_list[j])
