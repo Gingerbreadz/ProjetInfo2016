@@ -4,7 +4,7 @@ Implementation du Diagnostique.
 
 from loganalyser import outils  # Gestion des Dictionnaires
 import re
-import Datetime
+import datetime
 
 
 class Diagnostique:
