@@ -199,6 +199,7 @@ class Diagnostique:
         return L
         
     def get_attack(self, attack):
+        print(str(attack))
         d = {}
         for i in range(len(attack["URL"])):
             url = attack["URL"][i]
