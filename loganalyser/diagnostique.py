@@ -191,7 +191,7 @@ class Diagnostique:
         indices = self.get_indices_top(stat["Hits"])
         L = []
         for i in indices:
-            L.append(self.format_byte(stat["Bandwidth"][i]) + "\t\t" + str(stat["Hits"][i]) + "\t" + str(stat["Visitors"][i]) + "\t\t" + str(stat["Method"][i]) + "\t" + str(stat["URL"][i]) )
+            L.append("\033[36m" + self.format_byte(stat["Bandwidth"][i]) + "\033[0m\t\t\033[91m" + str(stat["Hits"][i]) + "\033[0m\t" + str(stat["Visitors"][i]) + "\t\t" + str(stat["Method"][i]) + "\t" + str(stat["URL"][i]) )
         return L
         
     def get_topreferrers(self, stat):
@@ -208,7 +208,7 @@ class Diagnostique:
         indices = self.get_indices_top(stat["Hits"])
         L = []
         for i in indices:
-            L.append(self.format_byte(stat["Bandwidth"][i]) + "\t\t" + str(stat["Hits"][i]) + "\t" + str(stat["Visitors"][i]) + "\t\t" + str(stat["Method"][i]) + "\t" + str(stat["Referrer"][i]) )
+            L.append("\033[36m" + self.format_byte(stat["Bandwidth"][i]) + "\033[0m\t\t\033[91m" + str(stat["Hits"][i]) + "\033[0m\t" + str(stat["Visitors"][i]) + "\t\t" + str(stat["Method"][i]) + "\t" + str(stat["Referrer"][i]) )
         return L
         
     def get_topvisitors(self, stat):
@@ -225,7 +225,7 @@ class Diagnostique:
         indices = self.get_indices_top(stat["Hits"])
         L = []
         for i in indices:
-            L.append(self.format_byte(stat["Bandwidth"][i]) + "\t\t" + str(stat["Hits"][i]) + "\t" + str(stat["Visits"][i]) + "\t" + str(stat["IP"][i]))
+            L.append("\033[36m" + self.format_byte(stat["Bandwidth"][i]) + "\033[0m\t\t\033[91m" + str(stat["Hits"][i]) + "\033[0m\t" + str(stat["Visits"][i]) + "\t" + str(stat["IP"][i]))
         return L
         
     def get_attack(self, attack):
@@ -313,7 +313,7 @@ class Diagnostique:
                     elif str(key) == "TopVisitors":
                         topvisitors = self.get_topvisitors(stat)
                         report.append("\n\033[100m\033[97m\033[1m   3 - TOP VISITORS\t\t\t\t\t\t\033[0m\n")
-                        report.append("\033[90mBandwidth\tHits\tVisits\tIP")
+                        report.append("\033[37mBandwidth\tHits\tVisits\tIP")
                         report.append("---------\t----\t------\t--\033[0m")
                         for ligne in topvisitors:
                             report.append(ligne)
