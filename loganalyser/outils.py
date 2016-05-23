@@ -91,8 +91,11 @@ class Dictionary(dict):
         """
         entrynumbers = []
         for key in self.keys():
-            if item in [x.donnee for x in self[key]]:
-                for i in range(0, len(self[key])):
+            for i in range(0, len(self[key])):
+                if type(self[key][i]) == str:
+                    if self[key][i] == item:
+                        entrynumbers.append(i)
+                else:
                     if self[key][i].donnee == item:
                         entrynumbers.append(i)
         if len(entrynumbers) == 0:
