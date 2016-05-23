@@ -10,7 +10,7 @@ class Diagnostique:
     """Classe instanciant le diagnostique, qui contient les résultats d'analyse et les fait.
     """
 
-    def __init__(self, token_dictionary, regexp_dictionary, n):
+    def __init__(self, token_dictionary, regexp_dictionary, n=5):
         """
         Constructeur de classe. Un diagnostique est initialisé à partir de tokens.
 
@@ -20,10 +20,7 @@ class Diagnostique:
         :type regexp_dictionary: dict
 
         """
-        if n is None:
-            n = 5
-        else:
-            self.line = n
+        self.line = n
         self.token_dict = token_dictionary
         self.regexp_dict = regexp_dictionary
         self.stat_dict = {}
