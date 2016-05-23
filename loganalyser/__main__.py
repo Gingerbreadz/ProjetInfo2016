@@ -56,7 +56,7 @@ def main():
     regexpfilepath = "./res/default_filter.xml"
     log_dic = recuperertokens(logfilepath)
     regexp_dic = recupererregexp(regexpfilepath)
-    diag = diagnostique.Diagnostique(log_dic, regexp_dic)
+    diag = diagnostique.Diagnostique(log_dic, regexp_dic, n)
     report = diag.get_report(False)
     for ligne in report:
         out.write(ligne)
