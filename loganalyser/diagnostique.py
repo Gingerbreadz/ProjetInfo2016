@@ -48,19 +48,48 @@ class Diagnostique:
                                             "TopVisitors", "ValidRequest", "NotFoundURL", "TopUniqueResponses"])
 
         def uniquevisitors():
+            """
+            détermine le nombre de visiteurs uniques total.
+            
+            :return: nombre de visiteurs
+            :rtype: int
+
+            """
             ip_list = [ip.donnee for ip in self.token_dict["IP"]]
             ip_distinct_list = list(set(ip_list))
             return len(ip_distinct_list)
 
-        def totalvisitors(): return len(self.token_dict["IP"])
+        def totalvisitors():
+            """
+            détermine le nombre de visites total.
+            
+            :return: nombre de visites
+            :rtype: int
+
+            """
+            return len(self.token_dict["IP"])
 
         def validrequest():
+            """
+            détermine le nombre requêtes ayant correctement abouties.
+            
+            :return: nombre de requêtes 
+            :rtype: int
+
+            """
             if "NoMatch" in self.token_dict.keys():
                 return totalvisitors() - self.nomatchcount
             else:
                 return totalvisitors()
 
         def topuniqueresponses():
+            """
+            détermine le nombre de réponses associées aux série des codes erreurs
+            
+            :return: dictionnaire des données en rapport avec les codes erreurs de retour du serveur
+            :rtype: dict
+
+            """
             code_list = self.token_dict["Response"]
             url_list = self.token_dict["URL"]
             byte_list = [int(byte.donnee) for byte in self.token_dict["Byte"]]
@@ -102,6 +131,13 @@ class Diagnostique:
             return topuniquereponses_dic
 
         def notfoundurl():
+            """
+            détermine le nombre de requêtes ayant abouties à un code erreur 404 "URL not found".
+            
+            :return: nombre de requêtes
+            :rtype: int
+
+            """
             code_list = self.token_dict["Response"]
             url_list = self.token_dict["URL"]
             counted_url = []
@@ -113,6 +149,13 @@ class Diagnostique:
             return s
 
         def topfiles():
+            """
+            détermine les données liés aux ressources demandés, à savoir le nombre fois ou cette ressource est demandée, le nombre de visiteurs uniques, la bande passante représentée, la méthode et l'URL de la ressource.
+            
+            :return: dictionnaire des données
+            :rtype: dict
+
+            """
             url_list = [url.donnee for url in self.token_dict["URL"]]
             ip_list = [ip.donnee for ip in self.token_dict["IP"]]
             method_list = [method.donnee for method in self.token_dict["Method"]]
@@ -134,6 +177,13 @@ class Diagnostique:
             return topfiles_dic
 
         def topreferrers():
+            """
+            détermine les données liés aux noms de domaine demandés, à savoir le nombre fois ou ce nom de domaine est demandé, le nombre de visiteurs uniques, la bande passante représentée, la méthode et le nom de domaine en question.
+            
+            :return: dictionnaire des données
+            :rtype: dict
+
+            """
             referrer_list = [referrer.domain for referrer in self.token_dict["Referrer"]]
             ip_list = [ip.donnee for ip in self.token_dict["IP"]]
             method_list = [method.donnee for method in self.token_dict["Method"]]
@@ -155,6 +205,13 @@ class Diagnostique:
             return topreferrers_dic
 
         def topvisitors():
+            """
+            détermine les données liés aux visiteurs, à savoir le nombre fois que le visiteur s'est connecté au serveurs, le nombre des différentes URL demandées, la bande passante représentée, et l'adresse IP du visteurs.
+            
+            :return: dictionnaire des données
+            :rtype: dict
+
+            """
             topvisitors_dic = outils.Dictionary(["Hits", "Visits", "Bandwidth", "IP"])
             ip_list = [ip.donnee for ip in self.token_dict["IP"]]
             byte_list = [int(byte.donnee) for byte in self.token_dict["Byte"]]
@@ -209,6 +266,15 @@ class Diagnostique:
                     self.attack_dict["Impact"] += [self.regexp_dict["Impact"][i]]
 
     def get_indices_top(self, liste):
+        """
+        Permet de trier une liste nous permettant de récupérer des valeurs triées de nos données à l'affichage.
+
+        :param liste: une liste
+        :type liste: list
+        :return: indices des valeurs que l'on souhaite afficher dans l'ordre de leurs futur affichage
+        :rtype: list
+
+        """
         indices = [0]
         valeurs = [liste[0]]
         for i in range(1, len(liste)):
@@ -225,7 +291,7 @@ class Diagnostique:
     
     def get_topfiles(self, stat):
         """
-        Ordonne la liste des top files et s'assure de sa configuration afin d'obtenir un affichage lisible des résultats
+        Ordonne la liste des top files et s'assure de sa configuration afin d'obtenir un affichage lisible des résultats.
 
         :param stat: dictionnaire de statistiques
         :type stat: dict
@@ -241,7 +307,7 @@ class Diagnostique:
         
     def get_topreferrers(self, stat):
         """
-        Ordonne la liste des top referrers et s'assure de sa configuration afin d'obtenir un affichage lisible des résultats
+        Ordonne la liste des top referrers et s'assure de sa configuration afin d'obtenir un affichage lisible des résultats.
 
         :param stat: dictionnaire de statistiques
         :type stat: dict
@@ -273,7 +339,7 @@ class Diagnostique:
 
     def get_topuniqueresponses(self, stat):
         """
-        Ordonne la liste des top unique responses et s'assure de sa configuration afin d'obtenir un affichage lisible des résultats
+        Ordonne la liste des top unique responses et s'assure de sa configuration afin d'obtenir un affichage lisible des résultats.
 
         :param stat: dictionnaire de statistiques
         :type stat: dict
@@ -291,7 +357,7 @@ class Diagnostique:
         
     def get_attack(self, attack):
         """
-        Ordonne la liste des potentiels attaques et s'assure de sa configuration afin d'obtenir un affichage lisible des résultats
+        Ordonne la liste des potentiels attaques et s'assure de sa configuration afin d'obtenir un affichage lisible des résultats.
 
         :param attack: dictionnaire d'attaque.
         :type attack: dict
@@ -330,72 +396,66 @@ class Diagnostique:
             byte = str(byte) + " o"
         return byte
 
-    def get_report(self, fileformat):
+    def get_report(self):
         """
         Ordonne les donnée issues des statistiques et des analyses, prépare pour l'affichage finale.
 
-        :param fileformat: indique si le rapport doit etre enregistré sous forme de fchier texte ou seulement être présenté dans la console
-        :type fileformat: bool
         :return: tableau des lignes de résultats à partir des dictionnaires
         :rtype: list
 
         """
-        if fileformat:
-            report = ["Ceci est la première ligne du Fichier Rapport", "Ceci est la deuxième"]
-        else:
-            D = time.strftime('%d/%m/%y %H:%M',time.localtime())  
-            report = list()
-            report.append("\n\n\n\n\n\033[100m\033[97m\033[1m   Analyse générale du fonctionnement\t\t" + str(D) + "\t\t\t\t\t\t\033[0m\n")
-            stat_keys = self.stat_dict.keys()
-            for key in stat_keys:
-                stat = self.stat_dict[key]
-                if key == "TotalVisitors":
-                    key = "TotalRequests"
-                if key == "ValidRequests":
-                    key = "SuccessfulRequest"
-                if key == "NotFoundURL":
-                    key = "Unique404"
-                if type(stat) == int:
-                    report.append("\t\033[97m" + str(key) + "\033[0m\033[92m\t " + str(stat) + "\033[0m")
-            for key in stat_keys:
-                stat = self.stat_dict[key]
-                if type(stat) != int:
-                    if str(key) == "TopFiles":
-                        topfiles = self.get_topfiles(stat)
-                        report.append("\n\033[100m\033[97m\033[1m   1 - TOP FILES (URLs)\t\t\t\t\t\t\t\t\t\t\t\033[0m\n")
-                        report.append("\033[37mBandwidth\tHits\tVisitors\tMethod\tURL")
-                        report.append("---------\t----\t--------\t------\t---\033[0m")
-                        for ligne in topfiles:
-                            report.append(ligne)
-                        report.append("")
-                    elif str(key) == "TopReferrers":
-                        topreferrers = self.get_topreferrers(stat)
-                        report.append("\n\033[100m\033[97m\033[1m   2 - TOP REFERRERS (Sites)\t\t\t\t\t\t\t\t\t\t\033[0m\n")
-                        report.append("\033[37mBandwidth\tHits\tVisitors\tMethod\tReferrer")
-                        report.append("---------\t----\t--------\t------\t--------\033[0m")
-                        for ligne in topreferrers:
-                            report.append(ligne)
-                        report.append("")
-                    elif str(key) == "TopVisitors":
-                        topvisitors = self.get_topvisitors(stat)
-                        report.append("\n\033[100m\033[97m\033[1m   3 - TOP VISITORS (Hostname or IP)\t\t\t\t\t\t\t\t\t\033[0m\n")
-                        report.append("\033[37mBandwidth\tHits\tVisits\tIP")
-                        report.append("---------\t----\t------\t--\033[0m")
-                        for ligne in topvisitors:
-                            report.append(ligne)
-                        report.append("")
-                    elif str(key) == "TopUniqueResponses":
-                        topuniqueresponses = self.get_topuniqueresponses(stat)
-                        report.append(
-                            "\n\033[100m\033[97m\033[1m   4 - HTTP Status Codes\t\t\t\t\t\t\t\t\t\t\033[0m\n")
-                        report.append("\033[37mBandwidth\tHits\tVisits\tCode")
-                        report.append("---------\t----\t------\t--\033[0m")
-                        for ligne in topuniqueresponses:
-                            report.append(ligne)
-                        report.append("")
-            attack = self.attack_dict
-            attacks = self.get_attack(attack)
-            for ligne in attacks:
-                report.append(ligne)
-            report.append("\033[100m\033[97m\033[1m   Fin de l'analyse\t\t\t\t\t\t\t\t\t\t\t\033[0m\n\n\n\n\n")
-        return report
+        
+        D = time.strftime('%d/%m/%y %H:%M',time.localtime())  
+        report = list()
+        report.append("\n\n\n\n\n\033[100m\033[97m\033[1m   Analyse générale du fonctionnement\t\t" + str(D) + "\t\t\t\t\t\t\033[0m\n")            stat_keys = self.stat_dict.keys()
+        for key in stat_keys:
+            stat = self.stat_dict[key]
+            if key == "TotalVisitors":
+                key = "TotalRequests"
+            if key == "ValidRequests":
+                key = "SuccessfulRequest"
+            if key == "NotFoundURL":
+                key = "Unique404"
+            if type(stat) == int:
+                report.append("\t\033[97m" + str(key) + "\033[0m\033[92m\t " + str(stat) + "\033[0m")
+        for key in stat_keys:
+            stat = self.stat_dict[key]
+            if type(stat) != int:
+                if str(key) == "TopFiles":
+                    topfiles = self.get_topfiles(stat)
+                    report.append("\n\033[100m\033[97m\033[1m   1 - TOP FILES (URLs)\t\t\t\t\t\t\t\t\t\t\t\033[0m\n")
+                    report.append("\033[37mBandwidth\tHits\tVisitors\tMethod\tURL")
+                    report.append("---------\t----\t--------\t------\t---\033[0m")
+                    for ligne in topfiles:
+                        report.append(ligne)
+                    report.append("")
+                elif str(key) == "TopReferrers":
+                    topreferrers = self.get_topreferrers(stat)
+                    report.append("\n\033[100m\033[97m\033[1m   2 - TOP REFERRERS (Sites)\t\t\t\t\t\t\t\t\t\t\033[0m\n")
+                    report.append("\033[37mBandwidth\tHits\tVisitors\tMethod\tReferrer")
+                    report.append("---------\t----\t--------\t------\t--------\033[0m")
+                    for ligne in topreferrers:
+                        report.append(ligne)
+                    report.append("")
+                elif str(key) == "TopVisitors":
+                    topvisitors = self.get_topvisitors(stat)
+                    report.append("\n\033[100m\033[97m\033[1m   3 - TOP VISITORS (Hostname or IP)\t\t\t\t\t\t\t\t\t\033[0m\n")
+                    report.append("\033[37mBandwidth\tHits\tVisits\tIP")
+                    report.append("---------\t----\t------\t--\033[0m")
+                    for ligne in topvisitors:
+                        report.append(ligne)
+                    report.append("")
+                elif str(key) == "TopUniqueResponses":
+                    topuniqueresponses = self.get_topuniqueresponses(stat)
+                    report.append("\n\033[100m\033[97m\033[1m   4 - HTTP Status Codes\t\t\t\t\t\t\t\t\t\t\033[0m\n")
+                    report.append("\033[37mBandwidth\tHits\tVisits\tCode")
+                    report.append("---------\t----\t------\t--\033[0m")
+                    for ligne in topuniqueresponses:
+                        report.append(ligne)
+                    report.append("")
+        attack = self.attack_dict
+        attacks = self.get_attack(attack)
+        for ligne in attacks:
+            report.append(ligne)
+        report.append("\033[100m\033[97m\033[1m   Fin de l'analyse\t\t\t\t\t\t\t\t\t\t\t\033[0m\n\n\n\n\n")
+    return report
