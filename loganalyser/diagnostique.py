@@ -4,6 +4,7 @@ Implementation du Diagnostique.
 
 from loganalyser import outils  # Gestion des Dictionnaires
 import re
+import Datetime
 
 
 class Diagnostique:
@@ -284,7 +285,8 @@ class Diagnostique:
             report = ["Ceci est la première ligne du Fichier Rapport", "Ceci est la deuxième"]
         else:
             report = list()
-            report.append("\n\n\n\n\n\033[100m\033[97m\033[1m   Analyse générale du fonctionnement\t\t\t\t\t\t\t\t\t\033[0m\n")
+            D = datetime.date
+            report.append("\n\n\n\n\n\033[100m\033[97m\033[1m   Analyse générale du fonctionnement\t\t\t\t" + str(D) + "\t\t\t\t\t\033[0m\n")
             stat_keys = self.stat_dict.keys()
             for key in stat_keys:
                 stat = self.stat_dict[key]
