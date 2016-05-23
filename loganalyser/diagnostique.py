@@ -191,7 +191,7 @@ class Diagnostique:
         indices = self.get_indices_top(stat["Hits"])
         L = []
         for i in indices:
-            L.append(str(stat["Bandwidth"][i]) + "\t\t" + str(stat["Hits"][i]) + "\t" + str(stat["Visitors"][i]) + "\t\t" + str(stat["Method"][i]) + "\t" + str(stat["URL"][i]) )
+            L.append(self.format_byte(stat["Bandwidth"][i]) + "\t\t" + str(stat["Hits"][i]) + "\t" + str(stat["Visitors"][i]) + "\t\t" + str(stat["Method"][i]) + "\t" + str(stat["URL"][i]) )
         return L
         
     def get_topreferrers(self, stat):
@@ -208,7 +208,7 @@ class Diagnostique:
         indices = self.get_indices_top(stat["Hits"])
         L = []
         for i in indices:
-            L.append(str(stat["Bandwidth"][i]) + "\t\t" + str(stat["Hits"][i]) + "\t" + str(stat["Visitors"][i]) + "\t\t" + str(stat["Method"][i]) + "\t" + str(stat["Referrer"][i]) )
+            L.append(self.format_byte(stat["Bandwidth"][i]) + "\t\t" + str(stat["Hits"][i]) + "\t" + str(stat["Visitors"][i]) + "\t\t" + str(stat["Method"][i]) + "\t" + str(stat["Referrer"][i]) )
         return L
         
     def get_topvisitors(self, stat):
@@ -261,6 +261,14 @@ class Diagnostique:
             L.append("URL " + str(url) + "\n\t" + "Impact\t\t" + str(e[2]) + "\n\tDescription\t" + str(e[1]) + "\n\tHits\t\t" + str(len(e[0])) + "\n\tLogLineNumbers\t" + ", ".join(e[0]) + "\n\n")
         return L
         
+    def format_byte(self, byte):
+        if int(byte) > 1000000000:
+            byte = str(int(byte)//1000000000) + " Go"
+        elif int(byte) > 1000000:
+            byte = str(int(byte)//1000000) + " Mo"
+        elif int(byte) > 1000:
+            byte = str(int(byte)//1000) + " Ko"
+        return str(byte)
     
     def get_report(self, fileformat):
         """
