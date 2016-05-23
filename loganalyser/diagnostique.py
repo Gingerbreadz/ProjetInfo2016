@@ -173,8 +173,8 @@ class Diagnostique:
         valeurs = [liste[0]]
         for i in range(len(liste)):
             if len(valeurs) < self.line:
-                indices[] = i
-                valeurs[] = liste[i]
+                indices.append(i)
+                valeurs.append(liste[i])
             else:
                 if liste[i] >= min(valeurs):
                     ind = valeurs.index(min(valeurs))
