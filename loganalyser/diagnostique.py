@@ -288,7 +288,7 @@ class Diagnostique:
         :rtype: list
 
         """
-        self.stat_dic["Total Hits"] = self.stat_dict.pop("TotalVisitors")
+        self.stat_dict["Total Hits"] = self.stat_dict.pop("TotalVisitors")
         if fileformat:
             report = ["Ceci est la première ligne du Fichier Rapport", "Ceci est la deuxième"]
         else:
