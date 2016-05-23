@@ -15,6 +15,14 @@ tokenkeys = ["IP", "Name", "Date", "Ext", "Method", "URL", "Response", "Byte", "
 regexkeys = ["Number", "Rule", "Description", "Impact"]
 
 def listtotokenlist(liste):
+    """
+    Retourne une ligne de logs sous la forme d'une liste tokenisée avec des champs corrects
+    :param liste: ligne de log mise sous forme de liste 
+    :type liste: list
+    :return: liste des tokens correctement instanciés et vérifiés
+    :rtype: list
+    
+    """
     s = list()
     s.append(token.IP(liste[0]))
     s.append(token.Name(liste[1]))
@@ -29,6 +37,14 @@ def listtotokenlist(liste):
 
 
 def recuperertokens(cheminfichier):
+    """
+    Retourne un dictionnaire des logs tokenisés à partir d'un ficher du type 'access.log'
+    :param cheminfichier: emplacment où récupérer la ressource
+    :type ncheminfichier: str
+    :return: dictionnaire des logs
+    :rtype: dict
+    
+    """
     matchfail = 0
     log_dic = outils.Dictionary(tokenkeys)
     fichierdelog = fichier.FichierDeLog(cheminfichier)
@@ -44,6 +60,14 @@ def recuperertokens(cheminfichier):
 
 
 def recupererregexp(cheminfichier):
+    """
+    Retourne un dictionnaire de regexp utilisable afin d'analyser les logs
+    :param cheminfichier: emplacment où récupérer la ressource
+    :type ncheminfichier: str
+    :return: dictionnaire des regexp
+    :rtype: dict
+    
+    """
     regexp_dic = outils.Dictionary(regexkeys)
     fichierregexp = fichier.FichierRegExp(cheminfichier)
     for i in range(0, len(fichierregexp.doc)):
