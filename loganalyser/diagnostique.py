@@ -280,7 +280,6 @@ class Diagnostique:
         :rtype: list
 
         """
-        self.stat_dict["Total Hits"] = self.stat_dict.pop("TotalVisitors")
         if fileformat:
             report = ["Ceci est la première ligne du Fichier Rapport", "Ceci est la deuxième"]
         else:
@@ -289,6 +288,8 @@ class Diagnostique:
             stat_keys = self.stat_dict.keys()
             for key in stat_keys:
                 stat = self.stat_dict[key]
+                if key == "TotalVisitors":
+                    key = "Total Hits"
                 if type(stat) == int:
                     report.append("\t\033[97m" + str(key) + "\033[0m\033[92m\t " + str(stat) + "\033[0m")
             for key in stat_keys:
