@@ -209,11 +209,13 @@ class Diagnostique:
                 d[url] = [ [str(attack["LogLineNumber"][i])], attack["Description"][i], attack["Impact"][i]]
         for key, elt in d.items():
             d[key][0] = list(set(elt[0]))
-        L2 = sorted(d.items(), key=lambda e: (-len(e[1][0]), -e[1][2])) # tri le dictionnaire en fonction du nombre d'apparition décroissant (d'ou le signe negatif)
         L = []
+        L2 = sorted(d.items(), key=lambda e: (-len(e[1][0]), -e[1][2])) # tri le dictionnaire en fonction du nombre d'apparition décroissant (d'ou le signe negatif)
+        L.append([">> ORDERED BY NUMBER OF HITS THEN BY IMPACT (DESC)>>\n\n"]
         for url, e in L2[:5]:
             L.append("URL " + str(url) + "\n\t" + "Impact\t\t" + str(e[2]) + "\n\tDescription\t" + str(e[1]) + "\n\tHits\t\t" + str(len(e[0])) + "\n\tLogLineNumbers\t" + ", ".join(e[0]) + "\n\n")
         L3 = sorted(d.items(), key=lambda e: (-e[1][2], -len(e[1][0])))
+        L.append([">> ORDERED BY IMPACT THEN BY NUMBER OF HITS (DESC)>>\n\n"]
         for url, e in L3[:5]:
             L.append("URL " + str(url) + "\n\t" + "Impact\t\t" + str(e[2]) + "\n\tDescription\t" + str(e[1]) + "\n\tHits\t\t" + str(len(e[0])) + "\n\tLogLineNumbers\t" + ", ".join(e[0]) + "\n\n")
         return L
@@ -268,7 +270,7 @@ class Diagnostique:
                         report.append("")
                     else:
                         report.append(str(key) + " ------->" + str(stat))
-            report.append("\r\n                         ===Attaques===                       ")
+            report.append("\n\n========================== WARNING ==========================\n")
             attack = self.attack_dict
             attacks = self.get_attack(attack)
             for ligne in attacks:
