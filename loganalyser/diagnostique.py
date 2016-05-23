@@ -181,7 +181,7 @@ class Diagnostique:
         indices = self.get_indices_topfiles(stat["Hits"])
         L = []
         for i in indices:
-            L.append(str(stat["Bandwidth"][i]) + "\t" + str(stat["Hits"][i]) + "\t" + str(stat["Visitors"][i]) + "\t" + str(stat["Method"][i]) + "\t" + str(stat["URL"][i]) )
+            L.append(str(stat["Bandwidth"][i]) + "\t\t" + str(stat["Hits"][i]) + "\t" + str(stat["Visitors"][i]) + "\t" + str(stat["Method"][i]) + "\t" + str(stat["URL"][i]) )
         return L
         
         
@@ -210,10 +210,12 @@ class Diagnostique:
                 else:
                     if str(key) == "TopFiles":
                         topfiles = self.get_topfiles(stat)
-                        report.append("# TOPFILES #")
-                        report.append("Bandwidth\tHits\tVisitors\Method\tURL")
+                        report.append("\n>> TOPFILES")
+                        report.append("Bandwidth\tHits\tVisitors\tMethod\tURL")
+                        report.append("---------\t----\t--------\t------\t---")
                         for ligne in topfiles:
                             report.append(ligne)
+                        report.append("")
             report.append("\r\n                         ===Attaques===                       ")
             attack_keys = self.attack_dict.keys()
             for key in attack_keys:
