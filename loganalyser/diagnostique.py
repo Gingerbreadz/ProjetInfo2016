@@ -191,7 +191,7 @@ class Diagnostique:
         indices = self.get_indices_top(stat["Hits"])
         L = []
         for i in indices:
-            L.append("\033[36m" + self.format_byte(stat["Bandwidth"][i]) + "\033[0m\t\t\033[91m" + str(stat["Hits"][i]) + "\033[0m\t" + str(stat["Visitors"][i]) + "\t\t" + str(stat["Method"][i]) + "\t" + str(stat["URL"][i]) )
+            L.append("\033[36m" + self.format_byte(stat["Bandwidth"][i]) + "\033[0m\t\t\033[91m" + str(stat["Hits"][i]) + "\033[0m\t\033[92m" + str(stat["Visitors"][i]) + "\033[0m\t\t\033[97m" + str(stat["Method"][i]) + "\033[0m\t\033[0m" + str(stat["URL"][i]) + "\033[0m" )
         return L
         
     def get_topreferrers(self, stat):
@@ -208,7 +208,7 @@ class Diagnostique:
         indices = self.get_indices_top(stat["Hits"])
         L = []
         for i in indices:
-            L.append("\033[36m" + self.format_byte(stat["Bandwidth"][i]) + "\033[0m\t\t\033[91m" + str(stat["Hits"][i]) + "\033[0m\t" + str(stat["Visitors"][i]) + "\t\t" + str(stat["Method"][i]) + "\t" + str(stat["Referrer"][i]) )
+            L.append("\033[36m" + self.format_byte(stat["Bandwidth"][i]) + "\033[0m\t\t\033[91m" + str(stat["Hits"][i]) + "\033[0m\t\033[092m" + str(stat["Visitors"][i]) + "\033[0m\t\t\033[97m" + str(stat["Method"][i]) + "\033[0m\t\033[35m" + str(stat["Referrer"][i]) + "\033[0m" )
         return L
         
     def get_topvisitors(self, stat):
@@ -225,7 +225,7 @@ class Diagnostique:
         indices = self.get_indices_top(stat["Hits"])
         L = []
         for i in indices:
-            L.append("\033[36m" + self.format_byte(stat["Bandwidth"][i]) + "\033[0m\t\t\033[91m" + str(stat["Hits"][i]) + "\033[0m\t" + str(stat["Visits"][i]) + "\t" + str(stat["IP"][i]))
+            L.append("\033[36m" + self.format_byte(stat["Bandwidth"][i]) + "\033[0m\t\t\033[91m" + str(stat["Hits"][i]) + "\033[0m\t\033[92m" + str(stat["Visits"][i]) + "\033[0m\t\033[97m" + str(stat["IP"][i]) + "\033[0m")
         return L
         
     def get_attack(self, attack):
@@ -268,7 +268,9 @@ class Diagnostique:
             byte = str(int(byte)//1000000) + " Mo"
         elif int(byte) > 1000:
             byte = str(int(byte)//1000) + " Ko"
-        return str(byte)
+        else:
+            byte = str(byte) + " o"
+        return byte
 
     
     def get_report(self, fileformat):
