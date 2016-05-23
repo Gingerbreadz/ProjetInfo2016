@@ -51,7 +51,7 @@ def recupererregexp(cheminfichier):
 
 
 def main():
-    #n = input("combien de ligne à afficher ?\n")
+    n = input("combien de ligne à afficher ?\n")
     logfilepath = sys.argv[0]
     regexpfilepath = "./res/default_filter.xml"
     log_dic = recuperertokens(logfilepath)
