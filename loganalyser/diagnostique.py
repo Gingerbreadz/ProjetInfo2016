@@ -167,16 +167,6 @@ class Diagnostique:
                     self.attack_dict["Impact"] += [self.regexp_dict["Impact"][i]]
 
     def get_indices_top(self, liste):
-         """
-        donne les indices des n plus grandes valeurs dans l'ordre décroissant.
-        :param liste: liste de données
-        :param n: nombre de données souhaitées
-        :type liste: list
-        :type n: int
-        :return: Liste triées des indices des plus grandes valeurs.
-        :rtype: list
-        
-        """
         indices = [0] * 5
         valeurs = [liste[0]] * 5
         for i in range(len(liste)):
