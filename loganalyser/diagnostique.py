@@ -297,7 +297,7 @@ class Diagnostique:
             report.append("\n\n========================== \033[6mStats\033[0m ==========================\n")
             report.append("\n\n========================== \033[30mStats\033[0m ==========================\n")
             report.append("\n\n========================== \033[36mStats\033[0m ==========================\n")
-            report.append("\n\n\033[47m\033[97m\033[1mAnalyse générale du fonctionnement\033[0m\n")
+            report.append("\n\n\033[107m\033[97m\033[1mAnalyse générale du fonctionnement\033[0m\n")
             stat_keys = self.stat_dict.keys()
             for key in stat_keys:
                 stat = self.stat_dict[key]
