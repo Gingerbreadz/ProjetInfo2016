@@ -20,7 +20,10 @@ class Diagnostique:
         :type regexp_dictionary: dict
 
         """
-        self.line = n
+        if n is None:
+            n = 5
+        else:
+            self.line = n
         self.token_dict = token_dictionary
         self.regexp_dict = regexp_dictionary
         self.stat_dict = {}
