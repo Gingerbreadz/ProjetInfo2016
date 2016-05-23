@@ -285,19 +285,7 @@ class Diagnostique:
             report = ["Ceci est la première ligne du Fichier Rapport", "Ceci est la deuxième"]
         else:
             report = list()
-            report.append("\n\n========================== \033[98mStats\033[0m ==========================\n")
-            report.append("\n\n========================== \033[97mStats\033[0m ==========================\n")
-            report.append("\n\n========================== \033[96mStats\033[0m ==========================\n")
-            report.append("\n\n========================== \033[95mStats\033[0m ==========================\n")
-            report.append("\n\n========================== \033[94mStats\033[0m ==========================\n")
-            report.append("\n\n========================== \033[92mStats\033[0m ==========================\n")
-            report.append("\n\n========================== \033[93mStats\033[0m ==========================\n")
-            report.append("\n\n========================== \033[91mStats\033[0m ==========================\n")
-            report.append("\n\n========================== \033[1mStats\033[0m ==========================\n")
-            report.append("\n\n========================== \033[6mStats\033[0m ==========================\n")
-            report.append("\n\n========================== \033[30mStats\033[0m ==========================\n")
-            report.append("\n\n========================== \033[36mStats\033[0m ==========================\n")
-            report.append("\n\n\033[100m\033[97m\033[1mAnalyse générale du fonctionnement\033[0m\n")
+            report.append("\n\n\033[100m\033[97m\033[1m\tAnalyse générale du fonctionnement\t\033[0m\n")
             stat_keys = self.stat_dict.keys()
             for key in stat_keys:
                 stat = self.stat_dict[key]
@@ -308,7 +296,7 @@ class Diagnostique:
                 if type(stat) != int:
                     if str(key) == "TopFiles":
                         topfiles = self.get_topfiles(stat)
-                        report.append("\n>> TOP FILES >>\n")
+                        report.append("\n\033[100m\033[97m\033[1m\t1 - TOP FILES\t\033[0m\n")
                         report.append("Bandwidth\tHits\tVisitors\tMethod\tURL")
                         report.append("---------\t----\t--------\t------\t---")
                         for ligne in topfiles:
@@ -316,7 +304,7 @@ class Diagnostique:
                         report.append("")
                     elif str(key) == "TopReferrers":
                         topreferrers = self.get_topreferrers(stat)
-                        report.append("\n>> TOP REFERRERS >>\n")
+                        report.append("\n\033[100m\033[97m\033[1m\t>> TOP REFERRERS\t\033[0m\n")
                         report.append("Bandwidth\tHits\tVisitors\tMethod\tReferrer")
                         report.append("---------\t----\t--------\t------\t--------")
                         for ligne in topreferrers:
@@ -324,7 +312,7 @@ class Diagnostique:
                         report.append("")
                     elif str(key) == "TopVisitors":
                         topvisitors = self.get_topvisitors(stat)
-                        report.append("\n>> TOP VISITORS >>\n")
+                        report.append("\n\033[100m\033[97m\033[1m\t>> TOP VISITORS\t\033[0m\n")
                         report.append("Bandwidth\tHits\tVisits\tIP")
                         report.append("---------\t----\t------\t--")
                         for ligne in topvisitors:
