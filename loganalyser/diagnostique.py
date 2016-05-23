@@ -83,7 +83,6 @@ class Diagnostique:
                 print(url)
                 lines = self.token_dict.itemtoentrynumbers(url)
                 print(lines)
-                print(self.token_dict)
                 counted_ip = []
                 byte_count = 0
                 visitors = 0
