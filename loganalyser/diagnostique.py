@@ -250,12 +250,12 @@ class Diagnostique:
             d[key][0] = list(set(elt[0]))
         L = []
         L2 = sorted(d.items(), key=lambda e: (-len(e[1][0]), -e[1][2])) # tri le dictionnaire en fonction du nombre d'apparition décroissant (d'ou le signe negatif)
-        report.append("\n\033[100m\033[97m\033[1m   4 - DANGER - order by number of hits, then by impact (desc)\t\t\t\t\t\t\033[0m\n")
+        L.append("\n\033[100m\033[97m\033[1m   4 - DANGER - order by number of hits, then by impact (desc)\t\t\t\t\t\t\033[0m\n")
         L.append("   -----------------------------------------------\n\n")
         for url, e in L2[:5]:
             L.append("URL " + str(url) + "\n\t" + "Impact\t\t" + str(e[2]) + "\n\tDescription\t" + str(e[1]) + "\n\tHits\t\t" + str(len(e[0])) + "\n\tLogLineNumbers\t" + ", ".join(e[0]) + "\n\n")
         L3 = sorted(d.items(), key=lambda e: (-e[1][2], -len(e[1][0])))
-        report.append("\n\033[100m\033[97m\033[1m   4 - DANGER - order by impact, then by number of hits (desc)\t\t\t\t\t\t\033[0m\n")
+        L.append("\n\033[100m\033[97m\033[1m   4 - DANGER - order by impact, then by number of hits (desc)\t\t\t\t\t\t\033[0m\n")
         L.append("   -----------------------------------------------\n\n")
         for url, e in L3[:5]:
             L.append("URL " + str(url) + "\n\t" + "Impact\t\t" + str(e[2]) + "\n\tDescription\t" + str(e[1]) + "\n\tHits\t\t" + str(len(e[0])) + "\n\tLogLineNumbers\t" + ", ".join(e[0]) + "\n\n")
