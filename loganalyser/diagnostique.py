@@ -93,9 +93,9 @@ class Diagnostique:
 
             topuniquereponses_dic = outils.Dictionary(["Hits", "Visitors", "Bandwidth", "Code"])
             topuniquereponses_dic.addentry([s2[0], s2[1], s2[2], "2xx Success"])
-            topuniquereponses_dic.addentry([s3[0], s3[1], s3[2], "3xx Success"])
-            topuniquereponses_dic.addentry([s4[0], s4[1], s4[2], "4xx Success"])
-            topuniquereponses_dic.addentry([s5[0], s5[1], s5[2], "5xx Success"])
+            topuniquereponses_dic.addentry([s3[0], s3[1], s3[2], "3xx Redirection"])
+            topuniquereponses_dic.addentry([s4[0], s4[1], s4[2], "4xx Client Error"])
+            topuniquereponses_dic.addentry([s5[0], s5[1], s5[2], "5xx Server Error"])
             return topuniquereponses_dic
 
         def notfoundurl():
