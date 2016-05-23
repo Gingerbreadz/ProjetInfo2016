@@ -181,7 +181,7 @@ class Diagnostique:
         indices = self.get_indices_topfiles(stat["Hits"])
         L = []
         for i in indices:
-            L.append(str(stat["Bandwidth"][i]) + "\t\t" + str(stat["Hits"][i]) + "\t" + str(stat["Visitors"][i]) + "\t" + str(stat["Method"][i]) + "\t" + str(stat["URL"][i]) )
+            L.append(str(stat["Bandwidth"][i]) + "\t\t" + str(stat["Hits"][i]) + "\t" + str(stat["Visitors"][i]) + "\t\t" + str(stat["Method"][i]) + "\t" + str(stat["URL"][i]) )
         return L
         
         
@@ -201,18 +201,18 @@ class Diagnostique:
             report = ["Ceci est la première ligne du Fichier Rapport", "Ceci est la deuxième"]
         else:
             report = list()
-            report.append("========================== Stats ==========================")
+            report.append("========================== Stats ==========================\n")
             stat_keys = self.stat_dict.keys()
             for key in stat_keys:
                 stat = self.stat_dict[key]
                 if type(stat) == int:
-                    report.append(str(key) + "\t " + str(stat))
+                    report.append("- " + str(key) + "\t " + str(stat))
                 else:
                     if str(key) == "TopFiles":
                         topfiles = self.get_topfiles(stat)
-                        report.append("\n>> TOPFILES")
-                        report.append("Bandwidth\tHits\tVisitors\tMethod\tURL")
-                        report.append("---------\t----\t--------\t------\t---")
+                        report.append("\n>> TOPFILES >>")
+                        report.append("Bandwidth\tHits\tVisitors\t\tMethod\tURL")
+                        report.append("---------\t----\t--------\t\t------\t---")
                         for ligne in topfiles:
                             report.append(ligne)
                         report.append("")
