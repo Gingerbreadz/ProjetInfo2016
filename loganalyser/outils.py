@@ -29,6 +29,8 @@ class Dictionary(dict):
         :type key: str
         :return: Liste contenant les valeurs de la clef passée en argument.
         :rtype: list
+        :raises: unvalid key exception
+        
         """
         if key not in self._keys:
             raise Exception("'" + key + "'" + " n'est pas une clef valide")
