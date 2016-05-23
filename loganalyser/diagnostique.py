@@ -285,7 +285,13 @@ class Diagnostique:
             report = ["Ceci est la première ligne du Fichier Rapport", "Ceci est la deuxième"]
         else:
             report = list()
+            report.append("\n\n========================== \033[95mStats\033[0m ==========================\n")
+            report.append("\n\n========================== \033[94mStats\033[0m ==========================\n")
+            report.append("\n\n========================== \033[92mStats\033[0m ==========================\n")
             report.append("\n\n========================== \033[93mStats\033[0m ==========================\n")
+            report.append("\n\n========================== \033[91mStats\033[0m ==========================\n")
+            report.append("\n\n========================== \033[1mStats\033[0m ==========================\n")
+            report.append("\n\n========================== \033[4mStats\033[0m ==========================\n")
             stat_keys = self.stat_dict.keys()
             for key in stat_keys:
                 stat = self.stat_dict[key]
