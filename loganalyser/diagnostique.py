@@ -167,8 +167,8 @@ class Diagnostique:
                     self.attack_dict["Impact"] += [self.regexp_dict["Impact"][i]]
 
     def get_indices_top(self, liste):
-        indices = [0] * self.line
-        valeurs = [liste[0]] * self.line
+        indices = [0] * min(len(liste), self.line)
+        valeurs = [liste[0]] * min(len(liste), self.line)
         for i in range(len(liste)):
             if liste[i] > min(valeurs):
                 ind = valeurs.index(min(valeurs))
