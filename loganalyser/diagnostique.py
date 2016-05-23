@@ -5,7 +5,6 @@ Implementation du Diagnostique.
 from loganalyser import outils  # Gestion des Dictionnaires
 import re
 
-
 class Diagnostique:
     """Classe instanciant le diagnostique, qui contient les résultats d'analyse et les fait.
     """
