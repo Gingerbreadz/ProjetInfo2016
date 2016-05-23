@@ -96,8 +96,8 @@ class Dictionary(dict):
         if item not in a:
             raise Exception("'" + str(item) + "'" + " n'est pas dans le dictionnaire")
         entrynumbers = []
-        for key in self._keys:
-            print([x.donnee for x in self[key]], item)
+        for key in self.keys():
+ #           print([x.donnee for x in self[key]], item)
             if item in self[key]:
                 for i in range(0, len(self[key])):
                     if self[key][i].donnee == item:
