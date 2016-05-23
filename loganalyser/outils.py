@@ -98,7 +98,7 @@ class Dictionary(dict):
         entrynumbers = []
         for key in self.keys():
  #           print([x.donnee for x in self[key]], item)
-            if item in self[key]:
+            if item in [x.donnee for x in self[key]]:
                 for i in range(0, len(self[key])):
                     if self[key][i].donnee == item:
                         entrynumbers.append(i)
