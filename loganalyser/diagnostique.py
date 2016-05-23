@@ -167,8 +167,6 @@ class Diagnostique:
                     self.attack_dict["Impact"] += [self.regexp_dict["Impact"][i]]
 
     def get_indices_top(self, liste):
-#        indices = [0] * min(len(liste), self.line)
-#        valeurs = [liste[0]] * min(len(liste), self.line)
         indices = [0]
         valeurs = [liste[0]]
         for i in range(len(liste)):
@@ -176,11 +174,11 @@ class Diagnostique:
                 indices.append(i)
                 valeurs.append(liste[i])
             else:
-                if liste[i] >= min(valeurs):
+                if liste[i] >= min(valeurs) and i not in indices:
                     ind = valeurs.index(min(valeurs))
                     indices[ind] = i
                     valeurs[ind] = liste[i]
-        #valeurs, indices = (list(t) for t in zip(*sorted(zip(valeurs, indices), reverse=True)))
+        valeurs, indices = (list(t) for t in zip(*sorted(zip(valeurs, indices), reverse=True)))
         return indices
     
     def get_topfiles(self, stat):
