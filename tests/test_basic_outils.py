@@ -131,6 +131,8 @@ else:
 
 
 print("====test itemtoentrynumbers====\n")   #la fonction ne fonctionne pas, cf outils.py
+ip_test = token.IP('1.1.1.1')
+print dir(ip_test)
 resObt=testDic.itemtoentrynumbers(token.IP('1.1.1.1'))
 resAtt=[1]
 
