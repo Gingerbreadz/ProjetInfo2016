@@ -212,10 +212,10 @@ class Diagnostique:
         L2 = sorted(d.items(), key=lambda e: (-len(e[1][0]), -e[1][2])) # tri le dictionnaire en fonction du nombre d'apparition décroissant (d'ou le signe negatif)
         L = []
         for url, e in L2[:5]:
-            L.append("URL " + str(url) + "\n\t" + "Impact\t\t" + str(e[2]) + "\n\tDescription\t" + str(e[1]) + "\n\tHits\t" + len(e[0]) + "\n\tLogLineNumbers\t" + ", ".join(e[0]) + "\n\n")
+            L.append("URL " + str(url) + "\n\t" + "Impact\t\t" + str(e[2]) + "\n\tDescription\t" + str(e[1]) + "\n\tHits\t" + str(len(e[0])) + "\n\tLogLineNumbers\t" + ", ".join(e[0]) + "\n\n")
         L3 = sorted(d.items(), key=lambda e: (-e[1][2], -len(e[1][0])))
         for url, e in L3[:5]:
-            L.append("URL " + str(url) + "\n\t" + "Impact\t\t" + str(e[2]) + "\n\tDescription\t" + str(e[1]) + "\n\tHits\t" + len(e[0]) + "\n\tLogLineNumbers\t" + ", ".join(e[0]) + "\n\n")
+            L.append("URL " + str(url) + "\n\t" + "Impact\t\t" + str(e[2]) + "\n\tDescription\t" + str(e[1]) + "\n\tHits\t" + str(len(e[0])) + "\n\tLogLineNumbers\t" + ", ".join(e[0]) + "\n\n")
         return L
         
     
