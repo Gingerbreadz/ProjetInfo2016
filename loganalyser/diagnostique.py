@@ -200,7 +200,7 @@ class Diagnostique:
                 else:
                     if str(key) == "TopFiles":
                         indices = self.get_indices_topfiles(stat["Hits"])
-                        print indices
+                        print(indices)
             report.append("\r\n                         ===Attaques===                       ")
             attack_keys = self.attack_dict.keys()
             for key in attack_keys:
