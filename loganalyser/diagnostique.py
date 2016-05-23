@@ -80,8 +80,10 @@ class Diagnostique:
             topfiles_dic = outils.Dictionary(["Hits", "Visitors", "Bandwidth", "Method", "URL"])
             for i in range(0, len(url_distinct_list)):
                 url = url_distinct_list[i]
+                print(url)
                 lines = self.token_dict.itemtoentrynumbers(url)
                 print(lines)
+                print(self.token_dict)
                 counted_ip = []
                 byte_count = 0
                 visitors = 0
