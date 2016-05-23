@@ -313,7 +313,7 @@ class Diagnostique:
                     elif str(key) == "TopVisitors":
                         topvisitors = self.get_topvisitors(stat)
                         report.append("\n\033[100m\033[97m\033[1m   3 - TOP VISITORS\t\t\t\t\t\t\033[0m\n")
-                        report.append("\033[37mBandwidth\tHits\tVisits\tIP")
+                        report.append("\033[90mBandwidth\tHits\tVisits\tIP")
                         report.append("---------\t----\t------\t--\033[0m")
                         for ligne in topvisitors:
                             report.append(ligne)
