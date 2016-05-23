@@ -252,11 +252,11 @@ class Diagnostique:
         L2 = sorted(d.items(), key=lambda e: (-len(e[1][0]), -e[1][2])) # tri le dictionnaire en fonction du nombre d'apparition décroissant (d'ou le signe negatif)
         L.append("\n\033[100m\033[97m\033[1m   4 - DANGER - order by number of hits, then by impact (desc)\t\t\t\t\t\t\033[0m\n")
         for url, e in L2[:5]:
-            L.append("\033[37mURL\033[0m\033[35m " + str(url) + "\033[0m\n\t\033[37mImpact\033[0m\t\t\033[93m" + str(e[2]) + "\033[0m\n\t\033[36mDescription\033[0m\t\033[36m" + str(e[1]) + "\033[0m\n\t\033[37mHits\033[0m\t\t\033[91m" + str(len(e[0])) + "\033[0m\n\t\033[37mLogLineNumbers\033[0m\t\033[37m" + ", ".join(e[0]) + "\033[0m\n\n")
+            L.append("\033[37mURL\033[0m\033[35m " + str(url) + "\033[0m\n\t\033[93mImpact\033[0m\t\t\033[93m" + str(e[2]) + "\033[0m\n\t\033[92mDescription\033[0m\t\033[92m" + str(e[1]) + "\033[0m\n\t\033[91mHits\033[0m\t\t\033[91m" + str(len(e[0])) + "\033[0m\n\t\033[37mLogLineNumbers\033[0m\t\033[37m" + ", ".join(e[0]) + "\033[0m\n\n")
         L3 = sorted(d.items(), key=lambda e: (-e[1][2], -len(e[1][0])))
         L.append("\n\033[100m\033[97m\033[1m   4 - DANGER - order by impact, then by number of hits (desc)\t\t\t\t\t\t\033[0m\n")
         for url, e in L3[:5]:
-            L.append("\033[37mURL\033[0m\033[35m " + str(url) + "\033[0m\n\t\033[93mImpact\033[0m\t\t\033[93m" + str(e[2]) + "\033[0m\n\t\033[36mDescription\033[0m\t\033[36m" + str(e[1]) + "\033[0m\n\t\033[91mHits\033[0m\t\t\033[91m" + str(len(e[0])) + "\033[0m\n\t\033[37mLogLineNumbers\033[0m\t\033[37m" + ", ".join(e[0]) + "\033[0m\n\n")
+            L.append("\033[37mURL\033[0m\033[35m " + str(url) + "\033[0m\n\t\033[93mImpact\033[0m\t\t\033[93m" + str(e[2]) + "\033[0m\n\t\033[92mDescription\033[0m\t\033[92m" + str(e[1]) + "\033[0m\n\t\033[91mHits\033[0m\t\t\033[91m" + str(len(e[0])) + "\033[0m\n\t\033[37mLogLineNumbers\033[0m\t\033[37m" + ", ".join(e[0]) + "\033[0m\n\n")
         return L
         
     def format_byte(self, byte):
