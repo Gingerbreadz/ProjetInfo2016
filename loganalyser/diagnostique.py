@@ -174,7 +174,16 @@ class Diagnostique:
                 ind = valeurs.index(min(valeurs))
                 indices[ind] = i
                 valeurs[ind] = liste[i]
-        return indices
+        return 
+    
+    def get_topfiles(self, stat):
+        indices = self.get_indices_topfiles(self, stat["Hits"])
+        L = []
+        for i in indices:
+            L.append(str(stat["Bandwidth"][i]) + "\t" + str(stat["Hits"][i]) + "\t" + str(stat["Visitors"][i]) + "\t" + str(stat["Method"][i]) + "\t" + str(stat["URL"][i]) )
+        return L
+        
+        
         
     
     def get_report(self, fileformat):
@@ -199,8 +208,9 @@ class Diagnostique:
                     report.append(str(key) + " : " + str(stat))
                 else:
                     if str(key) == "TopFiles":
-                        indices = self.get_indices_topfiles(stat["Hits"])
-                        print(indices)
+                        topfiles = self.get_topfiles(stat)
+                        for ligne in topfiles:
+                            print(ligne)
             report.append("\r\n                         ===Attaques===                       ")
             attack_keys = self.attack_dict.keys()
             for key in attack_keys:
