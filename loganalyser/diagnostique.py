@@ -19,6 +19,8 @@ class Diagnostique:
         :type regexp_dictionary: dict
         :param n: nombre de ligne à afficher (5 par défaut)
         :type n: int
+        :param nomatchcount: nombre de ligne n'ayant pas matchés (0 par défaut)
+        :type nomatchcount: int
 
         """
         self.nomatchcount = nomatchcount
@@ -180,7 +182,6 @@ class Diagnostique:
         self.stat_dict["NotFoundURL"] = notfoundurl()        # Int
         self.stat_dict["TopUniqueResponses"] = topuniqueresponses()  # SubDict: ["2xx Success", "3xx Redirection", "4xx Client Error", "5xx Server Error"]
 
-
     def __analyse(self):
         """
         Analyse les tokens par groupe selon certains motifs.
@@ -223,9 +224,10 @@ class Diagnostique:
     
     def get_topfiles(self, stat):
         """
-        ordonne la liste des top files et s'assure de sa configuration afin d'obtenir un affichage lisible des résultats
+        Ordonne la liste des top files et s'assure de sa configuration afin d'obtenir un affichage lisible des résultats
+
         :param stat: dictionnaire de statistiques
-        :type stats: dict
+        :type stat: dict
         :return: Liste des strings organisées.
         :rtype: list
         
@@ -238,9 +240,10 @@ class Diagnostique:
         
     def get_topreferrers(self, stat):
         """
-        ordonne la liste des top referrers et s'assure de sa configuration afin d'obtenir un affichage lisible des résultats
+        Ordonne la liste des top referrers et s'assure de sa configuration afin d'obtenir un affichage lisible des résultats
+
         :param stat: dictionnaire de statistiques
-        :type stats: dict
+        :type stat: dict
         :return: Liste des strings organisées.
         :rtype: list
         
@@ -253,7 +256,8 @@ class Diagnostique:
         
     def get_topvisitors(self, stat):
         """
-        ordonne la liste des top visitors et s'assure de sa configuration afin d'obtenir un affichage lisible des résultats
+        Ordonne la liste des top visitors et s'assure de sa configuration afin d'obtenir un affichage lisible des résultats
+
         :param stat: dictionnaire de statistiques
         :type stat: dict
         :return: Liste des strings organisées.
@@ -268,11 +272,12 @@ class Diagnostique:
 
     def get_topuniqueresponses(self, stat):
         """
-            ordonne la liste des top unique responses et s'assure de sa configuration afin d'obtenir un affichage lisible des résultats
-            :param stat: dictionnaire de statistiques
-            :type stat: dict
-            :return: Liste des strings organisées.
-            :rtype: list
+        Ordonne la liste des top unique responses et s'assure de sa configuration afin d'obtenir un affichage lisible des résultats
+
+        :param stat: dictionnaire de statistiques
+        :type stat: dict
+        :return: Liste des strings organisées.
+        :rtype: list
 
         """
         indices = self.get_indices_top(stat["Hits"])
@@ -285,9 +290,10 @@ class Diagnostique:
         
     def get_attack(self, attack):
         """
-        ordonne la liste des potentiels attaques et s'assure de sa configuration afin d'obtenir un affichage lisible des résultats
-        :param stat: dictionnaire de statistiques
-        :type stats: dict
+        Ordonne la liste des potentiels attaques et s'assure de sa configuration afin d'obtenir un affichage lisible des résultats
+
+        :param attack: dictionnaire d'attaque.
+        :type attack: dict
         :return: Liste des strings organisées.
         :rtype: list
         
@@ -323,7 +329,6 @@ class Diagnostique:
             byte = str(byte) + " o"
         return byte
 
-    
     def get_report(self, fileformat):
         """
         Ordonne les donnée issues des statistiques et des analyses, prépare pour l'affichage finale.

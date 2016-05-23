@@ -224,6 +224,8 @@
             <span class="n">match</span> <span class="o">=</span> <span class="n">c_reg</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">contenu</span><span class="p">[</span><span class="n">noligne</span><span class="p">])</span>
             <span class="n">log_tuple</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">groups</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">)</span>
             <span class="n">log</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">log_tuple</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">log</span> <span class="o">=</span> <span class="mi">9</span><span class="o">*</span><span class="p">[</span><span class="s2">&quot;NoMatch&quot;</span><span class="p">]</span>
 
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        ip = log[0]</span>
