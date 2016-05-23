@@ -6,6 +6,7 @@ from loganalyser import outils  # Gestion des Dictionnaires
 import re
 import time
 
+
 class Diagnostique:
     """Classe instanciant le diagnostique, qui contient les résultats d'analyse et les fait.
     """
@@ -49,7 +50,7 @@ class Diagnostique:
 
         def uniquevisitors():
             """
-            détermine le nombre de visiteurs uniques total.
+            Détermine le nombre de visiteurs uniques total.
             
             :return: nombre de visiteurs
             :rtype: int
@@ -61,7 +62,7 @@ class Diagnostique:
 
         def totalvisitors():
             """
-            détermine le nombre de visites total.
+            Détermine le nombre de visiteurs total.
             
             :return: nombre de visites
             :rtype: int
@@ -71,7 +72,7 @@ class Diagnostique:
 
         def validrequest():
             """
-            détermine le nombre requêtes ayant correctement abouties.
+            Détermine le nombre requêtes ayant correctement abouties.
             
             :return: nombre de requêtes 
             :rtype: int
@@ -84,7 +85,7 @@ class Diagnostique:
 
         def topuniqueresponses():
             """
-            détermine le nombre de réponses associées aux série des codes erreurs
+            Détermine le nombre de réponses associées aux codes de retour du HTTP.
             
             :return: dictionnaire des données en rapport avec les codes erreurs de retour du serveur
             :rtype: dict
@@ -128,11 +129,12 @@ class Diagnostique:
             topuniquereponses_dic.addentry([s3[0], s3[1], s3[2], "3xx Redirection"])
             topuniquereponses_dic.addentry([s4[0], s4[1], s4[2], "4xx Client Error"])
             topuniquereponses_dic.addentry([s5[0], s5[1], s5[2], "5xx Server Error"])
+
             return topuniquereponses_dic
 
         def notfoundurl():
             """
-            détermine le nombre de requêtes ayant abouties à un code erreur 404 "URL not found".
+            Détermine le nombre de requêtes ayant abouties à un code erreur 404 "URL not found".
             
             :return: nombre de requêtes
             :rtype: int
@@ -150,7 +152,8 @@ class Diagnostique:
 
         def topfiles():
             """
-            détermine les données liés aux ressources demandés, à savoir le nombre fois ou cette ressource est demandée, le nombre de visiteurs uniques, la bande passante représentée, la méthode et l'URL de la ressource.
+            Détermine les données liés aux ressources demandés, à savoir le nombre fois ou cette ressource est demandée,
+             le nombre de visiteurs uniques, la bande passante représentée, la méthode et l'URL de la ressource.
             
             :return: dictionnaire des données
             :rtype: dict
@@ -178,7 +181,9 @@ class Diagnostique:
 
         def topreferrers():
             """
-            détermine les données liés aux noms de domaine demandés, à savoir le nombre fois ou ce nom de domaine est demandé, le nombre de visiteurs uniques, la bande passante représentée, la méthode et le nom de domaine en question.
+            Détermine les données liés aux noms de domaine demandés, à savoir le nombre fois ou ce nom de domaine est
+            demandé, le nombre de visiteurs uniques, la bande passante représentée, la méthode et le nom de domaine
+            en question.
             
             :return: dictionnaire des données
             :rtype: dict
@@ -206,7 +211,9 @@ class Diagnostique:
 
         def topvisitors():
             """
-            détermine les données liés aux visiteurs, à savoir le nombre fois que le visiteur s'est connecté au serveurs, le nombre des différentes URL demandées, la bande passante représentée, et l'adresse IP du visteurs.
+            Détermine les données liés aux visiteurs, à savoir le nombre fois que le visiteur s'est connecté au
+            serveurs, le nombre des différentes URL demandées, la bande passante représentée, et l'adresse IP
+            du visteurs.
             
             :return: dictionnaire des données
             :rtype: dict
@@ -233,7 +240,7 @@ class Diagnostique:
 
         self.stat_dict["UniqueVisitors"] = uniquevisitors()  # Int
         self.stat_dict["TotalVisitors"] = totalvisitors()    # Int
-        self.stat_dict["TopFiles"] = topfiles()              # SubDict:["Hits", "Visitors", "Bandwidth", "Method", "URL"]
+        self.stat_dict["TopFiles"] = topfiles()              # SubDict:["Hits", "Visitors", "Bandwidth", # "Method", "URL"]
         self.stat_dict["TopReferrers"] = topreferrers()      # SubDict:["Referrer", "Hits", "Visitors", "Bandwidth", "Method"]
         self.stat_dict["TopVisitors"] = topvisitors()        # SubDict:["Hits", "Visits", "Bandwidth", "IP"]
         self.stat_dict["ValidRequest"] = validrequest()      # Int
@@ -291,7 +298,8 @@ class Diagnostique:
     
     def get_topfiles(self, stat):
         """
-        Ordonne la liste des top files et s'assure de sa configuration afin d'obtenir un affichage lisible des résultats.
+        Ordonne la liste des top files et s'assure de sa configuration afin d'obtenir un affichage lisible des
+        résultats.
 
         :param stat: dictionnaire de statistiques
         :type stat: dict
@@ -307,7 +315,8 @@ class Diagnostique:
         
     def get_topreferrers(self, stat):
         """
-        Ordonne la liste des top referrers et s'assure de sa configuration afin d'obtenir un affichage lisible des résultats.
+        Ordonne la liste des top referrers et s'assure de sa configuration afin d'obtenir un affichage lisible des
+        résultats.
 
         :param stat: dictionnaire de statistiques
         :type stat: dict
@@ -323,7 +332,8 @@ class Diagnostique:
         
     def get_topvisitors(self, stat):
         """
-        Ordonne la liste des top visitors et s'assure de sa configuration afin d'obtenir un affichage lisible des résultats
+        Ordonne la liste des top visitors et s'assure de sa configuration afin d'obtenir un affichage lisible des
+        résultats
 
         :param stat: dictionnaire de statistiques
         :type stat: dict
@@ -339,7 +349,8 @@ class Diagnostique:
 
     def get_topuniqueresponses(self, stat):
         """
-        Ordonne la liste des top unique responses et s'assure de sa configuration afin d'obtenir un affichage lisible des résultats.
+        Ordonne la liste des top unique responses et s'assure de sa configuration afin d'obtenir un affichage lisible
+        des résultats.
 
         :param stat: dictionnaire de statistiques
         :type stat: dict
@@ -357,7 +368,8 @@ class Diagnostique:
         
     def get_attack(self, attack):
         """
-        Ordonne la liste des potentiels attaques et s'assure de sa configuration afin d'obtenir un affichage lisible des résultats.
+        Ordonne la liste des potentiels attaques et s'assure de sa configuration afin d'obtenir un affichage lisible
+        des résultats.
 
         :param attack: dictionnaire d'attaque.
         :type attack: dict
@@ -385,8 +397,9 @@ class Diagnostique:
         for url, e in L3[:self.line]:
             L.append("\033[37mURL\033[0m\033[35m " + str(url) + "\033[0m\n\t\033[93mImpact\033[0m\t\t\033[93m" + str(e[2]) + "\033[0m\n\t\033[92mDescription\033[0m\t\033[92m" + str(e[1]) + "\033[0m\n\t\033[91mHits\033[0m\t\t\033[91m" + str(len(e[0])) + "\033[0m\n\t\033[37mLogLineNumbers\033[0m\t\033[37m" + ", ".join(e[0]) + "\033[0m\n\n")
         return L
-        
-    def format_byte(self, byte):
+
+    @staticmethod
+    def format_byte(byte):
         if int(byte) > 1000000000:
             byte = str(int(byte)//1000000000) + " Go"
         elif int(byte) > 1000000:
@@ -406,7 +419,7 @@ class Diagnostique:
 
         """
         
-        D = time.strftime('%d/%m/%y %H:%M',time.localtime())  
+        D = time.strftime('%d/%m/%y %H:%M', time.localtime())
         report = list()
         report.append("\n\n\n\n\n\033[100m\033[97m\033[1m   Analyse générale du fonctionnement\t\t\t\t\t\t\t" + str(D) + "\t\033[0m\n")
         stat_keys = self.stat_dict.keys()

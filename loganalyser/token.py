@@ -5,7 +5,6 @@ A l'instanciation de chacune des classes correspondant à un champ, la vérifica
 """
 import socket
 import re
-#from urllib.parse import urlparse
 from datetime import datetime
 
 from abc import ABCMeta, abstractmethod

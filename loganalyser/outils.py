@@ -13,8 +13,10 @@ class Dictionary(dict):
     def __init__(self, keylist):
         """
         Constructeur de classe. Un dictionnaire est initialisé vide à partir de la liste des clefs
+
         :param keylist: Liste des clefs du dictionnaire.
         :type keylist: list
+
         """
         super(Dictionary, self).__init__()
         self._keys = keylist
@@ -25,6 +27,7 @@ class Dictionary(dict):
     def __getitem__(self, key):
         """
         Retourne les valeurs de la clefs passée en argument.
+
         :param key: Clef
         :type key: str
         :return: Liste contenant les valeurs de la clef passée en argument.
@@ -39,16 +42,20 @@ class Dictionary(dict):
     def keys(self):
         """
         Retourne les clefs du dictionnaire.
+
         :return: Liste contenant les clefs du dictionnaire.
         :rtype: list
+
         """
         return self._keys
 
     def addentry(self, entry):
         """
         Ajoute au dicitonnaire une nouvelle valeur dans chacunes de ses clefs à partir d'une liste.
+
         :param entry: Liste contenant les valeurs pour chacune des clefs
         :type entry: list
+
         """
         if not len(entry) == len(self._keys):
             raise Exception("La liste n'est pas de bonne longueur")
@@ -60,10 +67,12 @@ class Dictionary(dict):
     def getentry(self, entrynumber):
         """
         Retourne la liste contenant les valeurs de chaques clefs pour un index donné.
+
         :param entrynumber: index de l'entrée.
         :type entrynumber: int
         :return: Liste contenant les valeurs de chaques clefs pour le même index.
         :rtype: list
+
         """
         if not entrynumber < len(self.__getitem__(self._keys[0])) and entrynumber >= 0:
             raise Exception("'" + str(entrynumber) + "'" + " ne correspond pas à index d'entrée valide")
@@ -72,10 +81,12 @@ class Dictionary(dict):
     def itemtoentrynumbers(self, item):
         """
         Retourne l'index d'une valeur dans le dictionnaire.
+
         :param item: valeur recherchée.
         :type item: str
         :return: Liste contenant les index associés à la valeur d'entrée.
         :rtype: list
+
         """
         entrynumbers = []
         for key in self.keys():

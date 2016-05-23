@@ -1,6 +1,7 @@
 """"
 Boucle principale
-C'est ici que sont implémentées les intéractions avec l'utilisateur et utilisées les classes/méthodes des autres modules.
+C'est ici que sont implémentées les intéractions avec l'utilisateur et utilisées les classes/méthodes des autres
+modules.
 """
 
 import sys
@@ -13,9 +14,11 @@ from loganalyser import token
 tokenkeys = ["IP", "Name", "Date", "Ext", "Method", "URL", "Response", "Byte", "Referrer"]
 regexkeys = ["Number", "Rule", "Description", "Impact"]
 
+
 def listtotokenlist(liste):
     """
     Retourne une ligne de logs sous la forme d'une liste tokenisée avec des champs corrects
+
     :param liste: ligne de log mise sous forme de liste 
     :type liste: list
     :return: liste des tokens correctement instanciés et vérifiés
@@ -38,8 +41,9 @@ def listtotokenlist(liste):
 def recuperertokens(cheminfichier):
     """
     Retourne un dictionnaire des logs tokenisés à partir d'un ficher du type 'access.log'
+
     :param cheminfichier: emplacment où récupérer la ressource
-    :type ncheminfichier: str
+    :type cheminfichier: str
     :return: dictionnaire des logs
     :rtype: dict
     
@@ -61,8 +65,9 @@ def recuperertokens(cheminfichier):
 def recupererregexp(cheminfichier):
     """
     Retourne un dictionnaire de regexp utilisable afin d'analyser les logs
+
     :param cheminfichier: emplacment où récupérer la ressource
-    :type ncheminfichier: str
+    :type cheminfichier: str
     :return: dictionnaire des regexp
     :rtype: dict
     
