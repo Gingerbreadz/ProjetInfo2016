@@ -304,7 +304,7 @@ class Diagnostique:
                         report.append("")
                     elif str(key) == "TopReferrers":
                         topreferrers = self.get_topreferrers(stat)
-                        report.append("\n\033[100m\033[97m\033[1m\t>> TOP REFERRERS\t\033[0m\n")
+                        report.append("\n\033[100m\033[97m\033[1m  2 - TOP REFERRERS\t\033[0m\n")
                         report.append("Bandwidth\tHits\tVisitors\tMethod\tReferrer")
                         report.append("---------\t----\t--------\t------\t--------")
                         for ligne in topreferrers:
@@ -312,7 +312,7 @@ class Diagnostique:
                         report.append("")
                     elif str(key) == "TopVisitors":
                         topvisitors = self.get_topvisitors(stat)
-                        report.append("\n\033[100m\033[97m\033[1m\t>> TOP VISITORS\t\033[0m\n")
+                        report.append("\n\033[100m\033[97m\033[1m  3 - TOP VISITORS\t\033[0m\n")
                         report.append("Bandwidth\tHits\tVisits\tIP")
                         report.append("---------\t----\t------\t--")
                         for ligne in topvisitors:
