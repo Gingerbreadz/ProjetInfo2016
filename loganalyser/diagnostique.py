@@ -201,17 +201,19 @@ class Diagnostique:
             report = ["Ceci est la première ligne du Fichier Rapport", "Ceci est la deuxième"]
         else:
             report = list()
-            report.append("                         ===Stats===                       ")
+            report.append("========================== Stats ==========================")
             stat_keys = self.stat_dict.keys()
             for key in stat_keys:
                 stat = self.stat_dict[key]
                 if type(stat) == int:
-                    report.append(str(key) + " : " + str(stat))
+                    report.append(str(key) + "\t " + str(stat))
                 else:
                     if str(key) == "TopFiles":
                         topfiles = self.get_topfiles(stat)
+                        report.append("# TOPFILES #")
+                        report.append("Bandwidth\tHits\tVisitors\Method\tURL")
                         for ligne in topfiles:
-                            print(ligne)
+                            report.append(ligne)
             report.append("\r\n                         ===Attaques===                       ")
             attack_keys = self.attack_dict.keys()
             for key in attack_keys:
