@@ -89,16 +89,12 @@ class Dictionary(dict):
         :rtype: list
 
         """
-        a = []
-        for key in self.keys():
-            for attr in self[key]:
-                a.append(attr.donnee)
-        if item not in a:
-            raise Exception("'" + str(item) + "'" + " n'est pas dans le dictionnaire")
         entrynumbers = []
         for key in self.keys():
             if item in [x.donnee for x in self[key]]:
                 for i in range(0, len(self[key])):
                     if self[key][i].donnee == item:
                         entrynumbers.append(i)
+        if len(entrynumbers) == 0:
+            raise Exception("'" + str(item) + "'" + " n'est pas dans le dictionnaire")
         return entrynumbers
