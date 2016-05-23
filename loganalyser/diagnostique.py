@@ -376,11 +376,12 @@ class Diagnostique:
             d[key][0] = list(set(elt[0]))
         L = []
         L2 = sorted(d.items(), key=lambda e: (-len(e[1][0]), -e[1][2])) # tri le dictionnaire en fonction du nombre d'apparition décroissant (d'ou le signe negatif)
-        #L.append("\n\033[100m\033[97m\033[1m   4 - DANGER - order by number of hits, then by impact (desc)\t\t\t\t\t\t\033[0m\n")
-       # for url, e in L2[:self.line]:
-            #L.append("\033[37mURL\033[0m\033[35m " + str(url) + "\033[0m\n\t\033[93mImpact\033[0m\t\t\033[93m" + str(e[2]) + "\033[0m\n\t\033[92mDescription\033[0m\t\033[92m" + str(e[1]) + "\033[0m\n\t\033[91mHits\033[0m\t\t\033[91m" + str(len(e[0])) + "\033[0m\n\t\033[37mLogLineNumbers\033[0m\t\033[37m" + ", ".join(e[0]) + "\033[0m\n\n")
+    #   L.append("\n\033[100m\033[97m\033[1m   4 - DANGER - order by number of hits, then by impact (desc)\t\t\t\t\t\t\033[0m\n")
+    #   for url, e in L2[:self.line]:
+            # L.append("\033[37mURL\033[0m\033[35m " + str(url) + "\033[0m\n\t\033[93mImpact\033[0m\t\t\033[93m" + str(e[2]) + "\033[0m\n\t\033[92mDescription\033[0m\t\033[92m" + str(e[1]) + "\033[0m\n\t\033[91mHits\033[0m\t\t\033[91m" + str(len(e[0])) + "\033[0m\n\t\033[37mLogLineNumbers\033[0m\t\033[37m" + ", ".join(e[0]) + "\033[0m\n\n")
         L3 = sorted(d.items(), key=lambda e: (-e[1][2], -len(e[1][0])))
-        L.append("\n\033[100m\033[97m\033[1m   5 - DANGER - order by impact, then by number of hits (desc)\t\t\t\t\t\t\033[0m\n")
+        total = len(L3)
+        L.append("\n\033[100m\033[97m\033[1m   5 - DANGER - order by impact, then by number of hits (desc)\t\t\t\t" + "total:" + str(total) + "\t\033[0m\n")
         for url, e in L3[:self.line]:
             L.append("\033[37mURL\033[0m\033[35m " + str(url) + "\033[0m\n\t\033[93mImpact\033[0m\t\t\033[93m" + str(e[2]) + "\033[0m\n\t\033[92mDescription\033[0m\t\033[92m" + str(e[1]) + "\033[0m\n\t\033[91mHits\033[0m\t\t\033[91m" + str(len(e[0])) + "\033[0m\n\t\033[37mLogLineNumbers\033[0m\t\033[37m" + ", ".join(e[0]) + "\033[0m\n\n")
         return L
@@ -407,7 +408,7 @@ class Diagnostique:
         
         D = time.strftime('%d/%m/%y %H:%M',time.localtime())  
         report = list()
-        report.append("\n\n\n\n\n\033[100m\033[97m\033[1m   Analyse générale du fonctionnement\t\t" + str(D) + "\t\t\t\t\t\t\033[0m\n")            
+        report.append("\n\n\n\n\n\033[100m\033[97m\033[1m   Analyse générale du fonctionnement\t\t\t\t\t\t\t" + str(D) + "\t\033[0m\n")
         stat_keys = self.stat_dict.keys()
         for key in stat_keys:
             stat = self.stat_dict[key]
@@ -422,9 +423,10 @@ class Diagnostique:
         for key in stat_keys:
             stat = self.stat_dict[key]
             if type(stat) != int:
+                total = len(stat[stat.keys()[0]])
                 if str(key) == "TopFiles":
                     topfiles = self.get_topfiles(stat)
-                    report.append("\n\033[100m\033[97m\033[1m   1 - TOP FILES (URLs)\t\t\t\t\t\t\t\t\t\t\t\033[0m\n")
+                    report.append("\n\033[100m\033[97m\033[1m   1 - TOP FILES (URLs)\t\t\t\t\t\t\t\t\t" + "total:" + str(total) + "\t\033[0m\n")
                     report.append("\033[37mBandwidth\tHits\tVisitors\tMethod\tURL")
                     report.append("---------\t----\t--------\t------\t---\033[0m")
                     for ligne in topfiles:
@@ -432,7 +434,7 @@ class Diagnostique:
                     report.append("")
                 elif str(key) == "TopReferrers":
                     topreferrers = self.get_topreferrers(stat)
-                    report.append("\n\033[100m\033[97m\033[1m   2 - TOP REFERRERS (Sites)\t\t\t\t\t\t\t\t\t\t\033[0m\n")
+                    report.append("\n\033[100m\033[97m\033[1m   2 - TOP REFERRERS (Sites)\t\t\t\t\t\t\t\t" + "total:" + str(total) + "\t\t\033[0m\n")
                     report.append("\033[37mBandwidth\tHits\tVisitors\tMethod\tReferrer")
                     report.append("---------\t----\t--------\t------\t--------\033[0m")
                     for ligne in topreferrers:
@@ -440,7 +442,7 @@ class Diagnostique:
                     report.append("")
                 elif str(key) == "TopVisitors":
                     topvisitors = self.get_topvisitors(stat)
-                    report.append("\n\033[100m\033[97m\033[1m   3 - TOP VISITORS (Hostname or IP)\t\t\t\t\t\t\t\t\t\033[0m\n")
+                    report.append("\n\033[100m\033[97m\033[1m   3 - TOP VISITORS (Hostname or IP)\t\t\t\t\t\t\t" + "total:" + str(total) + "\t\033[0m\n")
                     report.append("\033[37mBandwidth\tHits\tVisits\tIP")
                     report.append("---------\t----\t------\t--\033[0m")
                     for ligne in topvisitors:
@@ -448,7 +450,7 @@ class Diagnostique:
                     report.append("")
                 elif str(key) == "TopUniqueResponses":
                     topuniqueresponses = self.get_topuniqueresponses(stat)
-                    report.append("\n\033[100m\033[97m\033[1m   4 - HTTP Status Codes\t\t\t\t\t\t\t\t\t\t\033[0m\n")
+                    report.append("\n\033[100m\033[97m\033[1m   4 - HTTP Status Codes\t\t\t\t\t\t\t\t" + "total:" + str(total) + "\t\t\033[0m\n")
                     report.append("\033[37mBandwidth\tHits\tVisits\tCode")
                     report.append("---------\t----\t------\t--\033[0m")
                     for ligne in topuniqueresponses:

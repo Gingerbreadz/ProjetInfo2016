@@ -10,7 +10,6 @@ from loganalyser import outils
 from loganalyser import diagnostique
 from loganalyser import token
 
-out = sys.stdout
 tokenkeys = ["IP", "Name", "Date", "Ext", "Method", "URL", "Response", "Byte", "Referrer"]
 regexkeys = ["Number", "Rule", "Description", "Impact"]
 
@@ -78,12 +77,10 @@ def recupererregexp(cheminfichier):
 
 
 def main():
+    n = 5
     if len(sys.argv) > 2:
         n = int(sys.argv[2])
-        if len(sys.argv)>3:
-            sys.stdout = open(str(sys.argv[3]),'a')
-    else:
-        n = 5
+
     logfilepath = sys.argv[1]
     regexpfilepath = "./res/default_filter.xml"
     log_dic, nomatchcount = recuperertokens(logfilepath)
@@ -91,9 +88,15 @@ def main():
     diag = diagnostique.Diagnostique(log_dic, regexp_dic, n, nomatchcount)
     report = diag.get_report()
     os.system('cls' if os.name == 'nt' else 'clear')
-    for ligne in report:
-        print(ligne)
+
+    if len(sys.argv) > 3:
+        fichiersortie = fichier.FichierRapportTextuel(sys.argv[3])
+        fichiersortie.ecriretexte(report)
+    else:
+        for ligne in report:
+            print(ligne)
+
     return
-    sys.stdout.close
+
 if __name__ == '__main__':
     sys.exit(main())
