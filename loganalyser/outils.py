@@ -97,7 +97,7 @@ class Dictionary(dict):
             raise Exception("'" + str(item) + "'" + " n'est pas dans le dictionnaire")
         entrynumbers = []
         for key in self._keys:
-            print(self[key], item)
+            print([x.donnee for x in self[key]], item)
             if item in self[key]:
                 for i in range(0, len(self[key])):
                     if self[key][i].donnee == item:
