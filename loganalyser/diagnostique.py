@@ -170,7 +170,7 @@ class Diagnostique:
         indices = [0] * min(len(liste), self.line)
         valeurs = [liste[0]] * min(len(liste), self.line)
         for i in range(len(liste)):
-            if liste[i] > min(valeurs):
+            if liste[i] >= min(valeurs):
                 ind = valeurs.index(min(valeurs))
                 indices[ind] = i
                 valeurs[ind] = liste[i]
