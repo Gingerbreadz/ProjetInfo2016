@@ -52,7 +52,7 @@ def recupererregexp(cheminfichier):
 
 def main():
     if len(sys.argv) > 2:
-        n = sys.argv[2]
+        n = int(sys.argv[2])
     else:
         n = 5
     logfilepath = sys.argv[1]
