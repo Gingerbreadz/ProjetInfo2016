@@ -191,7 +191,7 @@ class Diagnostique:
         indices = self.get_indices_top(stat["Hits"])
         L = []
         for i in indices:
-            L.append("\033[36m" + self.format_byte(stat["Bandwidth"][i]) + "\033[0m\t\t\033[91m" + str(stat["Hits"][i]) + "\033[0m\t\033[92m" + str(stat["Visitors"][i]) + "\033[0m\t\t\033[97m" + str(stat["Method"][i]) + "\033[0m\t\033[0m" + str(stat["URL"][i]) + "\033[0m" )
+            L.append("\033[36m" + self.format_byte(stat["Bandwidth"][i]) + "\033[0m\t\t\033[91m" + str(stat["Hits"][i]) + "\033[0m\t\033[92m" + str(stat["Visitors"][i]) + "\033[0m\t\t\033[97m" + str(stat["Method"][i]) + "\033[0m\t\033[35m" + str(stat["URL"][i]) + "\033[0m" )
         return L
         
     def get_topreferrers(self, stat):
@@ -250,12 +250,12 @@ class Diagnostique:
             d[key][0] = list(set(elt[0]))
         L = []
         L2 = sorted(d.items(), key=lambda e: (-len(e[1][0]), -e[1][2])) # tri le dictionnaire en fonction du nombre d'apparition décroissant (d'ou le signe negatif)
-        L.append(">> ORDERED BY NUMBER OF HITS THEN BY IMPACT (DESC) >>")
+        report.append("\n\033[100m\033[97m\033[1m   4 - DANGER - order by number of hits, then by impact (desc)\t\t\t\t\t\t\033[0m\n")
         L.append("   -----------------------------------------------\n\n")
         for url, e in L2[:5]:
             L.append("URL " + str(url) + "\n\t" + "Impact\t\t" + str(e[2]) + "\n\tDescription\t" + str(e[1]) + "\n\tHits\t\t" + str(len(e[0])) + "\n\tLogLineNumbers\t" + ", ".join(e[0]) + "\n\n")
         L3 = sorted(d.items(), key=lambda e: (-e[1][2], -len(e[1][0])))
-        L.append(">> ORDERED BY IMPACT THEN BY NUMBER OF HITS (DESC) >>")
+        report.append("\n\033[100m\033[97m\033[1m   4 - DANGER - order by impact, then by number of hits (desc)\t\t\t\t\t\t\033[0m\n")
         L.append("   -----------------------------------------------\n\n")
         for url, e in L3[:5]:
             L.append("URL " + str(url) + "\n\t" + "Impact\t\t" + str(e[2]) + "\n\tDescription\t" + str(e[1]) + "\n\tHits\t\t" + str(len(e[0])) + "\n\tLogLineNumbers\t" + ", ".join(e[0]) + "\n\n")
@@ -322,7 +322,6 @@ class Diagnostique:
                         report.append("")
                     else:
                         report.append(str(key) + " ------->" + str(stat))
-            report.append("\n\n========================== WARNING ==========================\n")
             attack = self.attack_dict
             attacks = self.get_attack(attack)
             for ligne in attacks:
