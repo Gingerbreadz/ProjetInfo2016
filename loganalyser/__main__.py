@@ -4,6 +4,7 @@ C'est ici que sont implémentées les intéractions avec l'utilisateur et utilis
 """
 
 import sys
+import os
 from loganalyser import fichier
 from loganalyser import outils
 from loganalyser import diagnostique
@@ -12,7 +13,6 @@ from loganalyser import token
 out = sys.stdout
 tokenkeys = ["IP", "Name", "Date", "Ext", "Method", "URL", "Response", "Byte", "Referrer"]
 regexkeys = ["Number", "Rule", "Description", "Impact"]
-
 
 def listtotokenlist(liste):
     s = list()
@@ -29,15 +29,18 @@ def listtotokenlist(liste):
 
 
 def recuperertokens(cheminfichier):
+    matchfail = 0
     log_dic = outils.Dictionary(tokenkeys)
     fichierdelog = fichier.FichierDeLog(cheminfichier)
     for i in range(0, fichierdelog.nbLigne):
         ligne_log = fichierdelog.decouperligne(i)
-        if ligne_log:
+        if ligne_log[0] == "NoMatch":
+            matchfail += 1
+        else:
             tokenlist = listtotokenlist(ligne_log)
             log_dic.addentry(tokenlist)
     fichierdelog.fermerfichier()
-    return log_dic
+    return [log_dic, matchfail]
 
 
 def recupererregexp(cheminfichier):
@@ -57,10 +60,11 @@ def main():
         n = 5
     logfilepath = sys.argv[1]
     regexpfilepath = "./res/default_filter.xml"
-    log_dic = recuperertokens(logfilepath)
+    log_dic, nomatchcount = recuperertokens(logfilepath)
     regexp_dic = recupererregexp(regexpfilepath)
-    diag = diagnostique.Diagnostique(log_dic, regexp_dic, n)
+    diag = diagnostique.Diagnostique(log_dic, regexp_dic, n, nomatchcount)
     report = diag.get_report(False)
+    os.system('cls' if os.name == 'nt' else 'clear')
     for ligne in report:
         print(ligne)
     return

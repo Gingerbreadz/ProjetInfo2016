@@ -96,6 +96,8 @@ class FichierDeLog(Fichier):
             match = c_reg.match(self.contenu[noligne])
             log_tuple = match.groups('default')
             log = list(log_tuple)
+        else:
+            log = 9*["NoMatch"]
 
         """
         ip = log[0]
