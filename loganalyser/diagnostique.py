@@ -247,6 +247,7 @@ class Diagnostique:
                 stat = self.stat_dict[key]
                 if type(stat) != int:
                     if str(key) == "TopFiles":
+                        print(str(stat))
                         topfiles = self.get_topfiles(stat)
                         report.append("\n>> TOP FILES >>\n")
                         report.append("Bandwidth\tHits\tVisitors\tMethod\tURL")
