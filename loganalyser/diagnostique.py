@@ -174,6 +174,7 @@ class Diagnostique:
                 ind = valeurs.index(min(valeurs))
                 indices[ind] = i
                 valeurs[ind] = liste[i]
+        valeurs, indices = (list(t) for t in zip(*sorted(zip(valeurs, indices), reverse=True)))
         return indices
     
     def get_topfiles(self, stat):
