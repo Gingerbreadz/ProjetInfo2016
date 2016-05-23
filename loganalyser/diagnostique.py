@@ -199,7 +199,7 @@ class Diagnostique:
         return L
         
     def get_attack(self, attack):
-        print(str(attack))
+#        print(str(attack))
         d = {}
         for i in range(len(attack["URL"])):
             url = attack["URL"][i]
@@ -208,7 +208,7 @@ class Diagnostique:
             else:
                 d[url] = [ [str(attack["LogLineNumber"][i])], attack["Description"][i], attack["Impact"][i]]
         for elt in d.items():
-            elt = list(set(elt))
+            elt[0] = list(set(elt[0]))
         L2 = sorted(d.items(), key=lambda e: (-count(e[1][0]), -e[1][2])) # tri le dictionnaire en fonction du nombre d'apparition décroissant (d'ou le signe negatif)
         L = []
         for url, e in L2[:5]:
