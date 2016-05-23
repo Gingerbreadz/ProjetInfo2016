@@ -207,15 +207,18 @@ class Diagnostique:
                 stat = self.stat_dict[key]
                 if type(stat) == int:
                     report.append(str(key) + "\t " + str(stat))
+            for key in stat_keys:
+                stat = self.stat_dict[key]
+                if str(key) == "TopFiles":
+                    topfiles = self.get_topfiles(stat)
+                    report.append("\n>> TOPFILES >>")
+                    report.append("Bandwidth\tHits\tVisitors\tMethod\tURL")
+                    report.append("---------\t----\t--------\t------\t---")
+                    for ligne in topfiles:
+                        report.append(ligne)
+                    report.append("")
                 else:
-                    if str(key) == "TopFiles":
-                        topfiles = self.get_topfiles(stat)
-                        report.append("\n>> TOPFILES >>")
-                        report.append("Bandwidth\tHits\tVisitors\tMethod\tURL")
-                        report.append("---------\t----\t--------\t------\t---")
-                        for ligne in topfiles:
-                            report.append(ligne)
-                        report.append("")
+                    report.append(stat)
             report.append("\r\n                         ===Attaques===                       ")
             attack_keys = self.attack_dict.keys()
             for key in attack_keys:
