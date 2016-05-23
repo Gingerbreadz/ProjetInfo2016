@@ -55,6 +55,7 @@ def main():
         n = int(sys.argv[2])
     else:
         n = 5
+    sys.stdout = open(sys.argv[3],'w')
     logfilepath = sys.argv[1]
     regexpfilepath = "./res/default_filter.xml"
     log_dic = recuperertokens(logfilepath)
@@ -64,6 +65,6 @@ def main():
     for ligne in report:
         print(ligne)
     return
-
+    sys.stdout.close
 if __name__ == '__main__':
     sys.exit(main())
