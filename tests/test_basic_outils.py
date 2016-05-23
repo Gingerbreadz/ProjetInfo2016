@@ -5,7 +5,7 @@ Aucun test n'a pour l'instant été écrit.
 
 
 from loganalyser import outils as o
-
+import token
 
 
 
@@ -131,7 +131,7 @@ else:
 
 
 print("====test itemtoentrynumbers====\n")   #la fonction ne fonctionne pas, cf outils.py
-resObt=testDic.itemtoentrynumbers('1.1.1.1')
+resObt=testDic.itemtoentrynumbers(token.IP('1.1.1.1'))
 resAtt=[1]
 
 if resObt==resAtt :
@@ -142,7 +142,7 @@ else:
 print("test levée d'exception itemtoentrynumbers \n")
 print("on teste : testDic.itemtoentrynumbers('2.2.2.2') : une exception doit être levée\n")
 try:
-    testDic.itemtoentrynumbers('2.2.2.2')
+    testDic.itemtoentrynumbers(token.IP'2.2.2.2'))
 except Exception:
     print("une exception a bien été levée\n")
 else:
