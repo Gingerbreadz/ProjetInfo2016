@@ -166,7 +166,7 @@ class Diagnostique:
                     self.attack_dict["Description"] += [self.regexp_dict["Description"][i]]
                     self.attack_dict["Impact"] += [self.regexp_dict["Impact"][i]]
 
-    def get_indice_topfiles(self, liste):
+    def get_indices_topfiles(self, liste):
         indices = [0] * 5
         valeurs = [stat[0]] * 5
         for i in range(liste):
