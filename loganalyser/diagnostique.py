@@ -167,6 +167,16 @@ class Diagnostique:
                     self.attack_dict["Impact"] += [self.regexp_dict["Impact"][i]]
 
     def get_indices_top(self, liste):
+         """
+        donne les indices des n plus grandes valeurs dans l'ordre décroissant.
+        :param liste: liste de données
+        :param n: nombre de données souhaitées
+        :type liste: list
+        :type n: int
+        :return: Liste triées des indices des plus grandes valeurs.
+        :rtype: list
+        
+        """
         indices = [0] * 5
         valeurs = [liste[0]] * 5
         for i in range(len(liste)):
@@ -178,6 +188,16 @@ class Diagnostique:
         return indices
     
     def get_topfiles(self, stat):
+        """
+        ordonne la liste des top files et s'assure de sa configuration afin d'obtenir un affichage lisible des résultats
+        :param stat: dictionnaire de statistiques
+        :param n: nombre de données souhaitées
+        :type stats: dict
+        :type n: int
+        :return: Liste des strings organisées.
+        :rtype: list
+        
+        """
         indices = self.get_indices_top(stat["Hits"])
         L = []
         for i in indices:
@@ -185,6 +205,16 @@ class Diagnostique:
         return L
         
     def get_topreferrers(self, stat):
+        """
+        ordonne la liste des top referrers et s'assure de sa configuration afin d'obtenir un affichage lisible des résultats
+        :param stat: dictionnaire de statistiques
+        :param n: nombre de données souhaitées
+        :type stats: dict
+        :type n: int
+        :return: Liste des strings organisées.
+        :rtype: list
+        
+        """
         indices = self.get_indices_top(stat["Hits"])
         L = []
         for i in indices:
@@ -192,6 +222,16 @@ class Diagnostique:
         return L
         
     def get_topvisitors(self, stat):
+        """
+        ordonne la liste des top visitors et s'assure de sa configuration afin d'obtenir un affichage lisible des résultats
+        :param stat: dictionnaire de statistiques
+        :param n: nombre de données souhaitées
+        :type stats: dict
+        :type n: int
+        :return: Liste des strings organisées.
+        :rtype: list
+        
+        """
         indices = self.get_indices_top(stat["Hits"])
         L = []
         for i in indices:
@@ -199,6 +239,16 @@ class Diagnostique:
         return L
         
     def get_attack(self, attack):
+        """
+        ordonne la liste des potentiels attaques et s'assure de sa configuration afin d'obtenir un affichage lisible des résultats
+        :param stat: dictionnaire de statistiques
+        :param n: nombre de données souhaitées
+        :type stats: dict
+        :type n: int
+        :return: Liste des strings organisées.
+        :rtype: list
+        
+        """
         d = {}
         for i in range(len(attack["URL"])):
             url = attack["URL"][i]
