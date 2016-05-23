@@ -452,7 +452,7 @@ class Diagnostique:
                     topuniqueresponses = self.get_topuniqueresponses(stat)
                     report.append("\n\033[100m\033[97m\033[1m   4 - HTTP Status Codes\t\t\t\t\t\t\t\t" + "total:" + str(total) + "\t\t\033[0m\n")
                     report.append("\033[37mBandwidth\tHits\tVisits\tCode")
-                    report.append("---------\t----\t------\t--\033[0m")
+                    report.append("---------\t----\t------\t----\033[0m")
                     for ligne in topuniqueresponses:
                         report.append(ligne)
                     report.append("")
