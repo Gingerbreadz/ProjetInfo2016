@@ -219,7 +219,7 @@ class Diagnostique:
                             report.append(ligne)
                         report.append("")
                     else:
-                        report.append(str(key) + " ------->" + str(stat)))
+                        report.append(str(key) + " ------->" + str(stat))
             report.append("\r\n                         ===Attaques===                       ")
             attack_keys = self.attack_dict.keys()
             for key in attack_keys:
