@@ -179,6 +179,7 @@ class Diagnostique:
                     indices[ind] = i
                     valeurs[ind] = liste[i]
         valeurs, indices = (list(t) for t in zip(*sorted(zip(valeurs, indices), reverse=True)))
+        print(indices)
         return indices
     
     def get_topfiles(self, stat):
@@ -199,7 +200,7 @@ class Diagnostique:
         return L
         
     def get_topreferrers(self, stat):
-        print(stat)
+        #print(stat)
         """
         ordonne la liste des top referrers et s'assure de sa configuration afin d'obtenir un affichage lisible des résultats
         :param stat: dictionnaire de statistiques
