@@ -459,4 +459,4 @@ class Diagnostique:
         for ligne in attacks:
             report.append(ligne)
         report.append("\033[100m\033[97m\033[1m   Fin de l'analyse\t\t\t\t\t\t\t\t\t\t\t\033[0m\n\n\n\n\n")
-    return report
+        return report
