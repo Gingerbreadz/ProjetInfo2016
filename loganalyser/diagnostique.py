@@ -166,6 +166,17 @@ class Diagnostique:
                     self.attack_dict["Description"] += [self.regexp_dict["Description"][i]]
                     self.attack_dict["Impact"] += [self.regexp_dict["Impact"][i]]
 
+    def get_indice_topfiles(self, liste):
+        indices = [0] * 5
+        valeurs = [stat[0]] * 5
+        for i in range(liste):
+            if liste[i] > min(valeurs):
+                ind = values.index(min(valeurs))
+                indices[ind] = i
+                valeurs[ind] = liste[i]
+        return indices
+        
+    
     def get_report(self, fileformat):
         """
         Ordonne les donnée issues des statistiques et des analyses, prépare pour l'affichage finale.
@@ -187,8 +198,9 @@ class Diagnostique:
                 if type(stat) == int:
                     report.append(str(key) + " : " + str(stat))
                 else:
-                    report.append(str(key))
-                    report.append(str(stat))
+                    if str(key) == "TopFiles":
+                        indices = self.get_indices_topfiles(stat["Hits"])
+                        print indices
             report.append("\r\n                         ===Attaques===                       ")
             attack_keys = self.attack_dict.keys()
             for key in attack_keys:
