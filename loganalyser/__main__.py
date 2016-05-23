@@ -55,7 +55,7 @@ def main():
         n = int(sys.argv[2])
     else:
         n = 5
-    sys.stdout = open(sys.argv[3],'w')
+    sys.stdout = open(sys.argv[3],'a')
     logfilepath = sys.argv[1]
     regexpfilepath = "./res/default_filter.xml"
     log_dic = recuperertokens(logfilepath)
