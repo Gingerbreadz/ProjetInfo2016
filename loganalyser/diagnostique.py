@@ -18,6 +18,8 @@ class Diagnostique:
         :type token_dictionary: dict
         :param regexp_dictionary: dictionnaire de regexp
         :type regexp_dictionary: dict
+        :param n: nombre de ligne à afficher (5 par défaut)
+        :type n: int
 
         """
         self.line = n
