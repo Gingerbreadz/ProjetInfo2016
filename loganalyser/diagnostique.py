@@ -285,7 +285,7 @@ class Diagnostique:
             report = ["Ceci est la première ligne du Fichier Rapport", "Ceci est la deuxième"]
         else:
             report = list()
-            report.append("\n\n\033[100m\033[97m\033[1m   Analyse générale du fonctionnement\t\t\t\t\t\t\t\t\033[0m\n")
+            report.append("\n\n\033[100m\033[97m\033[1m   Analyse générale du fonctionnement\t\t\t\t\t\t\t\t\t\033[0m\n")
             stat_keys = self.stat_dict.keys()
             for key in stat_keys:
                 stat = self.stat_dict[key]
@@ -296,7 +296,7 @@ class Diagnostique:
                 if type(stat) != int:
                     if str(key) == "TopFiles":
                         topfiles = self.get_topfiles(stat)
-                        report.append("\n\033[100m\033[97m\033[1m   1 - TOP FILES\t\t\t\t\t\t\t\t\t\t\033[0m\n")
+                        report.append("\n\033[100m\033[97m\033[1m   1 - TOP FILES\t\t\t\t\t\t\t\t\t\t\t\033[0m\n")
                         report.append("\033[37mBandwidth\tHits\tVisitors\tMethod\tURL")
                         report.append("---------\t----\t--------\t------\t---\033[0m")
                         for ligne in topfiles:
@@ -312,15 +312,15 @@ class Diagnostique:
                         report.append("")
                     elif str(key) == "TopVisitors":
                         topvisitors = self.get_topvisitors(stat)
-                        report.append("\n\033[100m\033[97m\033[1m   3 - TOP VISITORS\t\t\t\t\t\t\t\t\t\t\033[0m\n")
+                        report.append("\n\033[100m\033[97m\033[1m   3 - TOP VISITORS\t\t\t\t\t\t\t\t\t\t\t\033[0m\n")
                         report.append("\033[37mBandwidth\tHits\tVisits\tIP")
                         report.append("---------\t----\t------\t--\033[0m")
                         for ligne in topvisitors:
                             report.append(ligne)
                         report.append("")
-            report.append("\n\033[100m\033[97m\033[1m   Fin de l'analyse\t\t\t\t\t\t\t\t\t\t\033[0m\n")
             attack = self.attack_dict
             attacks = self.get_attack(attack)
             for ligne in attacks:
                 report.append(ligne)
+            report.append("\n\033[100m\033[97m\033[1m   Fin de l'analyse\t\t\t\t\t\t\t\t\t\t\t\033[0m\n")
         return report
