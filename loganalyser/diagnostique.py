@@ -169,7 +169,7 @@ class Diagnostique:
     def get_indices_top(self, liste):
         indices = [0]
         valeurs = [liste[0]]
-        for i in range(len(liste)):
+        for i in range(1, len(liste)):
             if len(valeurs) < self.line:
                 indices.append(i)
                 valeurs.append(liste[i])
@@ -179,7 +179,6 @@ class Diagnostique:
                     indices[ind] = i
                     valeurs[ind] = liste[i]
         valeurs, indices = (list(t) for t in zip(*sorted(zip(valeurs, indices), reverse=True)))
-        print(indices)
         return indices
     
     def get_topfiles(self, stat):
