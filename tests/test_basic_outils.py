@@ -142,7 +142,7 @@ else:
 print("test levée d'exception itemtoentrynumbers \n")
 print("on teste : testDic.itemtoentrynumbers('2.2.2.2') : une exception doit être levée\n")
 try:
-    testDic.itemtoentrynumbers(token.IP'2.2.2.2'))
+    testDic.itemtoentrynumbers(token.IP('2.2.2.2'))
 except Exception:
     print("une exception a bien été levée\n")
 else:
