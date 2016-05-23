@@ -132,6 +132,8 @@
 
 <span class="kn">from</span> <span class="nn">loganalyser</span> <span class="kn">import</span> <span class="n">outils</span>  <span class="c1"># Gestion des Dictionnaires</span>
 <span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
 
 <div class="viewcode-block" id="Diagnostique"><a class="viewcode-back" href="../../loganalyser.html#loganalyser.diagnostique.Diagnostique">[docs]</a><span class="k">class</span> <span class="nc">Diagnostique</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Classe instanciant le diagnostique, qui contient les résultats d&#39;analyse et les fait.</span>
@@ -147,6 +149,8 @@
 <span class="sd">        :type regexp_dictionary: dict</span>
 <span class="sd">        :param n: nombre de ligne à afficher (5 par défaut)</span>
 <span class="sd">        :type n: int</span>
+<span class="sd">        :param nomatchcount: nombre de ligne n&#39;ayant pas matchés (0 par défaut)</span>
+<span class="sd">        :type nomatchcount: int</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">nomatchcount</span> <span class="o">=</span> <span class="n">nomatchcount</span>
@@ -173,19 +177,48 @@
                                             <span class="s2">&quot;TopVisitors&quot;</span><span class="p">,</span> <span class="s2">&quot;ValidRequest&quot;</span><span class="p">,</span> <span class="s2">&quot;NotFoundURL&quot;</span><span class="p">,</span> <span class="s2">&quot;TopUniqueResponses&quot;</span><span class="p">])</span>
 
         <span class="k">def</span> <span class="nf">uniquevisitors</span><span class="p">():</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Détermine le nombre de visiteurs uniques total.</span>
+<span class="sd">            </span>
+<span class="sd">            :return: nombre de visiteurs</span>
+<span class="sd">            :rtype: int</span>
+
+<span class="sd">            &quot;&quot;&quot;</span>
             <span class="n">ip_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">ip</span><span class="o">.</span><span class="n">donnee</span> <span class="k">for</span> <span class="n">ip</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">token_dict</span><span class="p">[</span><span class="s2">&quot;IP&quot;</span><span class="p">]]</span>
             <span class="n">ip_distinct_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">ip_list</span><span class="p">))</span>
             <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">ip_distinct_list</span><span class="p">)</span>
 
-        <span class="k">def</span> <span class="nf">totalvisitors</span><span class="p">():</span> <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">token_dict</span><span class="p">[</span><span class="s2">&quot;IP&quot;</span><span class="p">])</span>
+        <span class="k">def</span> <span class="nf">totalvisitors</span><span class="p">():</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Détermine le nombre de visiteurs total.</span>
+<span class="sd">            </span>
+<span class="sd">            :return: nombre de visites</span>
+<span class="sd">            :rtype: int</span>
+
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">token_dict</span><span class="p">[</span><span class="s2">&quot;IP&quot;</span><span class="p">])</span>
 
         <span class="k">def</span> <span class="nf">validrequest</span><span class="p">():</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Détermine le nombre requêtes ayant correctement abouties.</span>
+<span class="sd">            </span>
+<span class="sd">            :return: nombre de requêtes </span>
+<span class="sd">            :rtype: int</span>
+
+<span class="sd">            &quot;&quot;&quot;</span>
             <span class="k">if</span> <span class="s2">&quot;NoMatch&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">token_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
                 <span class="k">return</span> <span class="n">totalvisitors</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">nomatchcount</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">totalvisitors</span><span class="p">()</span>
 
         <span class="k">def</span> <span class="nf">topuniqueresponses</span><span class="p">():</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Détermine le nombre de réponses associées aux codes de retour du HTTP.</span>
+<span class="sd">            </span>
+<span class="sd">            :return: dictionnaire des données en rapport avec les codes erreurs de retour du serveur</span>
+<span class="sd">            :rtype: dict</span>
+
+<span class="sd">            &quot;&quot;&quot;</span>
             <span class="n">code_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">token_dict</span><span class="p">[</span><span class="s2">&quot;Response&quot;</span><span class="p">]</span>
             <span class="n">url_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">token_dict</span><span class="p">[</span><span class="s2">&quot;URL&quot;</span><span class="p">]</span>
             <span class="n">byte_list</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">byte</span><span class="o">.</span><span class="n">donnee</span><span class="p">)</span> <span class="k">for</span> <span class="n">byte</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">token_dict</span><span class="p">[</span><span class="s2">&quot;Byte&quot;</span><span class="p">]]</span>
@@ -224,9 +257,17 @@
             <span class="n">topuniquereponses_dic</span><span class="o">.</span><span class="n">addentry</span><span class="p">([</span><span class="n">s3</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">s3</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">s3</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="s2">&quot;3xx Redirection&quot;</span><span class="p">])</span>
             <span class="n">topuniquereponses_dic</span><span class="o">.</span><span class="n">addentry</span><span class="p">([</span><span class="n">s4</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">s4</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">s4</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="s2">&quot;4xx Client Error&quot;</span><span class="p">])</span>
             <span class="n">topuniquereponses_dic</span><span class="o">.</span><span class="n">addentry</span><span class="p">([</span><span class="n">s5</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">s5</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">s5</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="s2">&quot;5xx Server Error&quot;</span><span class="p">])</span>
+
             <span class="k">return</span> <span class="n">topuniquereponses_dic</span>
 
         <span class="k">def</span> <span class="nf">notfoundurl</span><span class="p">():</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Détermine le nombre de requêtes ayant abouties à un code erreur 404 &quot;URL not found&quot;.</span>
+<span class="sd">            </span>
+<span class="sd">            :return: nombre de requêtes</span>
+<span class="sd">            :rtype: int</span>
+
+<span class="sd">            &quot;&quot;&quot;</span>
             <span class="n">code_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">token_dict</span><span class="p">[</span><span class="s2">&quot;Response&quot;</span><span class="p">]</span>
             <span class="n">url_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">token_dict</span><span class="p">[</span><span class="s2">&quot;URL&quot;</span><span class="p">]</span>
             <span class="n">counted_url</span> <span class="o">=</span> <span class="p">[]</span>
@@ -238,6 +279,14 @@
             <span class="k">return</span> <span class="n">s</span>
 
         <span class="k">def</span> <span class="nf">topfiles</span><span class="p">():</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Détermine les données liés aux ressources demandés, à savoir le nombre fois ou cette ressource est demandée,</span>
+<span class="sd">             le nombre de visiteurs uniques, la bande passante représentée, la méthode et l&#39;URL de la ressource.</span>
+<span class="sd">            </span>
+<span class="sd">            :return: dictionnaire des données</span>
+<span class="sd">            :rtype: dict</span>
+
+<span class="sd">            &quot;&quot;&quot;</span>
             <span class="n">url_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">url</span><span class="o">.</span><span class="n">donnee</span> <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">token_dict</span><span class="p">[</span><span class="s2">&quot;URL&quot;</span><span class="p">]]</span>
             <span class="n">ip_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">ip</span><span class="o">.</span><span class="n">donnee</span> <span class="k">for</span> <span class="n">ip</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">token_dict</span><span class="p">[</span><span class="s2">&quot;IP&quot;</span><span class="p">]]</span>
             <span class="n">method_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">method</span><span class="o">.</span><span class="n">donnee</span> <span class="k">for</span> <span class="n">method</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">token_dict</span><span class="p">[</span><span class="s2">&quot;Method&quot;</span><span class="p">]]</span>
@@ -259,6 +308,15 @@
             <span class="k">return</span> <span class="n">topfiles_dic</span>
 
         <span class="k">def</span> <span class="nf">topreferrers</span><span class="p">():</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Détermine les données liés aux noms de domaine demandés, à savoir le nombre fois ou ce nom de domaine est</span>
+<span class="sd">            demandé, le nombre de visiteurs uniques, la bande passante représentée, la méthode et le nom de domaine</span>
+<span class="sd">            en question.</span>
+<span class="sd">            </span>
+<span class="sd">            :return: dictionnaire des données</span>
+<span class="sd">            :rtype: dict</span>
+
+<span class="sd">            &quot;&quot;&quot;</span>
             <span class="n">referrer_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">referrer</span><span class="o">.</span><span class="n">domain</span> <span class="k">for</span> <span class="n">referrer</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">token_dict</span><span class="p">[</span><span class="s2">&quot;Referrer&quot;</span><span class="p">]]</span>
             <span class="n">ip_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">ip</span><span class="o">.</span><span class="n">donnee</span> <span class="k">for</span> <span class="n">ip</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">token_dict</span><span class="p">[</span><span class="s2">&quot;IP&quot;</span><span class="p">]]</span>
             <span class="n">method_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">method</span><span class="o">.</span><span class="n">donnee</span> <span class="k">for</span> <span class="n">method</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">token_dict</span><span class="p">[</span><span class="s2">&quot;Method&quot;</span><span class="p">]]</span>
@@ -280,6 +338,15 @@
             <span class="k">return</span> <span class="n">topreferrers_dic</span>
 
         <span class="k">def</span> <span class="nf">topvisitors</span><span class="p">():</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Détermine les données liés aux visiteurs, à savoir le nombre fois que le visiteur s&#39;est connecté au</span>
+<span class="sd">            serveurs, le nombre des différentes URL demandées, la bande passante représentée, et l&#39;adresse IP</span>
+<span class="sd">            du visteurs.</span>
+<span class="sd">            </span>
+<span class="sd">            :return: dictionnaire des données</span>
+<span class="sd">            :rtype: dict</span>
+
+<span class="sd">            &quot;&quot;&quot;</span>
             <span class="n">topvisitors_dic</span> <span class="o">=</span> <span class="n">outils</span><span class="o">.</span><span class="n">Dictionary</span><span class="p">([</span><span class="s2">&quot;Hits&quot;</span><span class="p">,</span> <span class="s2">&quot;Visits&quot;</span><span class="p">,</span> <span class="s2">&quot;Bandwidth&quot;</span><span class="p">,</span> <span class="s2">&quot;IP&quot;</span><span class="p">])</span>
             <span class="n">ip_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">ip</span><span class="o">.</span><span class="n">donnee</span> <span class="k">for</span> <span class="n">ip</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">token_dict</span><span class="p">[</span><span class="s2">&quot;IP&quot;</span><span class="p">]]</span>
             <span class="n">byte_list</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">byte</span><span class="o">.</span><span class="n">donnee</span><span class="p">)</span> <span class="k">for</span> <span class="n">byte</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">token_dict</span><span class="p">[</span><span class="s2">&quot;Byte&quot;</span><span class="p">]]</span>
@@ -301,13 +368,12 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">stat_dict</span><span class="p">[</span><span class="s2">&quot;UniqueVisitors&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">uniquevisitors</span><span class="p">()</span>  <span class="c1"># Int</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">stat_dict</span><span class="p">[</span><span class="s2">&quot;TotalVisitors&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">totalvisitors</span><span class="p">()</span>    <span class="c1"># Int</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">stat_dict</span><span class="p">[</span><span class="s2">&quot;TopFiles&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">topfiles</span><span class="p">()</span>              <span class="c1"># SubDict:[&quot;Hits&quot;, &quot;Visitors&quot;, &quot;Bandwidth&quot;, &quot;Method&quot;, &quot;URL&quot;]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stat_dict</span><span class="p">[</span><span class="s2">&quot;TopFiles&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">topfiles</span><span class="p">()</span>              <span class="c1"># SubDict:[&quot;Hits&quot;, &quot;Visitors&quot;, &quot;Bandwidth&quot;, # &quot;Method&quot;, &quot;URL&quot;]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">stat_dict</span><span class="p">[</span><span class="s2">&quot;TopReferrers&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">topreferrers</span><span class="p">()</span>      <span class="c1"># SubDict:[&quot;Referrer&quot;, &quot;Hits&quot;, &quot;Visitors&quot;, &quot;Bandwidth&quot;, &quot;Method&quot;]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">stat_dict</span><span class="p">[</span><span class="s2">&quot;TopVisitors&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">topvisitors</span><span class="p">()</span>        <span class="c1"># SubDict:[&quot;Hits&quot;, &quot;Visits&quot;, &quot;Bandwidth&quot;, &quot;IP&quot;]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">stat_dict</span><span class="p">[</span><span class="s2">&quot;ValidRequest&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">validrequest</span><span class="p">()</span>      <span class="c1"># Int</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">stat_dict</span><span class="p">[</span><span class="s2">&quot;NotFoundURL&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">notfoundurl</span><span class="p">()</span>        <span class="c1"># Int</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">stat_dict</span><span class="p">[</span><span class="s2">&quot;TopUniqueResponses&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">topuniqueresponses</span><span class="p">()</span>  <span class="c1"># SubDict: [&quot;2xx Success&quot;, &quot;3xx Redirection&quot;, &quot;4xx Client Error&quot;, &quot;5xx Server Error&quot;]</span>
-
 
     <span class="k">def</span> <span class="nf">__analyse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -334,7 +400,16 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">attack_dict</span><span class="p">[</span><span class="s2">&quot;Description&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">regexp_dict</span><span class="p">[</span><span class="s2">&quot;Description&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]]</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">attack_dict</span><span class="p">[</span><span class="s2">&quot;Impact&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">regexp_dict</span><span class="p">[</span><span class="s2">&quot;Impact&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]]</span>
 
-    <span class="k">def</span> <span class="nf">get_indices_top</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">liste</span><span class="p">):</span>
+<div class="viewcode-block" id="Diagnostique.get_indices_top"><a class="viewcode-back" href="../../loganalyser.html#loganalyser.diagnostique.Diagnostique.get_indices_top">[docs]</a>    <span class="k">def</span> <span class="nf">get_indices_top</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">liste</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Permet de trier une liste nous permettant de récupérer des valeurs triées de nos données à l&#39;affichage.</span>
+
+<span class="sd">        :param liste: une liste</span>
+<span class="sd">        :type liste: list</span>
+<span class="sd">        :return: indices des valeurs que l&#39;on souhaite afficher dans l&#39;ordre de leurs futur affichage</span>
+<span class="sd">        :rtype: list</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">indices</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">valeurs</span> <span class="o">=</span> <span class="p">[</span><span class="n">liste</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">liste</span><span class="p">)):</span>
@@ -347,13 +422,15 @@
                     <span class="n">indices</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
                     <span class="n">valeurs</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span> <span class="o">=</span> <span class="n">liste</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
         <span class="n">valeurs</span><span class="p">,</span> <span class="n">indices</span> <span class="o">=</span> <span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="nb">sorted</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">valeurs</span><span class="p">,</span> <span class="n">indices</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)))</span>
-        <span class="k">return</span> <span class="n">indices</span>
+        <span class="k">return</span> <span class="n">indices</span></div>
     
 <div class="viewcode-block" id="Diagnostique.get_topfiles"><a class="viewcode-back" href="../../loganalyser.html#loganalyser.diagnostique.Diagnostique.get_topfiles">[docs]</a>    <span class="k">def</span> <span class="nf">get_topfiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stat</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        ordonne la liste des top files et s&#39;assure de sa configuration afin d&#39;obtenir un affichage lisible des résultats</span>
+<span class="sd">        Ordonne la liste des top files et s&#39;assure de sa configuration afin d&#39;obtenir un affichage lisible des</span>
+<span class="sd">        résultats.</span>
+
 <span class="sd">        :param stat: dictionnaire de statistiques</span>
-<span class="sd">        :type stats: dict</span>
+<span class="sd">        :type stat: dict</span>
 <span class="sd">        :return: Liste des strings organisées.</span>
 <span class="sd">        :rtype: list</span>
 <span class="sd">        </span>
@@ -366,9 +443,11 @@
         
 <div class="viewcode-block" id="Diagnostique.get_topreferrers"><a class="viewcode-back" href="../../loganalyser.html#loganalyser.diagnostique.Diagnostique.get_topreferrers">[docs]</a>    <span class="k">def</span> <span class="nf">get_topreferrers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stat</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        ordonne la liste des top referrers et s&#39;assure de sa configuration afin d&#39;obtenir un affichage lisible des résultats</span>
+<span class="sd">        Ordonne la liste des top referrers et s&#39;assure de sa configuration afin d&#39;obtenir un affichage lisible des</span>
+<span class="sd">        résultats.</span>
+
 <span class="sd">        :param stat: dictionnaire de statistiques</span>
-<span class="sd">        :type stats: dict</span>
+<span class="sd">        :type stat: dict</span>
 <span class="sd">        :return: Liste des strings organisées.</span>
 <span class="sd">        :rtype: list</span>
 <span class="sd">        </span>
@@ -381,7 +460,9 @@
         
 <div class="viewcode-block" id="Diagnostique.get_topvisitors"><a class="viewcode-back" href="../../loganalyser.html#loganalyser.diagnostique.Diagnostique.get_topvisitors">[docs]</a>    <span class="k">def</span> <span class="nf">get_topvisitors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stat</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        ordonne la liste des top visitors et s&#39;assure de sa configuration afin d&#39;obtenir un affichage lisible des résultats</span>
+<span class="sd">        Ordonne la liste des top visitors et s&#39;assure de sa configuration afin d&#39;obtenir un affichage lisible des</span>
+<span class="sd">        résultats</span>
+
 <span class="sd">        :param stat: dictionnaire de statistiques</span>
 <span class="sd">        :type stat: dict</span>
 <span class="sd">        :return: Liste des strings organisées.</span>
@@ -396,11 +477,13 @@
 
 <div class="viewcode-block" id="Diagnostique.get_topuniqueresponses"><a class="viewcode-back" href="../../loganalyser.html#loganalyser.diagnostique.Diagnostique.get_topuniqueresponses">[docs]</a>    <span class="k">def</span> <span class="nf">get_topuniqueresponses</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stat</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">            ordonne la liste des top unique responses et s&#39;assure de sa configuration afin d&#39;obtenir un affichage lisible des résultats</span>
-<span class="sd">            :param stat: dictionnaire de statistiques</span>
-<span class="sd">            :type stat: dict</span>
-<span class="sd">            :return: Liste des strings organisées.</span>
-<span class="sd">            :rtype: list</span>
+<span class="sd">        Ordonne la liste des top unique responses et s&#39;assure de sa configuration afin d&#39;obtenir un affichage lisible</span>
+<span class="sd">        des résultats.</span>
+
+<span class="sd">        :param stat: dictionnaire de statistiques</span>
+<span class="sd">        :type stat: dict</span>
+<span class="sd">        :return: Liste des strings organisées.</span>
+<span class="sd">        :rtype: list</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">indices</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_indices_top</span><span class="p">(</span><span class="n">stat</span><span class="p">[</span><span class="s2">&quot;Hits&quot;</span><span class="p">])</span>
@@ -413,9 +496,11 @@
         
 <div class="viewcode-block" id="Diagnostique.get_attack"><a class="viewcode-back" href="../../loganalyser.html#loganalyser.diagnostique.Diagnostique.get_attack">[docs]</a>    <span class="k">def</span> <span class="nf">get_attack</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attack</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        ordonne la liste des potentiels attaques et s&#39;assure de sa configuration afin d&#39;obtenir un affichage lisible des résultats</span>
-<span class="sd">        :param stat: dictionnaire de statistiques</span>
-<span class="sd">        :type stats: dict</span>
+<span class="sd">        Ordonne la liste des potentiels attaques et s&#39;assure de sa configuration afin d&#39;obtenir un affichage lisible</span>
+<span class="sd">        des résultats.</span>
+
+<span class="sd">        :param attack: dictionnaire d&#39;attaque.</span>
+<span class="sd">        :type attack: dict</span>
 <span class="sd">        :return: Liste des strings organisées.</span>
 <span class="sd">        :rtype: list</span>
 <span class="sd">        </span>
@@ -431,16 +516,18 @@
             <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">elt</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
         <span class="n">L</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">L2</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">e</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]),</span> <span class="o">-</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]))</span> <span class="c1"># tri le dictionnaire en fonction du nombre d&#39;apparition décroissant (d&#39;ou le signe negatif)</span>
-        <span class="c1">#L.append(&quot;\n\033[100m\033[97m\033[1m   4 - DANGER - order by number of hits, then by impact (desc)\t\t\t\t\t\t\033[0m\n&quot;)</span>
-       <span class="c1"># for url, e in L2[:self.line]:</span>
-            <span class="c1">#L.append(&quot;\033[37mURL\033[0m\033[35m &quot; + str(url) + &quot;\033[0m\n\t\033[93mImpact\033[0m\t\t\033[93m&quot; + str(e[2]) + &quot;\033[0m\n\t\033[92mDescription\033[0m\t\033[92m&quot; + str(e[1]) + &quot;\033[0m\n\t\033[91mHits\033[0m\t\t\033[91m&quot; + str(len(e[0])) + &quot;\033[0m\n\t\033[37mLogLineNumbers\033[0m\t\033[37m&quot; + &quot;, &quot;.join(e[0]) + &quot;\033[0m\n\n&quot;)</span>
+    <span class="c1">#   L.append(&quot;\n\033[100m\033[97m\033[1m   4 - DANGER - order by number of hits, then by impact (desc)\t\t\t\t\t\t\033[0m\n&quot;)</span>
+    <span class="c1">#   for url, e in L2[:self.line]:</span>
+            <span class="c1"># L.append(&quot;\033[37mURL\033[0m\033[35m &quot; + str(url) + &quot;\033[0m\n\t\033[93mImpact\033[0m\t\t\033[93m&quot; + str(e[2]) + &quot;\033[0m\n\t\033[92mDescription\033[0m\t\033[92m&quot; + str(e[1]) + &quot;\033[0m\n\t\033[91mHits\033[0m\t\t\033[91m&quot; + str(len(e[0])) + &quot;\033[0m\n\t\033[37mLogLineNumbers\033[0m\t\033[37m&quot; + &quot;, &quot;.join(e[0]) + &quot;\033[0m\n\n&quot;)</span>
         <span class="n">L3</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">e</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span> <span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])))</span>
-        <span class="n">L</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\033</span><span class="s2">[100m</span><span class="se">\033</span><span class="s2">[97m</span><span class="se">\033</span><span class="s2">[1m   5 - DANGER - order by impact, then by number of hits (desc)</span><span class="se">\t\t\t\t\t\t\033</span><span class="s2">[0m</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">L3</span><span class="p">)</span>
+        <span class="n">L</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\033</span><span class="s2">[100m</span><span class="se">\033</span><span class="s2">[97m</span><span class="se">\033</span><span class="s2">[1m   5 - DANGER - order by impact, then by number of hits (desc)</span><span class="se">\t\t\t\t</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;total:&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">total</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\t\033</span><span class="s2">[0m</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">url</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">L3</span><span class="p">[:</span><span class="bp">self</span><span class="o">.</span><span class="n">line</span><span class="p">]:</span>
             <span class="n">L</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\033</span><span class="s2">[37mURL</span><span class="se">\033</span><span class="s2">[0m</span><span class="se">\033</span><span class="s2">[35m &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\033</span><span class="s2">[0m</span><span class="se">\n\t\033</span><span class="s2">[93mImpact</span><span class="se">\033</span><span class="s2">[0m</span><span class="se">\t\t\033</span><span class="s2">[93m&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\033</span><span class="s2">[0m</span><span class="se">\n\t\033</span><span class="s2">[92mDescription</span><span class="se">\033</span><span class="s2">[0m</span><span class="se">\t\033</span><span class="s2">[92m&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\033</span><span class="s2">[0m</span><span class="se">\n\t\033</span><span class="s2">[91mHits</span><span class="se">\033</span><span class="s2">[0m</span><span class="se">\t\t\033</span><span class="s2">[91m&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\033</span><span class="s2">[0m</span><span class="se">\n\t\033</span><span class="s2">[37mLogLineNumbers</span><span class="se">\033</span><span class="s2">[0m</span><span class="se">\t\033</span><span class="s2">[37m&quot;</span> <span class="o">+</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\033</span><span class="s2">[0m</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">L</span></div>
-        
-    <span class="k">def</span> <span class="nf">format_byte</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">byte</span><span class="p">):</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">format_byte</span><span class="p">(</span><span class="n">byte</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">byte</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1000000000</span><span class="p">:</span>
             <span class="n">byte</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">byte</span><span class="p">)</span><span class="o">//</span><span class="mi">1000000000</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; Go&quot;</span>
         <span class="k">elif</span> <span class="nb">int</span><span class="p">(</span><span class="n">byte</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1000000</span><span class="p">:</span>
@@ -451,74 +538,70 @@
             <span class="n">byte</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">byte</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; o&quot;</span>
         <span class="k">return</span> <span class="n">byte</span>
 
-    
-<div class="viewcode-block" id="Diagnostique.get_report"><a class="viewcode-back" href="../../loganalyser.html#loganalyser.diagnostique.Diagnostique.get_report">[docs]</a>    <span class="k">def</span> <span class="nf">get_report</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fileformat</span><span class="p">):</span>
+<div class="viewcode-block" id="Diagnostique.get_report"><a class="viewcode-back" href="../../loganalyser.html#loganalyser.diagnostique.Diagnostique.get_report">[docs]</a>    <span class="k">def</span> <span class="nf">get_report</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Ordonne les donnée issues des statistiques et des analyses, prépare pour l&#39;affichage finale.</span>
 
-<span class="sd">        :param fileformat: indique si le rapport doit etre enregistré sous forme de fchier texte ou seulement être présenté dans la console</span>
-<span class="sd">        :type fileformat: bool</span>
 <span class="sd">        :return: tableau des lignes de résultats à partir des dictionnaires</span>
 <span class="sd">        :rtype: list</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">fileformat</span><span class="p">:</span>
-            <span class="n">report</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Ceci est la première ligne du Fichier Rapport&quot;</span><span class="p">,</span> <span class="s2">&quot;Ceci est la deuxième&quot;</span><span class="p">]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">report</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
-            <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n\n\n\n\033</span><span class="s2">[100m</span><span class="se">\033</span><span class="s2">[97m</span><span class="se">\033</span><span class="s2">[1m   Analyse générale du fonctionnement</span><span class="se">\t\t\t\t\t\t\t\t\t\033</span><span class="s2">[0m</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-            <span class="n">stat_keys</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stat_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
-            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">stat_keys</span><span class="p">:</span>
-                <span class="n">stat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stat_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
-                <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;TotalVisitors&quot;</span><span class="p">:</span>
-                    <span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;TotalRequests&quot;</span>
-                <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;ValidRequests&quot;</span><span class="p">:</span>
-                    <span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;SuccessfulRequest&quot;</span>
-                <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;NotFoundURL&quot;</span><span class="p">:</span>
-                    <span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;Unique404&quot;</span>
-                <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">stat</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span>
-                    <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t\033</span><span class="s2">[97m&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\033</span><span class="s2">[0m</span><span class="se">\033</span><span class="s2">[92m</span><span class="se">\t</span><span class="s2"> &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">stat</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\033</span><span class="s2">[0m&quot;</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">stat_keys</span><span class="p">:</span>
-                <span class="n">stat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stat_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
-                <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">stat</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">int</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;TopFiles&quot;</span><span class="p">:</span>
-                        <span class="n">topfiles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_topfiles</span><span class="p">(</span><span class="n">stat</span><span class="p">)</span>
-                        <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\033</span><span class="s2">[100m</span><span class="se">\033</span><span class="s2">[97m</span><span class="se">\033</span><span class="s2">[1m   1 - TOP FILES (URLs)</span><span class="se">\t\t\t\t\t\t\t\t\t\t\t\033</span><span class="s2">[0m</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-                        <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\033</span><span class="s2">[37mBandwidth</span><span class="se">\t</span><span class="s2">Hits</span><span class="se">\t</span><span class="s2">Visitors</span><span class="se">\t</span><span class="s2">Method</span><span class="se">\t</span><span class="s2">URL&quot;</span><span class="p">)</span>
-                        <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;---------</span><span class="se">\t</span><span class="s2">----</span><span class="se">\t</span><span class="s2">--------</span><span class="se">\t</span><span class="s2">------</span><span class="se">\t</span><span class="s2">---</span><span class="se">\033</span><span class="s2">[0m&quot;</span><span class="p">)</span>
-                        <span class="k">for</span> <span class="n">ligne</span> <span class="ow">in</span> <span class="n">topfiles</span><span class="p">:</span>
-                            <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ligne</span><span class="p">)</span>
-                        <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
-                    <span class="k">elif</span> <span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;TopReferrers&quot;</span><span class="p">:</span>
-                        <span class="n">topreferrers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_topreferrers</span><span class="p">(</span><span class="n">stat</span><span class="p">)</span>
-                        <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\033</span><span class="s2">[100m</span><span class="se">\033</span><span class="s2">[97m</span><span class="se">\033</span><span class="s2">[1m   2 - TOP REFERRERS (Sites)</span><span class="se">\t\t\t\t\t\t\t\t\t\t\033</span><span class="s2">[0m</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-                        <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\033</span><span class="s2">[37mBandwidth</span><span class="se">\t</span><span class="s2">Hits</span><span class="se">\t</span><span class="s2">Visitors</span><span class="se">\t</span><span class="s2">Method</span><span class="se">\t</span><span class="s2">Referrer&quot;</span><span class="p">)</span>
-                        <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;---------</span><span class="se">\t</span><span class="s2">----</span><span class="se">\t</span><span class="s2">--------</span><span class="se">\t</span><span class="s2">------</span><span class="se">\t</span><span class="s2">--------</span><span class="se">\033</span><span class="s2">[0m&quot;</span><span class="p">)</span>
-                        <span class="k">for</span> <span class="n">ligne</span> <span class="ow">in</span> <span class="n">topreferrers</span><span class="p">:</span>
-                            <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ligne</span><span class="p">)</span>
-                        <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
-                    <span class="k">elif</span> <span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;TopVisitors&quot;</span><span class="p">:</span>
-                        <span class="n">topvisitors</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_topvisitors</span><span class="p">(</span><span class="n">stat</span><span class="p">)</span>
-                        <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\033</span><span class="s2">[100m</span><span class="se">\033</span><span class="s2">[97m</span><span class="se">\033</span><span class="s2">[1m   3 - TOP VISITORS (Hostname or IP)</span><span class="se">\t\t\t\t\t\t\t\t\t\033</span><span class="s2">[0m</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-                        <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\033</span><span class="s2">[37mBandwidth</span><span class="se">\t</span><span class="s2">Hits</span><span class="se">\t</span><span class="s2">Visits</span><span class="se">\t</span><span class="s2">IP&quot;</span><span class="p">)</span>
-                        <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;---------</span><span class="se">\t</span><span class="s2">----</span><span class="se">\t</span><span class="s2">------</span><span class="se">\t</span><span class="s2">--</span><span class="se">\033</span><span class="s2">[0m&quot;</span><span class="p">)</span>
-                        <span class="k">for</span> <span class="n">ligne</span> <span class="ow">in</span> <span class="n">topvisitors</span><span class="p">:</span>
-                            <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ligne</span><span class="p">)</span>
-                        <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
-                    <span class="k">elif</span> <span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;TopUniqueResponses&quot;</span><span class="p">:</span>
-                        <span class="n">topuniqueresponses</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_topuniqueresponses</span><span class="p">(</span><span class="n">stat</span><span class="p">)</span>
-                        <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                            <span class="s2">&quot;</span><span class="se">\n\033</span><span class="s2">[100m</span><span class="se">\033</span><span class="s2">[97m</span><span class="se">\033</span><span class="s2">[1m   4 - HTTP Status Codes</span><span class="se">\t\t\t\t\t\t\t\t\t\t\033</span><span class="s2">[0m</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-                        <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\033</span><span class="s2">[37mBandwidth</span><span class="se">\t</span><span class="s2">Hits</span><span class="se">\t</span><span class="s2">Visits</span><span class="se">\t</span><span class="s2">Code&quot;</span><span class="p">)</span>
-                        <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;---------</span><span class="se">\t</span><span class="s2">----</span><span class="se">\t</span><span class="s2">------</span><span class="se">\t</span><span class="s2">--</span><span class="se">\033</span><span class="s2">[0m&quot;</span><span class="p">)</span>
-                        <span class="k">for</span> <span class="n">ligne</span> <span class="ow">in</span> <span class="n">topuniqueresponses</span><span class="p">:</span>
-                            <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ligne</span><span class="p">)</span>
-                        <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
-            <span class="n">attack</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">attack_dict</span>
-            <span class="n">attacks</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_attack</span><span class="p">(</span><span class="n">attack</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">ligne</span> <span class="ow">in</span> <span class="n">attacks</span><span class="p">:</span>
-                <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ligne</span><span class="p">)</span>
-            <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\033</span><span class="s2">[100m</span><span class="se">\033</span><span class="s2">[97m</span><span class="se">\033</span><span class="s2">[1m   Fin de l&#39;analyse</span><span class="se">\t\t\t\t\t\t\t\t\t\t\t\033</span><span class="s2">[0m</span><span class="se">\n\n\n\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        
+        <span class="n">D</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">/%m/%y %H:%M&#39;</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">localtime</span><span class="p">())</span>
+        <span class="n">report</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n\n\n\n\033</span><span class="s2">[100m</span><span class="se">\033</span><span class="s2">[97m</span><span class="se">\033</span><span class="s2">[1m   Analyse générale du fonctionnement</span><span class="se">\t\t\t\t\t\t\t</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">D</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\t\033</span><span class="s2">[0m</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">stat_keys</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stat_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">stat_keys</span><span class="p">:</span>
+            <span class="n">stat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stat_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;TotalVisitors&quot;</span><span class="p">:</span>
+                <span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;TotalRequests&quot;</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;ValidRequests&quot;</span><span class="p">:</span>
+                <span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;SuccessfulRequest&quot;</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;NotFoundURL&quot;</span><span class="p">:</span>
+                <span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;Unique404&quot;</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">stat</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span>
+                <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t\033</span><span class="s2">[97m&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\033</span><span class="s2">[0m</span><span class="se">\033</span><span class="s2">[92m</span><span class="se">\t</span><span class="s2"> &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">stat</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\033</span><span class="s2">[0m&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">stat_keys</span><span class="p">:</span>
+            <span class="n">stat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stat_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">stat</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">int</span><span class="p">:</span>
+                <span class="n">total</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">stat</span><span class="p">[</span><span class="n">stat</span><span class="o">.</span><span class="n">keys</span><span class="p">()[</span><span class="mi">0</span><span class="p">]])</span>
+                <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;TopFiles&quot;</span><span class="p">:</span>
+                    <span class="n">topfiles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_topfiles</span><span class="p">(</span><span class="n">stat</span><span class="p">)</span>
+                    <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\033</span><span class="s2">[100m</span><span class="se">\033</span><span class="s2">[97m</span><span class="se">\033</span><span class="s2">[1m   1 - TOP FILES (URLs)</span><span class="se">\t\t\t\t\t\t\t\t\t</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;total:&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">total</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\t\033</span><span class="s2">[0m</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                    <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\033</span><span class="s2">[37mBandwidth</span><span class="se">\t</span><span class="s2">Hits</span><span class="se">\t</span><span class="s2">Visitors</span><span class="se">\t</span><span class="s2">Method</span><span class="se">\t</span><span class="s2">URL&quot;</span><span class="p">)</span>
+                    <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;---------</span><span class="se">\t</span><span class="s2">----</span><span class="se">\t</span><span class="s2">--------</span><span class="se">\t</span><span class="s2">------</span><span class="se">\t</span><span class="s2">---</span><span class="se">\033</span><span class="s2">[0m&quot;</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">ligne</span> <span class="ow">in</span> <span class="n">topfiles</span><span class="p">:</span>
+                        <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ligne</span><span class="p">)</span>
+                    <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;TopReferrers&quot;</span><span class="p">:</span>
+                    <span class="n">topreferrers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_topreferrers</span><span class="p">(</span><span class="n">stat</span><span class="p">)</span>
+                    <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\033</span><span class="s2">[100m</span><span class="se">\033</span><span class="s2">[97m</span><span class="se">\033</span><span class="s2">[1m   2 - TOP REFERRERS (Sites)</span><span class="se">\t\t\t\t\t\t\t\t</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;total:&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">total</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\t\t\033</span><span class="s2">[0m</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                    <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\033</span><span class="s2">[37mBandwidth</span><span class="se">\t</span><span class="s2">Hits</span><span class="se">\t</span><span class="s2">Visitors</span><span class="se">\t</span><span class="s2">Method</span><span class="se">\t</span><span class="s2">Referrer&quot;</span><span class="p">)</span>
+                    <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;---------</span><span class="se">\t</span><span class="s2">----</span><span class="se">\t</span><span class="s2">--------</span><span class="se">\t</span><span class="s2">------</span><span class="se">\t</span><span class="s2">--------</span><span class="se">\033</span><span class="s2">[0m&quot;</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">ligne</span> <span class="ow">in</span> <span class="n">topreferrers</span><span class="p">:</span>
+                        <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ligne</span><span class="p">)</span>
+                    <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;TopVisitors&quot;</span><span class="p">:</span>
+                    <span class="n">topvisitors</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_topvisitors</span><span class="p">(</span><span class="n">stat</span><span class="p">)</span>
+                    <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\033</span><span class="s2">[100m</span><span class="se">\033</span><span class="s2">[97m</span><span class="se">\033</span><span class="s2">[1m   3 - TOP VISITORS (Hostname or IP)</span><span class="se">\t\t\t\t\t\t\t</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;total:&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">total</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\t\033</span><span class="s2">[0m</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                    <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\033</span><span class="s2">[37mBandwidth</span><span class="se">\t</span><span class="s2">Hits</span><span class="se">\t</span><span class="s2">Visits</span><span class="se">\t</span><span class="s2">IP&quot;</span><span class="p">)</span>
+                    <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;---------</span><span class="se">\t</span><span class="s2">----</span><span class="se">\t</span><span class="s2">------</span><span class="se">\t</span><span class="s2">--</span><span class="se">\033</span><span class="s2">[0m&quot;</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">ligne</span> <span class="ow">in</span> <span class="n">topvisitors</span><span class="p">:</span>
+                        <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ligne</span><span class="p">)</span>
+                    <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;TopUniqueResponses&quot;</span><span class="p">:</span>
+                    <span class="n">topuniqueresponses</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_topuniqueresponses</span><span class="p">(</span><span class="n">stat</span><span class="p">)</span>
+                    <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\033</span><span class="s2">[100m</span><span class="se">\033</span><span class="s2">[97m</span><span class="se">\033</span><span class="s2">[1m   4 - HTTP Status Codes</span><span class="se">\t\t\t\t\t\t\t\t</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;total:&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">total</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\t\t\033</span><span class="s2">[0m</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                    <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\033</span><span class="s2">[37mBandwidth</span><span class="se">\t</span><span class="s2">Hits</span><span class="se">\t</span><span class="s2">Visits</span><span class="se">\t</span><span class="s2">Code&quot;</span><span class="p">)</span>
+                    <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;---------</span><span class="se">\t</span><span class="s2">----</span><span class="se">\t</span><span class="s2">------</span><span class="se">\t</span><span class="s2">----</span><span class="se">\033</span><span class="s2">[0m&quot;</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">ligne</span> <span class="ow">in</span> <span class="n">topuniqueresponses</span><span class="p">:</span>
+                        <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ligne</span><span class="p">)</span>
+                    <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="n">attack</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">attack_dict</span>
+        <span class="n">attacks</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_attack</span><span class="p">(</span><span class="n">attack</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">ligne</span> <span class="ow">in</span> <span class="n">attacks</span><span class="p">:</span>
+            <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ligne</span><span class="p">)</span>
+        <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\033</span><span class="s2">[100m</span><span class="se">\033</span><span class="s2">[97m</span><span class="se">\033</span><span class="s2">[1m   Fin de l&#39;analyse</span><span class="se">\t\t\t\t\t\t\t\t\t\t\t\033</span><span class="s2">[0m</span><span class="se">\n\n\n\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">report</span></div></div>
 </pre></div>
 

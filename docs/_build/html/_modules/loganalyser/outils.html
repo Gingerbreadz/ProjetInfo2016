@@ -141,8 +141,10 @@
 <div class="viewcode-block" id="Dictionary.__init__"><a class="viewcode-back" href="../../loganalyser.html#loganalyser.outils.Dictionary.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keylist</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Constructeur de classe. Un dictionnaire est initialisé vide à partir de la liste des clefs</span>
+
 <span class="sd">        :param keylist: Liste des clefs du dictionnaire.</span>
 <span class="sd">        :type keylist: list</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">Dictionary</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_keys</span> <span class="o">=</span> <span class="n">keylist</span>
@@ -153,6 +155,7 @@
     <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Retourne les valeurs de la clefs passée en argument.</span>
+
 <span class="sd">        :param key: Clef</span>
 <span class="sd">        :type key: str</span>
 <span class="sd">        :return: Liste contenant les valeurs de la clef passée en argument.</span>
@@ -167,16 +170,20 @@
 <div class="viewcode-block" id="Dictionary.keys"><a class="viewcode-back" href="../../loganalyser.html#loganalyser.outils.Dictionary.keys">[docs]</a>    <span class="k">def</span> <span class="nf">keys</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Retourne les clefs du dictionnaire.</span>
+
 <span class="sd">        :return: Liste contenant les clefs du dictionnaire.</span>
 <span class="sd">        :rtype: list</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_keys</span></div>
 
 <div class="viewcode-block" id="Dictionary.addentry"><a class="viewcode-back" href="../../loganalyser.html#loganalyser.outils.Dictionary.addentry">[docs]</a>    <span class="k">def</span> <span class="nf">addentry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entry</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Ajoute au dicitonnaire une nouvelle valeur dans chacunes de ses clefs à partir d&#39;une liste.</span>
+
 <span class="sd">        :param entry: Liste contenant les valeurs pour chacune des clefs</span>
 <span class="sd">        :type entry: list</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_keys</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;La liste n&#39;est pas de bonne longueur&quot;</span><span class="p">)</span>
@@ -188,10 +195,12 @@
 <div class="viewcode-block" id="Dictionary.getentry"><a class="viewcode-back" href="../../loganalyser.html#loganalyser.outils.Dictionary.getentry">[docs]</a>    <span class="k">def</span> <span class="nf">getentry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entrynumber</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Retourne la liste contenant les valeurs de chaques clefs pour un index donné.</span>
+
 <span class="sd">        :param entrynumber: index de l&#39;entrée.</span>
 <span class="sd">        :type entrynumber: int</span>
 <span class="sd">        :return: Liste contenant les valeurs de chaques clefs pour le même index.</span>
 <span class="sd">        :rtype: list</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">entrynumber</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_keys</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="ow">and</span> <span class="n">entrynumber</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;&#39;&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">entrynumber</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span> <span class="o">+</span> <span class="s2">&quot; ne correspond pas à index d&#39;entrée valide&quot;</span><span class="p">)</span>
@@ -200,10 +209,12 @@
 <div class="viewcode-block" id="Dictionary.itemtoentrynumbers"><a class="viewcode-back" href="../../loganalyser.html#loganalyser.outils.Dictionary.itemtoentrynumbers">[docs]</a>    <span class="k">def</span> <span class="nf">itemtoentrynumbers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Retourne l&#39;index d&#39;une valeur dans le dictionnaire.</span>
+
 <span class="sd">        :param item: valeur recherchée.</span>
 <span class="sd">        :type item: str</span>
 <span class="sd">        :return: Liste contenant les index associés à la valeur d&#39;entrée.</span>
 <span class="sd">        :rtype: list</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">entrynumbers</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>

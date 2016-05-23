@@ -45,14 +45,3 @@ Outils module
     :special-members: __init__
     :private-members:
     :show-inheritance:
-
-Module contents
----------------
-
-.. automodule:: loganalyser
-    :members:
-    :member-order: bysource
-    :special-members: __init__
-    :private-members:
-    :inherited-members:
-    :show-inheritance:

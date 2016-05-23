@@ -85,7 +85,6 @@
 <li class="toctree-l2"><a class="reference internal" href="#module-loganalyser.fichier">Fichier module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-loganalyser.token">Token module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-loganalyser.outils">Outils module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-loganalyser">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -154,6 +153,7 @@
 <li><strong>token_dictionary</strong> (<em>dict</em>) &#8211; dictionnaire de token</li>
 <li><strong>regexp_dictionary</strong> (<em>dict</em>) &#8211; dictionnaire de regexp</li>
 <li><strong>n</strong> (<em>int</em>) &#8211; nombre de ligne à afficher (5 par défaut)</li>
+<li><strong>nomatchcount</strong> (<em>int</em>) &#8211; nombre de ligne n&#8217;ayant pas matchés (0 par défaut)</li>
 </ul>
 </td>
 </tr>
@@ -162,68 +162,129 @@
 </dd></dl>
 
 <dl class="method">
+<dt id="loganalyser.diagnostique.Diagnostique.get_indices_top">
+<code class="descname">get_indices_top</code><span class="sig-paren">(</span><em>liste</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loganalyser/diagnostique.html#Diagnostique.get_indices_top"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loganalyser.diagnostique.Diagnostique.get_indices_top" title="Permalink to this definition">¶</a></dt>
+<dd><p>Permet de trier une liste nous permettant de récupérer des valeurs triées de nos données à l&#8217;affichage.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>liste</strong> (<em>list</em>) &#8211; une liste</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">indices des valeurs que l&#8217;on souhaite afficher dans l&#8217;ordre de leurs futur affichage</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="loganalyser.diagnostique.Diagnostique.get_topfiles">
 <code class="descname">get_topfiles</code><span class="sig-paren">(</span><em>stat</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loganalyser/diagnostique.html#Diagnostique.get_topfiles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loganalyser.diagnostique.Diagnostique.get_topfiles" title="Permalink to this definition">¶</a></dt>
-<dd><p>ordonne la liste des top files et s&#8217;assure de sa configuration afin d&#8217;obtenir un affichage lisible des résultats
-:param stat: dictionnaire de statistiques
-:type stats: dict
-:return: Liste des strings organisées.
-:rtype: list</p>
+<dd><p>Ordonne la liste des top files et s&#8217;assure de sa configuration afin d&#8217;obtenir un affichage lisible des
+résultats.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>stat</strong> (<em>dict</em>) &#8211; dictionnaire de statistiques</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Liste des strings organisées.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="loganalyser.diagnostique.Diagnostique.get_topreferrers">
 <code class="descname">get_topreferrers</code><span class="sig-paren">(</span><em>stat</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loganalyser/diagnostique.html#Diagnostique.get_topreferrers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loganalyser.diagnostique.Diagnostique.get_topreferrers" title="Permalink to this definition">¶</a></dt>
-<dd><p>ordonne la liste des top referrers et s&#8217;assure de sa configuration afin d&#8217;obtenir un affichage lisible des résultats
-:param stat: dictionnaire de statistiques
-:type stats: dict
-:return: Liste des strings organisées.
-:rtype: list</p>
+<dd><p>Ordonne la liste des top referrers et s&#8217;assure de sa configuration afin d&#8217;obtenir un affichage lisible des
+résultats.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>stat</strong> (<em>dict</em>) &#8211; dictionnaire de statistiques</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Liste des strings organisées.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="loganalyser.diagnostique.Diagnostique.get_topvisitors">
 <code class="descname">get_topvisitors</code><span class="sig-paren">(</span><em>stat</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loganalyser/diagnostique.html#Diagnostique.get_topvisitors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loganalyser.diagnostique.Diagnostique.get_topvisitors" title="Permalink to this definition">¶</a></dt>
-<dd><p>ordonne la liste des top visitors et s&#8217;assure de sa configuration afin d&#8217;obtenir un affichage lisible des résultats
-:param stat: dictionnaire de statistiques
-:type stat: dict
-:return: Liste des strings organisées.
-:rtype: list</p>
+<dd><p>Ordonne la liste des top visitors et s&#8217;assure de sa configuration afin d&#8217;obtenir un affichage lisible des
+résultats</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>stat</strong> (<em>dict</em>) &#8211; dictionnaire de statistiques</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Liste des strings organisées.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="loganalyser.diagnostique.Diagnostique.get_topuniqueresponses">
 <code class="descname">get_topuniqueresponses</code><span class="sig-paren">(</span><em>stat</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loganalyser/diagnostique.html#Diagnostique.get_topuniqueresponses"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loganalyser.diagnostique.Diagnostique.get_topuniqueresponses" title="Permalink to this definition">¶</a></dt>
-<dd><p>ordonne la liste des top unique responses et s&#8217;assure de sa configuration afin d&#8217;obtenir un affichage lisible des résultats
-:param stat: dictionnaire de statistiques
-:type stat: dict
-:return: Liste des strings organisées.
-:rtype: list</p>
+<dd><p>Ordonne la liste des top unique responses et s&#8217;assure de sa configuration afin d&#8217;obtenir un affichage lisible
+des résultats.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>stat</strong> (<em>dict</em>) &#8211; dictionnaire de statistiques</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Liste des strings organisées.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="loganalyser.diagnostique.Diagnostique.get_attack">
 <code class="descname">get_attack</code><span class="sig-paren">(</span><em>attack</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loganalyser/diagnostique.html#Diagnostique.get_attack"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loganalyser.diagnostique.Diagnostique.get_attack" title="Permalink to this definition">¶</a></dt>
-<dd><p>ordonne la liste des potentiels attaques et s&#8217;assure de sa configuration afin d&#8217;obtenir un affichage lisible des résultats
-:param stat: dictionnaire de statistiques
-:type stats: dict
-:return: Liste des strings organisées.
-:rtype: list</p>
+<dd><p>Ordonne la liste des potentiels attaques et s&#8217;assure de sa configuration afin d&#8217;obtenir un affichage lisible
+des résultats.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>attack</strong> (<em>dict</em>) &#8211; dictionnaire d&#8217;attaque.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Liste des strings organisées.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="loganalyser.diagnostique.Diagnostique.get_report">
-<code class="descname">get_report</code><span class="sig-paren">(</span><em>fileformat</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loganalyser/diagnostique.html#Diagnostique.get_report"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loganalyser.diagnostique.Diagnostique.get_report" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_report</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/loganalyser/diagnostique.html#Diagnostique.get_report"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loganalyser.diagnostique.Diagnostique.get_report" title="Permalink to this definition">¶</a></dt>
 <dd><p>Ordonne les donnée issues des statistiques et des analyses, prépare pour l&#8217;affichage finale.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fileformat</strong> (<em>bool</em>) &#8211; indique si le rapport doit etre enregistré sous forme de fchier texte ou seulement être présenté dans la console</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">tableau des lignes de résultats à partir des dictionnaires</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">tableau des lignes de résultats à partir des dictionnaires</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
 </tr>
 </tbody>
 </table>
@@ -881,54 +942,85 @@ qui nous sont utiles sur les dictionnaires.</p>
 <dl class="method">
 <dt id="loganalyser.outils.Dictionary.__init__">
 <code class="descname">__init__</code><span class="sig-paren">(</span><em>keylist</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loganalyser/outils.html#Dictionary.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loganalyser.outils.Dictionary.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Constructeur de classe. Un dictionnaire est initialisé vide à partir de la liste des clefs
-:param keylist: Liste des clefs du dictionnaire.
-:type keylist: list</p>
+<dd><p>Constructeur de classe. Un dictionnaire est initialisé vide à partir de la liste des clefs</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>keylist</strong> (<em>list</em>) &#8211; Liste des clefs du dictionnaire.</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="loganalyser.outils.Dictionary.keys">
 <code class="descname">keys</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/loganalyser/outils.html#Dictionary.keys"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loganalyser.outils.Dictionary.keys" title="Permalink to this definition">¶</a></dt>
-<dd><p>Retourne les clefs du dictionnaire.
-:return: Liste contenant les clefs du dictionnaire.
-:rtype: list</p>
+<dd><p>Retourne les clefs du dictionnaire.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Liste contenant les clefs du dictionnaire.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="loganalyser.outils.Dictionary.addentry">
 <code class="descname">addentry</code><span class="sig-paren">(</span><em>entry</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loganalyser/outils.html#Dictionary.addentry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loganalyser.outils.Dictionary.addentry" title="Permalink to this definition">¶</a></dt>
-<dd><p>Ajoute au dicitonnaire une nouvelle valeur dans chacunes de ses clefs à partir d&#8217;une liste.
-:param entry: Liste contenant les valeurs pour chacune des clefs
-:type entry: list</p>
+<dd><p>Ajoute au dicitonnaire une nouvelle valeur dans chacunes de ses clefs à partir d&#8217;une liste.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>entry</strong> (<em>list</em>) &#8211; Liste contenant les valeurs pour chacune des clefs</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="loganalyser.outils.Dictionary.getentry">
 <code class="descname">getentry</code><span class="sig-paren">(</span><em>entrynumber</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loganalyser/outils.html#Dictionary.getentry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loganalyser.outils.Dictionary.getentry" title="Permalink to this definition">¶</a></dt>
-<dd><p>Retourne la liste contenant les valeurs de chaques clefs pour un index donné.
-:param entrynumber: index de l&#8217;entrée.
-:type entrynumber: int
-:return: Liste contenant les valeurs de chaques clefs pour le même index.
-:rtype: list</p>
+<dd><p>Retourne la liste contenant les valeurs de chaques clefs pour un index donné.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>entrynumber</strong> (<em>int</em>) &#8211; index de l&#8217;entrée.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Liste contenant les valeurs de chaques clefs pour le même index.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="loganalyser.outils.Dictionary.itemtoentrynumbers">
 <code class="descname">itemtoentrynumbers</code><span class="sig-paren">(</span><em>item</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loganalyser/outils.html#Dictionary.itemtoentrynumbers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loganalyser.outils.Dictionary.itemtoentrynumbers" title="Permalink to this definition">¶</a></dt>
-<dd><p>Retourne l&#8217;index d&#8217;une valeur dans le dictionnaire.
-:param item: valeur recherchée.
-:type item: str
-:return: Liste contenant les index associés à la valeur d&#8217;entrée.
-:rtype: list</p>
+<dd><p>Retourne l&#8217;index d&#8217;une valeur dans le dictionnaire.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>item</strong> (<em>str</em>) &#8211; valeur recherchée.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Liste contenant les index associés à la valeur d&#8217;entrée.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>
 
-</div>
-<div class="section" id="module-loganalyser">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-loganalyser" title="Permalink to this headline">¶</a></h2>
-<p>Vide mais utile!
-Même vide, ce fichier permet à python de reconnaitre le dossier courant comme un module.</p>
 </div>
 </div>
 

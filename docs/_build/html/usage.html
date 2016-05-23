@@ -131,7 +131,19 @@
 <p>L&#8217;utilisation du programme nécessite la possession du fichier de log que l&#8217;on souhaite analyser.
 Une fois le paquet installé, se fait directement depuis la ligne de commande de la façon :</p>
 <blockquote>
-<div><div class="highlight-bash"><div class="highlight"><pre><span></span>$ loganalyser <span class="s2">&quot;/chemin/vers/fichier/de/log&quot;</span>
+<div><div class="highlight-bash"><div class="highlight"><pre><span></span>$ loganalyser f <span class="o">[</span>n<span class="o">]</span> <span class="o">[</span>o<span class="o">]</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Paramètres</strong></p>
+<ul class="simple">
+<li>f : Chemin fichier de logs.</li>
+<li>n : (Optionel) Nombre de ligne à afficher</li>
+<li>o : (Optionel) Fichier de sortie.</li>
+</ul>
+<p><strong>Exemple</strong></p>
+<blockquote>
+<div><div class="highlight-bash"><div class="highlight"><pre><span></span>$ loganalyser <span class="s2">&quot;/chemin/vers/fichier/de/log&quot;</span> <span class="m">6</span> <span class="s2">&quot;/chemin/fichier/output&quot;</span>
 </pre></div>
 </div>
 </div></blockquote>
