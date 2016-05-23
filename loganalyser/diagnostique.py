@@ -207,11 +207,11 @@ class Diagnostique:
                 d[url][1].append(str(attack["LogLineNumber"][i]))
             else:
                 d[url] = [0, [str(attack["LogLineNumber"][i])], attack["Description"][i], attack["Impact"][i]]
-        L2 = sorted(d.items(), key=lambda e: (-e[1][0], -e[1][3]) # tri le dictionnaire en fonction du nombre d'apparition décroissant (d'ou le signe negatif)
+        L2 = sorted(d.items(), key=lambda e: (-e[1][0], -e[1][3])) # tri le dictionnaire en fonction du nombre d'apparition décroissant (d'ou le signe negatif)
         L = []
         for url, e in L2[:5]:
             L.append("URL " + str(url) + "\n\t" + "Impact\t\t" + str(e[3]) + "\n\tDescription\t" + str(e[2]) + "\n\tLogLineNumbers\t" + ", ".join(e[1]) + "\n\n")
-        L3 = sorted(d.items(), key=lambda e: (-e[1][0], -e[1][3])
+        L3 = sorted(d.items(), key=lambda e: (-e[1][0], -e[1][3]))
         for url, e in L3[:5]:
             L.append("URL " + str(url) + "\n\t" + "Impact\t\t" + str(e[3]) + "\n\tDescription\t" + str(e[2]) + "\n\tLogLineNumbers\t" + ", ".join(e[1]) + "\n\n")
         return L
