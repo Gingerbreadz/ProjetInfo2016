@@ -207,9 +207,8 @@ class Diagnostique:
                 d[url][0].append(str(attack["LogLineNumber"][i]))
             else:
                 d[url] = [ [str(attack["LogLineNumber"][i])], attack["Description"][i], attack["Impact"][i]]
-        for elt in d.items():
-            print(type(elt[0]))
-            elt[0] = list(set(elt[0]))
+        for key, elt in d.iteritems():
+            d[key][elt][0] = list(set(elt[0]))
         L2 = sorted(d.items(), key=lambda e: (-count(e[1][0]), -e[1][2])) # tri le dictionnaire en fonction du nombre d'apparition décroissant (d'ou le signe negatif)
         L = []
         for url, e in L2[:5]:
