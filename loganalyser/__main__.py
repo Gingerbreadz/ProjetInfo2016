@@ -53,9 +53,10 @@ def recupererregexp(cheminfichier):
 def main():
     if len(sys.argv) > 2:
         n = int(sys.argv[2])
+        if len(sys.argv)>3:
+            sys.stdout = open(str(sys.argv[3]),'a')
     else:
         n = 5
-    sys.stdout = open(sys.argv[3],'a')
     logfilepath = sys.argv[1]
     regexpfilepath = "./res/default_filter.xml"
     log_dic = recuperertokens(logfilepath)
