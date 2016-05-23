@@ -269,16 +269,7 @@ class Diagnostique:
         elif int(byte) > 1000:
             byte = str(int(byte)//1000) + " Ko"
         return str(byte)
-    
-    class bcolors:
-        HEADER = '\033[95m'
-        OKBLUE = '\033[94m'
-        OKGREEN = '\033[92m'
-        WARNING = '\033[93m'
-        FAIL = '\033[91m'
-        ENDC = '\033[0m'
-        BOLD = '\033[1m'
-        UNDERLINE = '\033[4m'
+
     
     def get_report(self, fileformat):
         """
@@ -294,7 +285,7 @@ class Diagnostique:
             report = ["Ceci est la première ligne du Fichier Rapport", "Ceci est la deuxième"]
         else:
             report = list()
-            report.append("\n\n========================== " + bcolors.WARNING + "Stats" + bcolors.ENDC + " ==========================\n")
+            report.append("\n\n========================== \033[93mStats\033[0m ==========================\n")
             stat_keys = self.stat_dict.keys()
             for key in stat_keys:
                 stat = self.stat_dict[key]
