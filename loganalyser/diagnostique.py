@@ -187,9 +187,7 @@ class Diagnostique:
         """
         ordonne la liste des top files et s'assure de sa configuration afin d'obtenir un affichage lisible des résultats
         :param stat: dictionnaire de statistiques
-        :param n: nombre de données souhaitées
         :type stats: dict
-        :type n: int
         :return: Liste des strings organisées.
         :rtype: list
         
@@ -205,9 +203,7 @@ class Diagnostique:
         """
         ordonne la liste des top referrers et s'assure de sa configuration afin d'obtenir un affichage lisible des résultats
         :param stat: dictionnaire de statistiques
-        :param n: nombre de données souhaitées
         :type stats: dict
-        :type n: int
         :return: Liste des strings organisées.
         :rtype: list
         
@@ -222,9 +218,7 @@ class Diagnostique:
         """
         ordonne la liste des top visitors et s'assure de sa configuration afin d'obtenir un affichage lisible des résultats
         :param stat: dictionnaire de statistiques
-        :param n: nombre de données souhaitées
         :type stats: dict
-        :type n: int
         :return: Liste des strings organisées.
         :rtype: list
         
@@ -239,9 +233,7 @@ class Diagnostique:
         """
         ordonne la liste des potentiels attaques et s'assure de sa configuration afin d'obtenir un affichage lisible des résultats
         :param stat: dictionnaire de statistiques
-        :param n: nombre de données souhaitées
         :type stats: dict
-        :type n: int
         :return: Liste des strings organisées.
         :rtype: list
         
