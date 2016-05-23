@@ -79,10 +79,17 @@ class Dictionary(dict):
         """
         entrynumbers = []
         for key in self.keys():
-            if item in [x.donnee for x in self[key]]:
-                for i in range(0, len(self[key])):
-                    if self[key][i].donnee == item:
-                        entrynumbers.append(i)
+            if key == "Referrer":
+                if item in [x.domain for x in self[key]]:
+                    for i in range(0, len(self[key])):
+                            if self[key][i].domain == item:
+                                entrynumbers.append(i)
+            else:
+                if item in [x.donnee for x in self[key]]:
+                    for i in range(0, len(self[key])):
+                        if self[key][i].donnee == item:
+                            entrynumbers.append(i)
+
         if len(entrynumbers) == 0:
             raise Exception("'" + str(item) + "'" + " n'est pas dans le dictionnaire")
         return entrynumbers

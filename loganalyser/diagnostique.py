@@ -95,7 +95,7 @@ class Diagnostique:
             return topfiles_dic
 
         def topreferrers():
-            referrer_list = [referrer.donnee for referrer in self.token_dict["Referrer"]]
+            referrer_list = [referrer.domain for referrer in self.token_dict["Referrer"]]
             ip_list = [ip.donnee for ip in self.token_dict["IP"]]
             method_list = [method.donnee for method in self.token_dict["Method"]]
             byte_list = [int(byte.donnee) for byte in self.token_dict["Byte"]]

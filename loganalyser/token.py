@@ -199,10 +199,10 @@ class Byte(Token):
 class Referer(Token):
     """Classe concrète instanciant les token Referer"""
     def __init__(self, value):
-        url_cut_reg = re.compile("^(.*[/]{2}[w]?[w]?[w]?[.]?)(\w*[.]\w*)(.*)$")
+        url_cut_reg = re.compile("^(.*[/]{2})([\w|.]*)(.*)$")
         self.domain = value
         if url_cut_reg.search(value):
-            self.domain = list(url_cut_reg.match(value).groups('defaults'))[2]
+            self.domain = list(url_cut_reg.match(value).groups('defaults'))[1]
         super().__init__(value, self.__verifier_type(value))
 
     def __verifier_type(self, value):
