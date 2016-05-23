@@ -1,9 +1,9 @@
 """
-Aucun test n'a pour l'instant été écrit.
+test basic.
 """
 
 import sys
-path = "/home/antoine/ProjetInfo/ProjetInfo2016"
+path = "../"
 sys.path.append(path)
 from loganalyser import fichier as f
 from loganalyser import outils as o
@@ -46,10 +46,10 @@ else :
     
     
 print("===test methode addentry====\n")
-newEntry=['0.0.0.0','toto','09/05/2016:17:58:48', '-0700', 'GET', 'www.urlexemple.com', '200', '2326','http://www.example.com/start.html']
+newEntry=['0.0.0.0','toto','09/May/2016:17:58:48', '-0700', 'GET', 'www.urlexemple.com', '200', '2326','http://www.example.com/start.html']
 testDic.addentry(newEntry)
 print('resultat attendu\n')
-resatt={'Ext': ['-0700'], 'Byte': ['2326'], 'Response': ['200'], 'Methode': ['GET'], 'Date': ['09/05/2016:17:58:48'], 'URL': ['www.urlexemple.com'], 'IP': ['0.0.0.0'], 'Referrer': ['http://www.example.com/start.html'], 'Name': ['toto']}
+resatt={'Ext': ['-0700'], 'Byte': ['2326'], 'Response': ['200'], 'Methode': ['GET'], 'Date': ['09/May/2016:17:58:48'], 'URL': ['www.urlexemple.com'], 'IP': ['0.0.0.0'], 'Referrer': ['http://www.example.com/start.html'], 'Name': ['toto']}
 print(resatt)
 print('resultat obtenu\n')
 print(testDic)
@@ -101,8 +101,8 @@ else:
     quit()
 
 print("====test getentry====\n")
-newEntry2=['1.1.1.1','toto1','09/05/2016:18:58:48', '-0700', 'DELETE', 'www.urlexemple2.com', '404', '4652','http://www.example2.com/start.html']
-print("ajout d'une seconde entrée:['1.1.1.1','toto1','09/05/2016:18:58:48', '-0700', 'DELETE', 'www.urlexemple2.com', '404', '4652','http://www.example2.com/start.html']\n")
+newEntry2=['1.1.1.1','toto1','09/May/2016:18:58:48', '-0700', 'DELETE', 'www.urlexemple2.com', '404', '4652','http://www.example2.com/start.html']
+print("ajout d'une seconde entrée:['1.1.1.1','toto1','09/May/2016:18:58:48', '-0700', 'DELETE', 'www.urlexemple2.com', '404', '4652','http://www.example2.com/start.html']\n")
 testDic.addentry(newEntry2)
 print("resultat attendu :\n")
 print("index 0:" ,newEntry,"\n", "index 1 : ",newEntry2,"\n" )
@@ -133,7 +133,25 @@ else:
 
 
 print("====test itemtoentrynumbers====\n")   #la fonction ne fonctionne pas, cf outils.py
-resObt=testDic.itemtoentrynumbers('1.1.1.1')
+testDic["IP"][0]=t.IP(testDic["IP"][0])
+testDic["IP"][1]=t.IP(testDic["IP"][1])
+testDic["Name"][0]=t.Name(testDic["Name"][0])
+testDic["Name"][1]=t.Name(testDic["Name"][1])
+testDic["Date"][0]=t.Date(testDic["Date"][0])
+testDic["Date"][1]=t.Date(testDic["Date"][1])
+testDic["Ext"][0]=t.EXT(testDic["Ext"][0])
+testDic["Ext"][1]=t.EXT(testDic["Ext"][1])
+testDic["Methode"][0]=t.Method(testDic["Methode"][0])
+testDic["Methode"][1]=t.Method(testDic["Methode"][1])
+testDic["URL"][0]=t.URL(testDic["URL"][0])
+testDic["URL"][1]=t.URL(testDic["URL"][1])
+testDic["Response"][0]=t.Response(testDic["Response"][0])
+testDic["Response"][1]=t.Response(testDic["Response"][1])
+testDic["Byte"][0]=t.Byte(testDic["Byte"][0])
+testDic["Byte"][1]=t.Byte(testDic["Byte"][1])
+testDic["Referrer"][0]=t.Referer(testDic["Referrer"][0])
+testDic["Referrer"][1]=t.Referer(testDic["Referrer"][1])
+resObt=testDic.itemtoentrynumbers(t.IP('1.1.1.1').donnee)
 resAtt=[1]
 
 if resObt==resAtt :
@@ -144,7 +162,7 @@ else:
 print("test levée d'exception itemtoentrynumbers \n")
 print("on teste : testDic.itemetoentrynumbers('2.2.2.2') : une exception doit être levée\n")
 try:
-    testDic.itemetoentrynumbers('2.2.2.2')
+    testDic.itemetoentrynumbers(t.IP('2.2.2.2').donnee)
 except Exception:
     print("une exception a bien été levée\n")
 else:
