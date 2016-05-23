@@ -294,7 +294,6 @@ class Diagnostique:
                 stat = self.stat_dict[key]
                 if type(stat) != int:
                     if str(key) == "TopFiles":
-                        print(str(stat))
                         topfiles = self.get_topfiles(stat)
                         report.append("\n>> TOP FILES >>\n")
                         report.append("Bandwidth\tHits\tVisitors\tMethod\tURL")
@@ -303,19 +302,19 @@ class Diagnostique:
                             report.append(ligne)
                         report.append("")
                     elif str(key) == "TopReferrers":
-                        topfiles = self.get_topreferrers(stat)
+                        topreferrers = self.get_topreferrers(stat)
                         report.append("\n>> TOP REFERRERS >>\n")
                         report.append("Bandwidth\tHits\tVisitors\tMethod\tReferrer")
                         report.append("---------\t----\t--------\t------\t--------")
-                        for ligne in topfiles:
+                        for ligne in topreferrers:
                             report.append(ligne)
                         report.append("")
                     elif str(key) == "TopVisitors":
-                        topfiles = self.get_topvisitors(stat)
+                        topvisitors = self.get_topvisitors(stat)
                         report.append("\n>> TOP VISITORS >>\n")
                         report.append("Bandwidth\tHits\tVisits\tIP")
                         report.append("---------\t----\t------\t--")
-                        for ligne in topfiles:
+                        for ligne in topvisitors:
                             report.append(ligne)
                         report.append("")
                     else:
