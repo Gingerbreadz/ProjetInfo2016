@@ -166,7 +166,7 @@ class Diagnostique:
                     self.attack_dict["Description"] += [self.regexp_dict["Description"][i]]
                     self.attack_dict["Impact"] += [self.regexp_dict["Impact"][i]]
 
-    def get_indices_topfiles(self, liste):
+    def get_indices_top(self, liste):
         indices = [0] * 5
         valeurs = [liste[0]] * 5
         for i in range(len(liste)):
@@ -178,10 +178,17 @@ class Diagnostique:
         return indices
     
     def get_topfiles(self, stat):
-        indices = self.get_indices_topfiles(stat["Hits"])
+        indices = self.get_indices_top(stat["Hits"])
         L = []
         for i in indices:
             L.append(str(stat["Bandwidth"][i]) + "\t\t" + str(stat["Hits"][i]) + "\t" + str(stat["Visitors"][i]) + "\t\t" + str(stat["Method"][i]) + "\t" + str(stat["URL"][i]) )
+        return L
+        
+    def get_topreferrers(self, stat):
+        indices = self.get_indices_top(stat["Hits"])
+        L = []
+        for i in indices:
+            L.append(str(stat["Bandwidth"][i]) + "\t\t" + str(stat["Hits"][i]) + "\t" + str(stat["Visitors"][i]) + "\t\t" + str(stat["Method"][i]) + "\t" + str(stat["Referrer"][i]) )
         return L
         
         
@@ -201,7 +208,7 @@ class Diagnostique:
             report = ["Ceci est la première ligne du Fichier Rapport", "Ceci est la deuxième"]
         else:
             report = list()
-            report.append("========================== Stats ==========================\n")
+            report.append("\n\n========================== Stats ==========================\n")
             stat_keys = self.stat_dict.keys()
             for key in stat_keys:
                 stat = self.stat_dict[key]
@@ -214,6 +221,14 @@ class Diagnostique:
                         topfiles = self.get_topfiles(stat)
                         report.append("\n>> TOPFILES >>")
                         report.append("Bandwidth\tHits\tVisitors\tMethod\tURL")
+                        report.append("---------\t----\t--------\t------\t---")
+                        for ligne in topfiles:
+                            report.append(ligne)
+                        report.append("")
+                    elif str(key) == "TopReferrers":
+                        topfiles = self.get_topreferrers(stat)
+                        report.append("\n>> TOPREFERRERS >>")
+                        report.append("Bandwidth\tHits\tVisitors\tMethod\tReferrer")
                         report.append("---------\t----\t--------\t------\t---")
                         for ligne in topfiles:
                             report.append(ligne)
