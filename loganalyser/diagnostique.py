@@ -225,7 +225,7 @@ class Diagnostique:
         indices = self.get_indices_top(stat["Hits"])
         L = []
         for i in indices:
-            L.append(str(stat["Bandwidth"][i]) + "\t\t" + str(stat["Hits"][i]) + "\t" + str(stat["Visits"][i]) + "\t" + str(stat["IP"][i]))
+            L.append(self.format_byte(stat["Bandwidth"][i]) + "\t\t" + str(stat["Hits"][i]) + "\t" + str(stat["Visits"][i]) + "\t" + str(stat["IP"][i]))
         return L
         
     def get_attack(self, attack):
