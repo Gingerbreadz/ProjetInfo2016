@@ -89,7 +89,7 @@ def main():
     log_dic, nomatchcount = recuperertokens(logfilepath)
     regexp_dic = recupererregexp(regexpfilepath)
     diag = diagnostique.Diagnostique(log_dic, regexp_dic, n, nomatchcount)
-    report = diag.get_report(False)
+    report = diag.get_report()
     os.system('cls' if os.name == 'nt' else 'clear')
     for ligne in report:
         print(ligne)
