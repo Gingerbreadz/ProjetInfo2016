@@ -5,7 +5,7 @@ Aucun test n'a pour l'instant été écrit.
 
 
 from loganalyser import outils as o
-import token
+from loganalyser import token
 
 
 
