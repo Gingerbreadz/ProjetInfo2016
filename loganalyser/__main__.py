@@ -56,6 +56,8 @@ def recupererregexp(cheminfichier):
 def main():
     if len(sys.argv) > 2:
         n = int(sys.argv[2])
+        if len(sys.argv)>3:
+            sys.stdout = open(str(sys.argv[3]),'a')
     else:
         n = 5
     logfilepath = sys.argv[1]
@@ -68,6 +70,6 @@ def main():
     for ligne in report:
         print(ligne)
     return
-
+    sys.stdout.close
 if __name__ == '__main__':
     sys.exit(main())
