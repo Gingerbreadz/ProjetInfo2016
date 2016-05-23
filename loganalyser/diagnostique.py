@@ -177,7 +177,7 @@ class Diagnostique:
         return 
     
     def get_topfiles(self, stat):
-        indices = self.get_indices_topfiles(self, stat["Hits"])
+        indices = self.get_indices_topfiles(stat["Hits"])
         L = []
         for i in indices:
             L.append(str(stat["Bandwidth"][i]) + "\t" + str(stat["Hits"][i]) + "\t" + str(stat["Visitors"][i]) + "\t" + str(stat["Method"][i]) + "\t" + str(stat["URL"][i]) )
