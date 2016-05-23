@@ -98,7 +98,7 @@ class Date(Token):
 
     def __verifier_type(self, value):
         try:
-            datetime.strptime(value, '%d/%b/%Y:%H:%M:%S')
+            datetime.strptime(str(value), '%d/%b/%Y:%H:%M:%S')
         except ValueError:
             return False
         else:
