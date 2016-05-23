@@ -195,6 +195,7 @@ class Diagnostique:
         return L
         
     def get_topreferrers(self, stat):
+        print(stat)
         """
         ordonne la liste des top referrers et s'assure de sa configuration afin d'obtenir un affichage lisible des résultats
         :param stat: dictionnaire de statistiques
