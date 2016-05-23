@@ -191,6 +191,13 @@ class Diagnostique:
             L.append(str(stat["Bandwidth"][i]) + "\t\t" + str(stat["Hits"][i]) + "\t" + str(stat["Visitors"][i]) + "\t\t" + str(stat["Method"][i]) + "\t" + str(stat["Referrer"][i]) )
         return L
         
+    def get_topvisitors(self, stat):
+        indices = self.get_indices_top(stat["Hits"])
+        L = []
+        for i in indices:
+            L.append(str(stat["Bandwidth"][i]) + "\t\t" + str(stat["Hits"][i]) + "\t" + str(stat["Visits"][i]) + "\t\t" + str(stat["IP"][i]))
+        return L
+        
         
         
     
@@ -219,7 +226,7 @@ class Diagnostique:
                 if type(stat) != int:
                     if str(key) == "TopFiles":
                         topfiles = self.get_topfiles(stat)
-                        report.append("\n>> TOPFILES >>")
+                        report.append("\n>> TOP FILES >>\n")
                         report.append("Bandwidth\tHits\tVisitors\tMethod\tURL")
                         report.append("---------\t----\t--------\t------\t---")
                         for ligne in topfiles:
@@ -227,9 +234,17 @@ class Diagnostique:
                         report.append("")
                     elif str(key) == "TopReferrers":
                         topfiles = self.get_topreferrers(stat)
-                        report.append("\n>> TOPREFERRERS >>")
+                        report.append("\n>> TOP REFERRERS >>\n")
                         report.append("Bandwidth\tHits\tVisitors\tMethod\tReferrer")
-                        report.append("---------\t----\t--------\t------\t---")
+                        report.append("---------\t----\t--------\t------\t--------")
+                        for ligne in topfiles:
+                            report.append(ligne)
+                        report.append("")
+                    elif str(key) == "TopVisitors":
+                        topfiles = self.get_topvisitors(stat)
+                        report.append("\n>> TOP VISITORS >>\n")
+                        report.append("Bandwidth\tHits\tVisits\tIP")
+                        report.append("---------\t----\t------\t--")
                         for ligne in topfiles:
                             report.append(ligne)
                         report.append("")
