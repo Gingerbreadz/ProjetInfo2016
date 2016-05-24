@@ -17,4 +17,6 @@ setup(
     entry_points={
         "console_scripts": ['loganalyser = loganalyser.__main__:main']
     },
+    package_data={'': ['./res/default_filter.xml']},
+    data_files = [('', ['./res/default_filter.xml',]),]
 )
