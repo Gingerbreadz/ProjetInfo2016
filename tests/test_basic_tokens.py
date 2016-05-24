@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-test pour la classe Token
+test unitaire sur le module token
 """
 
 
