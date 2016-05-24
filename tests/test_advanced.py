@@ -29,15 +29,19 @@ def listtotokenlist(liste):
 
 
 def recuperertokens(cheminfichier):
+    matchfail = 0
     log_dic = outils.Dictionary(tokenkeys)
     fichierdelog = fichier.FichierDeLog(cheminfichier)
     for i in range(0, fichierdelog.nbLigne):
         ligne_log = fichierdelog.decouperligne(i)
-        if ligne_log:
+        if ligne_log[0] == "NoMatch":
+            matchfail += 1
+        else:
             tokenlist = listtotokenlist(ligne_log)
             log_dic.addentry(tokenlist)
     fichierdelog.fermerfichier()
-    return log_dic
+    return [log_dic, matchfail]
+
 
 
 def recupererregexp(cheminfichier):
@@ -49,9 +53,10 @@ def recupererregexp(cheminfichier):
     fichierregexp.fermerfichier()
     return regexp_dic
 
-log_dict = recuperertokens(logfilepath)
-regexp_dict = recupererregexp(regexpfilepath)
-diag = diagnostique.Diagnostique(log_dict, regexp_dict)
-report = diag.get_report(False)
+
+log_dic, nomatchcount = recuperertokens(logfilepath)
+regexp_dic = recupererregexp(regexpfilepath)
+diag = diagnostique.Diagnostique(log_dic, regexp_dic)
+report = diag.get_report()
 for ligne in report:
     print(ligne)
