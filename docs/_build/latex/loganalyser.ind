@@ -1,0 +1,112 @@
+\begin{theindex}
+\def\bigletter#1{{\Large\sffamily#1}\nopagebreak\vspace{1mm}}
+
+  \bigletter {Symbols}
+  \item \_Diagnostique\_\_analyse() (loganalyser.diagnostique.Diagnostique method), \hyperpage{5}
+  \item \_Diagnostique\_\_statistique() (loganalyser.diagnostique.Diagnostique method), 
+		\hyperpage{5}
+  \item \_Token\_\_analyse() (loganalyser.token.Byte method), \hyperpage{10}
+  \item \_Token\_\_analyse() (loganalyser.token.Date method), \hyperpage{8}
+  \item \_Token\_\_analyse() (loganalyser.token.EXT method), \hyperpage{9}
+  \item \_Token\_\_analyse() (loganalyser.token.IP method), \hyperpage{8}
+  \item \_Token\_\_analyse() (loganalyser.token.Method method), \hyperpage{9}
+  \item \_Token\_\_analyse() (loganalyser.token.Name method), \hyperpage{8}
+  \item \_Token\_\_analyse() (loganalyser.token.Referer method), \hyperpage{10}
+  \item \_Token\_\_analyse() (loganalyser.token.Response method), \hyperpage{10}
+  \item \_Token\_\_analyse() (loganalyser.token.Token method), \hyperpage{7}
+  \item \_Token\_\_analyse() (loganalyser.token.URL method), \hyperpage{9}
+  \item \_Token\_\_verifier\_type() (loganalyser.token.Byte method), \hyperpage{10}
+  \item \_Token\_\_verifier\_type() (loganalyser.token.Date method), \hyperpage{8}
+  \item \_Token\_\_verifier\_type() (loganalyser.token.EXT method), \hyperpage{9}
+  \item \_Token\_\_verifier\_type() (loganalyser.token.IP method), \hyperpage{8}
+  \item \_Token\_\_verifier\_type() (loganalyser.token.Method method), \hyperpage{9}
+  \item \_Token\_\_verifier\_type() (loganalyser.token.Name method), \hyperpage{8}
+  \item \_Token\_\_verifier\_type() (loganalyser.token.Referer method), \hyperpage{10}
+  \item \_Token\_\_verifier\_type() (loganalyser.token.Response method), \hyperpage{10}
+  \item \_Token\_\_verifier\_type() (loganalyser.token.Token method), \hyperpage{7}
+  \item \_Token\_\_verifier\_type() (loganalyser.token.URL method), \hyperpage{9}
+  \item \_\_init\_\_() (loganalyser.diagnostique.Diagnostique method), \hyperpage{4}
+  \item \_\_init\_\_() (loganalyser.fichier.Fichier method), \hyperpage{6}
+  \item \_\_init\_\_() (loganalyser.fichier.FichierRapportTextuel method), \hyperpage{7}
+  \item \_\_init\_\_() (loganalyser.outils.Dictionary method), \hyperpage{11}
+  \item \_\_init\_\_() (loganalyser.token.Token method), \hyperpage{7}
+
+  \indexspace
+  \bigletter A
+  \item addentry() (loganalyser.outils.Dictionary method), \hyperpage{11}
+
+  \indexspace
+  \bigletter B
+  \item Byte (class in loganalyser.token), \hyperpage{10}
+
+  \indexspace
+  \bigletter D
+  \item Date (class in loganalyser.token), \hyperpage{8}
+  \item decouperligne() (loganalyser.fichier.FichierDeLog method), \hyperpage{6}
+  \item decouperligne() (loganalyser.fichier.FichierRegExp method), \hyperpage{7}
+  \item Diagnostique (class in loganalyser.diagnostique), \hyperpage{4}
+  \item Dictionary (class in loganalyser.outils), \hyperpage{11}
+
+  \indexspace
+  \bigletter E
+  \item ecriretexte() (loganalyser.fichier.FichierRapportTextuel method), \hyperpage{7}
+  \item EXT (class in loganalyser.token), \hyperpage{9}
+
+  \indexspace
+  \bigletter F
+  \item fermerfichier() (loganalyser.fichier.Fichier method), \hyperpage{6}
+  \item Fichier (class in loganalyser.fichier), \hyperpage{6}
+  \item FichierDeLog (class in loganalyser.fichier), \hyperpage{6}
+  \item FichierRapportTextuel (class in loganalyser.fichier), \hyperpage{7}
+  \item FichierRegExp (class in loganalyser.fichier), \hyperpage{6}
+
+  \indexspace
+  \bigletter G
+  \item get\_attack() (loganalyser.diagnostique.Diagnostique method), \hyperpage{5}
+  \item get\_indices\_top() (loganalyser.diagnostique.Diagnostique method), \hyperpage{4}
+  \item get\_report() (loganalyser.diagnostique.Diagnostique method), \hyperpage{5}
+  \item get\_topfiles() (loganalyser.diagnostique.Diagnostique method), \hyperpage{4}
+  \item get\_topreferrers() (loganalyser.diagnostique.Diagnostique method), \hyperpage{5}
+  \item get\_topuniqueresponses() (loganalyser.diagnostique.Diagnostique method), \hyperpage{5}
+  \item get\_topvisitors() (loganalyser.diagnostique.Diagnostique method), \hyperpage{5}
+  \item getentry() (loganalyser.outils.Dictionary method), \hyperpage{11}
+
+  \indexspace
+  \bigletter I
+  \item IP (class in loganalyser.token), \hyperpage{8}
+  \item itemtoentrynumbers() (loganalyser.outils.Dictionary method), \hyperpage{11}
+
+  \indexspace
+  \bigletter K
+  \item keys() (loganalyser.outils.Dictionary method), \hyperpage{11}
+
+  \indexspace
+  \bigletter L
+  \item lireligne() (loganalyser.fichier.Fichier method), \hyperpage{6}
+  \item loganalyser.diagnostique (module), \hyperpage{4}
+  \item loganalyser.fichier (module), \hyperpage{6}
+  \item loganalyser.outils (module), \hyperpage{11}
+  \item loganalyser.token (module), \hyperpage{7}
+
+  \indexspace
+  \bigletter M
+  \item Method (class in loganalyser.token), \hyperpage{9}
+
+  \indexspace
+  \bigletter N
+  \item Name (class in loganalyser.token), \hyperpage{8}
+
+  \indexspace
+  \bigletter R
+  \item Referer (class in loganalyser.token), \hyperpage{10}
+  \item Response (class in loganalyser.token), \hyperpage{10}
+
+  \indexspace
+  \bigletter T
+  \item Token (class in loganalyser.token), \hyperpage{7}
+
+  \indexspace
+  \bigletter U
+  \item URL (class in loganalyser.token), \hyperpage{9}
+
+\end{theindex}
