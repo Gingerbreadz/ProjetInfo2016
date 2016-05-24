@@ -1,5 +1,5 @@
 """
-test basic.
+test d'intégration : on vérifie la cohérence de l'ensemble (manque certains tests).
 """
 
 import sys
