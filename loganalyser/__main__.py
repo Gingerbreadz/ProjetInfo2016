@@ -89,7 +89,7 @@ def main():
         n = int(sys.argv[2])
 
     logfilepath = sys.argv[1]
-    regexpfilepath = str(list(re.compile("(.*)([/].*)([/].*)").match(__file__).groups('default'))[0]) + "/res/default_filter.xml"
+    regexpfilepath = str(list(re.compile("(.*)([/].*)([/].*)").match(__file__).groups('default'))[0]) + "/default_filter.xml"
     log_dic, nomatchcount = recuperertokens(logfilepath)
     regexp_dic = recupererregexp(regexpfilepath)
     diag = diagnostique.Diagnostique(log_dic, regexp_dic, n, nomatchcount)
