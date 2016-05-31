@@ -61,7 +61,8 @@ class Dictionary(dict):
             raise Exception("La liste n'est pas de bonne longueur")
         i = 0
         for key in self._keys:
-            self.__setitem__(key, self.__getitem__(key)+[entry[i]])
+            #self.__setitem__(key, self.__getitem__(key)+[entry[i]])
+            self[key].append(entry[i])
             i += 1
 
     def getentry(self, entrynumber):

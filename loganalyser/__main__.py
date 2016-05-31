@@ -8,7 +8,6 @@ import sys
 import os
 import time
 import re
-import pkg_resources
 from loganalyser import fichier
 from loganalyser import outils
 from loganalyser import diagnostique
@@ -90,35 +89,35 @@ def main():
         n = int(sys.argv[2])
 
     logfilepath = sys.argv[1]
-    regexpfilepath = str(list(re.compile("(.*)([/].*)([/].*)").match(__file__).groups('default'))[0]) + "/default_filter.xml"
-
-    print("\n\nOuverture et découpage du fichier de log:",)
-    start_time1 = time.time()
+    #regexpfilepath = str(list(re.compile("(.*)([/].*)([/].*)").match(__file__).groups('default'))[0]) + "/default_filter.xml"
+    regexpfilepath = "./res/default_filter.xml"
+    #print("\n\nOuverture et découpage du fichier de log:",)
+    #start_time1 = time.time()
     log_dic, nomatchcount = recuperertokens(logfilepath)
-    end_time1 = time.time()
-    print("\t%s seconds\n" % (end_time1 - start_time1))
-    input("\tPress Enter to continue...\n")
+    #end_time1 = time.time()
+    #print("\t%s seconds\n" % (end_time1 - start_time1))
+    #input("\tPress Enter to continue...\n")
 
-    print("Ouverture et découpage du fichier de regles:",)
-    start_time2 = time.time()
+    #print("Ouverture et découpage du fichier de regles:",)
+    #start_time2 = time.time()
     regexp_dic = recupererregexp(regexpfilepath)
-    end_time2 = time.time()
-    print("\t%s seconds\n" % (end_time2 - start_time2))
-    input("\tPress Enter to continue...\n")
+    #end_time2 = time.time()
+    #print("\t%s seconds\n" % (end_time2 - start_time2))
+    #input("\tPress Enter to continue...\n")
 
-    print("Création du Diagnostique:",)
-    start_time3 = time.time()
+    #print("Création du Diagnostique:",)
+    #start_time3 = time.time()
     diag = diagnostique.Diagnostique(log_dic, regexp_dic, n, nomatchcount)
-    end_time3 = time.time()
-    print("\t%s seconds\n" % (end_time3 - start_time3))
-    input("\tPress Enter to continue...\n")
+    #end_time3 = time.time()
+    #print("\t%s seconds\n" % (end_time3 - start_time3))
+    #input("\tPress Enter to continue...\n")
 
-    print("Ecriture du Rapport:",)
-    start_time4 = time.time()
+    #print("Ecriture du Rapport:",)
+    #start_time4 = time.time()
     report = diag.get_report()
-    end_time4 = time.time()
-    print("\t%s seconds\n" % (end_time4 - start_time4))
-    input("\tPress Enter to continue...\n")
+    #end_time4 = time.time()
+    #print("\t%s seconds\n" % (end_time4 - start_time4))
+    #input("\tPress Enter to continue...\n")
 
     os.system('cls' if os.name == 'nt' else 'clear')
 
