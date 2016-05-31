@@ -6,6 +6,7 @@ modules.
 
 import sys
 import os
+import time
 import re
 import pkg_resources
 from loganalyser import fichier
@@ -90,10 +91,27 @@ def main():
 
     logfilepath = sys.argv[1]
     regexpfilepath = str(list(re.compile("(.*)([/].*)([/].*)").match(__file__).groups('default'))[0]) + "/default_filter.xml"
+
+    print("\n\nOuverture et découpage du fichier de log:",)
+    start_time1 = time.time()
     log_dic, nomatchcount = recuperertokens(logfilepath)
+    print("\t%s seconds\n" % (time.time() - start_time1))
+
+    print("Ouverture et découpage du fichier de regles:",)
+    start_time2 = time.time()
     regexp_dic = recupererregexp(regexpfilepath)
+    print("\t%s seconds\n" % (time.time() - start_time2))
+
+    print("Création du Diagnostique:",)
+    start_time3 = time.time()
     diag = diagnostique.Diagnostique(log_dic, regexp_dic, n, nomatchcount)
+    print("\t%s seconds\n" % (time.time() - start_time3))
+
+    print("Ecriture du Rapport:",)
+    start_time4 = time.time()
     report = diag.get_report()
+    print("\t%s seconds\n" % (time.time() - start_time4))
+
     os.system('cls' if os.name == 'nt' else 'clear')
 
     if len(sys.argv) > 3:
